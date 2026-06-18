@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { tracks, specialPaths, type Character } from '../data/tracks';
 import { CharacterCard } from './CharacterCard';
 import { SpecialPathCard } from './SpecialPathCard';
-import { ImageWithFallback } from './figma/ImageWithFallback';
+import { ImageWithFallback } from './shared/ImageWithFallback';
 
 interface CharacterSelectPageProps {
   selected: Character;
@@ -222,7 +222,7 @@ export function CharacterSelectPage({ selected, onSelect, onStart }: CharacterSe
               }}
               className="uppercase"
             >
-              ✦ Caminho Sagrado ✦
+              ✦ Caminho Especial ✦
             </p>
           </div>
           <div className="flex flex-wrap justify-center gap-4">

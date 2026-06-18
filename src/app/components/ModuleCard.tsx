@@ -1,3 +1,4 @@
+import type React from 'react';
 import {
   Code, Database, Globe, Lock, Layers, Trophy, Monitor, Zap, Component,
   Palette, Gauge, GitBranch, Cloud, Calculator, BarChart2, Brain, Network,

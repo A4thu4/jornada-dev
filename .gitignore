@@ -29,6 +29,8 @@ lerna-debug.log*
 .env.production.local
 
 # Editor / IDE
+.claude/
+.ide/
 .vscode/*
 !.vscode/extensions.json
 .idea/

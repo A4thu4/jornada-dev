@@ -1,7 +1,8 @@
-import { Flame, Sword, Shield, Star } from 'lucide-react';
+import type React from 'react';
+import { Award, ListTodo, Loader, Star } from 'lucide-react';
 
 interface StatsBarProps {
-  stats: { fogo: number; espada: number; escudo: number; xp: number };
+  stats: { nivel: number; missoes: number; progresso: number; xp: number };
   accentColor: string;
 }
 
@@ -51,11 +52,11 @@ export function StatsBar({ stats, accentColor }: StatsBarProps) {
       }}
       className="flex items-center justify-around gap-6 px-6 py-4 rounded-xl"
     >
-      <StatItem icon={<Flame size={16} />} label="Fogo" value={stats.fogo} accentColor={accentColor} />
+      <StatItem icon={<Award size={16} />} label="Nível" value={stats.nivel} accentColor={accentColor} />
       <div style={{ width: '1px', height: '40px', backgroundColor: 'rgba(255,255,255,0.08)' }} />
-      <StatItem icon={<Sword size={16} />} label="Espada" value={stats.espada} accentColor={accentColor} />
+      <StatItem icon={<ListTodo size={16} />} label="Missões" value={stats.missoes} accentColor={accentColor} />
       <div style={{ width: '1px', height: '40px', backgroundColor: 'rgba(255,255,255,0.08)' }} />
-      <StatItem icon={<Shield size={16} />} label="Escudo" value={stats.escudo} accentColor={accentColor} />
+      <StatItem icon={<Loader size={16} />} label="Progresso" value={stats.progresso} accentColor={accentColor} />
       <div style={{ width: '1px', height: '40px', backgroundColor: 'rgba(255,255,255,0.08)' }} />
       <div className="flex flex-col items-center gap-1">
         <Star size={16} color={accentColor} />

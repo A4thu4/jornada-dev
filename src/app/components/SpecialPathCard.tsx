@@ -1,7 +1,8 @@
-import { Swords, Brain } from 'lucide-react';
+import type React from 'react';
+import { Brain, Sigma, Flame, Sparkles } from 'lucide-react';
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; color?: string }>> = {
-  Swords, Brain,
+    Brain, Sigma, Flame, Sparkles
 };
 
 interface SpecialPath {
@@ -20,7 +21,7 @@ interface SpecialPathCardProps {
 }
 
 export function SpecialPathCard({ path }: SpecialPathCardProps) {
-  const Icon = iconMap[path.icon] ?? Swords;
+  const Icon = iconMap[path.icon] ?? Brain;
 
   return (
     <div

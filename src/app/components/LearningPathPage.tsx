@@ -1,4 +1,6 @@
+import type React from 'react';
 import {
+  Instagram, Github,
   Server, Monitor, Layers, Cloud, BarChart2, Brain, GitBranch,
   Gamepad2, Shield, Palette, Bug, Database, Cpu, Bot, Link, ArrowLeft,
 } from 'lucide-react';
@@ -86,7 +88,7 @@ export function LearningPathPage({ character, onBack }: LearningPathPageProps) {
               }}
               className="uppercase mb-1"
             >
-              Trilha de Herói ·{' '}
+              Trilha ·{' '}
               <span style={{ color: character.accentColor }}>{character.archetype}</span>
             </p>
             <h1
@@ -108,20 +110,21 @@ export function LearningPathPage({ character, onBack }: LearningPathPageProps) {
           <div className="flex gap-2">
             <button
               style={{
-                border: `1px solid rgba(255,255,255,0.15)`,
-                color: '#9CA3AF',
+                border: `1px solid rgba(227,6,46,0.15)`,
+                color: '#e3062e',
                 fontFamily: "'Cinzel', serif",
                 fontSize: '11px',
                 letterSpacing: '0.1em',
                 padding: '8px 16px',
                 borderRadius: '8px',
                 cursor: 'pointer',
-                background: 'transparent',
+                background: 'rgba(244,75,86,0.15)',
               }}
-              className="uppercase hover:opacity-70 transition-opacity"
+              className="uppercase hover:opacity-70 transition-opacity inline-flex items-center justify-center gap-2 whitespace-nowrap"
             >
-              ▷ YouTube
+                <Instagram size={14} /> Instagram
             </button>
+
             <button
               style={{
                 border: `1px solid ${character.accentColor}60`,
@@ -134,9 +137,9 @@ export function LearningPathPage({ character, onBack }: LearningPathPageProps) {
                 cursor: 'pointer',
                 background: `${character.accentColor}15`,
               }}
-              className="uppercase hover:opacity-80 transition-opacity"
+              className="uppercase hover:opacity-80 transition-opacity inline-flex items-center justify-center gap-2 whitespace-nowrap"
             >
-              ★ Comunidade
+                <Github size={14} /> Github
             </button>
           </div>
         </div>
@@ -156,7 +159,7 @@ export function LearningPathPage({ character, onBack }: LearningPathPageProps) {
             }}
             className="uppercase"
           >
-            ✦ Módulos da Jornada ✦
+            ✦ Módulos ✦
           </p>
           <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.06)' }} />
         </div>

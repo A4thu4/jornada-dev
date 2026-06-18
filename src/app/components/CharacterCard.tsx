@@ -1,12 +1,13 @@
+import type React from 'react';
 import {
-  Server, Monitor, Layers, Cloud, BarChart2, Brain, GitBranch,
-  Gamepad2, Shield, Palette, Bug, Database, Cpu, Bot, Link,
+  Server, Monitor, Layers, Cloud, BarChart2, BrainCircuit, GitBranch,
+  Gamepad2, Cuboid, Shield, Palette, Bug, Database, Cpu, Bot, Link,
 } from 'lucide-react';
 import type { Character } from '../data/tracks';
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; color?: string }>> = {
-  Server, Monitor, Layers, Cloud, BarChart2, Brain, GitBranch,
-  Gamepad2, Shield, Palette, Bug, Database, Cpu, Bot, Link,
+  Server, Monitor, Layers, Cloud, BarChart2, BrainCircuit, GitBranch,
+  Gamepad2, Cuboid, Shield, Palette, Bug, Database, Cpu, Bot, Link,
 };
 
 interface CharacterCardProps {

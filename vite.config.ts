@@ -8,8 +8,8 @@ function figmaAssetResolver() {
   return {
     name: 'figma-asset-resolver',
     resolveId(id) {
-      if (id.startsWith('figma:asset/')) {
-        const filename = id.replace('figma:asset/', '')
+      if (id.startsWith('shared:asset/')) {
+        const filename = id.replace('shared:asset/', '')
         return path.resolve(__dirname, 'src/assets', filename)
       }
     },
