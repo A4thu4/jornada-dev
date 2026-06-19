@@ -178,6 +178,24 @@ export const tracks: Character[] = [
     ]),
   },
   {
+    id: 'mobile',
+    name: 'Mobile',
+    title: 'Viking dos Apps',
+    archetype: 'Andarilho Portátil',
+    accentColor: '#813B10',
+    accentGlow: 'rgb(129 59 16 / 0.25)',
+    icon: 'Smartphone',
+    stats: {nivel: 1, missoes: 2, progresso: 4, xp: 1200},
+    modules: makeModules('gd', [
+      {title: 'Kotlin', description: '', icon: ''},
+      {
+        title: 'Desafio Final: Publicar um Aplicativo',
+        description: 'Finalize e publique no Google Play',
+        icon: 'Trophy'
+      },
+    ]),
+  },
+  {
     id: 'gamedev',
     name: 'GameDev',
     title: 'Criador de Mundos',

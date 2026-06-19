@@ -13,7 +13,7 @@ Multipage app with view-switching (URL routing needed):
 
 ---
 
-## Learning Tracks (17 Characters)
+## Learning Tracks (20 Characters)
 
 Each character gets a unique fantasy/sci-fi mixed archetype and color accent:
 
@@ -26,6 +26,7 @@ Each character gets a unique fantasy/sci-fi mixed archetype and color accent:
 | Data Science       | Oráculo dos Dados        | Vidente               | #EE82EE (Violet)     |
 | IA                 | Louco Artificial         | Golem Arcano          | #4ADE80 (Green)      |
 | DevOps             | Engenheiro do Caos       | Alquimista            | #FB923C (Orange)     |
+| Mobile             | Viking dos Apps          | Andarilho             | #813B10 (Brown)      |
 | GameDev            | Criador de Mundos        | Demiurgo              | #F87171 (Red)        |
 | 3D Modeling        | Escultor de Realidades   | Artífice Dimensional  | #500101 (Dark Red)   |
 | Hacking & CyberSec | Sombra Digital           | Assassino Cibernético | #8B5CF6 (Purple)     |
@@ -35,8 +36,8 @@ Each character gets a unique fantasy/sci-fi mixed archetype and color accent:
 | Embedded Systems   | Espírito do Hardware     | Mecânico Arcano       | #94A3B8 (Steel)      |
 | Automations        | Maestro das Máquinas     | Conjurador de Scripts | #2DD4BF (Teal)       |
 | Blockchain         | Guardião do Ledger       | Monge Criptográfico   | #F97316 (Amber)      |
-| Advanced           | Demônio dos Códigos      | Demonio               | #D92639 (Dark Red)   |
 | Essentials         | Arcanjo dos Códigos      | Arcanjo               | #00FF98 (Dark Green) |
+| Advanced           | Demônio dos Códigos      | Demonio               | #D92639 (Dark Red)   |
 | Matématica         | Louco Matemático         | Sábio dos Números     | #1497b1 (Dark Cyan)  |
 
 Each track gets 6–8 placeholder modules (with generic titles like "Fundamentos", "Intermediário", "Avançado", etc.) that the user can replace later.
