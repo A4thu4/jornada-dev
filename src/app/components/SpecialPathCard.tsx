@@ -1,26 +1,17 @@
 import type React from 'react';
 import { Brain, Sigma, Flame, Sparkles } from 'lucide-react';
+import type { SpecialPath } from '../data/tracks';
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; color?: string }>> = {
-    Brain, Sigma, Flame, Sparkles
+  Brain, Sigma, Flame, Sparkles,
 };
-
-interface SpecialPath {
-  id: string;
-  name: string;
-  title: string;
-  description: string;
-  accentColor: string;
-  accentGlow: string;
-  buttonLabel: string;
-  icon: string;
-}
 
 interface SpecialPathCardProps {
   path: SpecialPath;
+  onClick: () => void;
 }
 
-export function SpecialPathCard({ path }: SpecialPathCardProps) {
+export function SpecialPathCard({ path, onClick }: SpecialPathCardProps) {
   const Icon = iconMap[path.icon] ?? Brain;
 
   return (
@@ -44,7 +35,7 @@ export function SpecialPathCard({ path }: SpecialPathCardProps) {
 
       <div className="text-center">
         <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', letterSpacing: '0.15em' }} className="text-gray-500 uppercase mb-1">
-          {path.title}
+          {path.archetype}
         </p>
         <h3
           style={{ fontFamily: "'Cinzel', serif", color: path.accentColor, fontSize: '20px' }}
@@ -58,6 +49,7 @@ export function SpecialPathCard({ path }: SpecialPathCardProps) {
       </p>
 
       <button
+        onClick={onClick}
         style={{
           background: `linear-gradient(90deg, ${path.accentColor}22, ${path.accentColor}44)`,
           border: `1px solid ${path.accentColor}80`,
