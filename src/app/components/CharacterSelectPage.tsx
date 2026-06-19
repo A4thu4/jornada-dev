@@ -9,11 +9,12 @@ interface CharacterSelectPageProps {
   selected: Character;
   onSelect: (c: Character) => void;
   onStart: () => void;
+  onStartSpecial: (c: Character) => void;
 }
 
 const HERO_IMG = 'https://images.unsplash.com/photo-1769221909844-9795db07a67a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080';
 
-export function CharacterSelectPage({ selected, onSelect, onStart }: CharacterSelectPageProps) {
+export function CharacterSelectPage({ selected, onSelect, onStart, onStartSpecial }: CharacterSelectPageProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scrollBy = (dir: 'left' | 'right') => {
@@ -227,7 +228,7 @@ export function CharacterSelectPage({ selected, onSelect, onStart }: CharacterSe
           </div>
           <div className="flex flex-wrap justify-center gap-4">
             {specialPaths.map((sp) => (
-              <SpecialPathCard key={sp.id} path={sp} />
+              <SpecialPathCard key={sp.id} path={sp} onClick={() => onStartSpecial(sp)} />
             ))}
           </div>
         </div>
