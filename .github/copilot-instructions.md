@@ -10,6 +10,7 @@ When suggesting or generating commit messages, **always** follow the [Convention
 - Keep the summary **extra short, imperative, and lowercase** unless a proper noun is required.
 - Only reference the main changes.
 - For breaking changes, use `!` after the type/scope and add a `BREAKING CHANGE:` footer.
+- Avoid overly verbose descriptions or unnecessary details.
 
 ## Pull Requests
 
