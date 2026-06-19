@@ -12,6 +12,10 @@ export default function App() {
   const handleStart = () => setPage('path');
   const handleBack = () => setPage('select');
   const handleSelect = (c: Character) => setSelected(c);
+  const handleStartSpecial = (c: Character) => {
+    setSelected(c);
+    setPage('path');
+  };
 
   return (
     <div className="size-full" style={{ background: '#060B1A' }}>
@@ -20,6 +24,7 @@ export default function App() {
           selected={selected}
           onSelect={handleSelect}
           onStart={handleStart}
+          onStartSpecial={handleStartSpecial}
         />
       ) : (
         <LearningPathPage
