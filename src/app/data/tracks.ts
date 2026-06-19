@@ -22,6 +22,11 @@ export interface Character {
   modules: Module[];
 }
 
+export interface SpecialPath extends Character {
+  description: string;
+  buttonLabel: string;
+}
+
 const makeModules = (prefix: string, titles: { title: string; description: string; icon: string }[]): Module[] =>
   titles.map((m, i) => ({
     id: `${prefix}-${i + 1}`,
@@ -324,35 +329,69 @@ export const tracks: Character[] = [
   },
 ];
 
-export const specialPaths = [
+export const specialPaths: SpecialPath[] = [
   {
     id: 'essentials',
     name: 'Essenciais',
-    title: 'Arcanjo dos Códigos',
-    description: 'Conteúdos essenciais e importantes para a base da programação. Para programadores mais iniciantes.',
+    title: 'A base que todo dev precisa dominar',
+    archetype: 'Arcanjo dos Códigos',
     accentColor: '#00FF98',
     accentGlow: 'rgb(0 255 152 / 0.25)',
-    buttonLabel: 'Despertar o Arcanjo',
     icon: 'Sparkles',
+    stats: { nivel: 1, missoes: 0, progresso: 0, xp: 0 },
+    description: 'Conteúdos essenciais e importantes para a base da programação. Para programadores mais iniciantes.',
+    buttonLabel: 'Despertar o Arcanjo',
+    modules: makeModules('es', [
+      { title: 'Lógica de Programação', description: 'Variáveis, condicionais, loops e funções do zero', icon: 'Code' },
+      { title: 'Estruturas de Dados', description: 'Arrays, listas, pilhas, filas e dicionários', icon: 'Layers' },
+      { title: 'Orientação a Objetos', description: 'Classes, herança, polimorfismo e encapsulamento', icon: 'Brain' },
+      { title: 'Git & GitHub', description: 'Commits, branches, pull requests e colaboração', icon: 'GitBranch' },
+      { title: 'Linha de Comando', description: 'Terminal Linux/Mac e scripts básicos de automação', icon: 'Terminal' },
+      { title: 'Algoritmos Essenciais', description: 'Busca, ordenação e análise de complexidade básica', icon: 'Code' },
+      { title: 'Como Aprender Tech', description: 'Método, consistência e como construir projetos reais', icon: 'Brain' },
+      { title: 'Desafio Final: Primeiro Projeto', description: 'Crie um projeto do zero e publique no GitHub', icon: 'Trophy' },
+    ]),
   },
   {
     id: 'advanced',
     name: 'Avançado',
-    title: 'Demônio dos Códigos',
-    description: 'Conteúdos mais avançados e importantes da programação. Para programadores mais avançados.',
+    title: 'Para devs que querem ir além',
+    archetype: 'Demônio dos Códigos',
     accentColor: '#D92639',
     accentGlow: 'rgb(217 38 57 / 0.25)',
-    buttonLabel: 'Invocar o Demônio',
     icon: 'Flame',
+    stats: { nivel: 1, missoes: 0, progresso: 0, xp: 0 },
+    description: 'Conteúdos mais avançados e importantes da programação. Para programadores mais experientes.',
+    buttonLabel: 'Invocar o Demônio',
+    modules: makeModules('av', [
+      { title: 'Design Patterns', description: 'GoF, padrões comportamentais e aplicação no mundo real', icon: 'Layers' },
+      { title: 'Arquiteturas Distribuídas', description: 'Microsserviços, event-driven e comunicação assíncrona', icon: 'Network' },
+      { title: 'Performance & Otimização', description: 'Profiling, caching, lazy loading e métricas de performance', icon: 'Gauge' },
+      { title: 'Testes Avançados', description: 'TDD, BDD, mocks, contratos e testes de mutação', icon: 'CheckCircle' },
+      { title: 'Segurança Aplicada', description: 'OWASP, threat modeling e secure coding na prática', icon: 'Shield' },
+      { title: 'Open Source & Carreira', description: 'Contribuições, code review e posicionamento técnico', icon: 'GitBranch' },
+      { title: 'Desafio Final: Projeto Enterprise', description: 'Arquitete e implemente um sistema de produção', icon: 'Trophy' },
+    ]),
   },
   {
     id: 'math',
-    name: 'Louco Matemático',
-    title: 'Sábio dos Números',
-    description: 'A matemática e os algoritmos. A matemática essencial e base lógica que um programador precisa.',
+    name: 'Matemática',
+    title: 'A matemática essencial do programador',
+    archetype: 'Sábio dos Números',
     accentColor: '#1497b1',
     accentGlow: 'rgb(20 151 177 / 0.25)',
-    buttonLabel: 'Consultar o Sábio',
     icon: 'Sigma',
+    stats: { nivel: 1, missoes: 0, progresso: 0, xp: 0 },
+    description: 'A matemática e os algoritmos. A base lógica que todo programador precisa.',
+    buttonLabel: 'Consultar o Sábio',
+    modules: makeModules('mt', [
+      { title: 'Matemática Discreta', description: 'Lógica proposicional, conjuntos e combinatória', icon: 'Calculator' },
+      { title: 'Álgebra Linear para Dev', description: 'Vetores, matrizes e aplicações em IA e gráficos', icon: 'Calculator' },
+      { title: 'Estatística & Probabilidade', description: 'Distribuições, testes de hipótese e teorema de Bayes', icon: 'BarChart2' },
+      { title: 'Algoritmos & Complexidade', description: 'Big-O, sorting avançado e análise de algoritmos', icon: 'Code' },
+      { title: 'Teoria dos Grafos', description: 'BFS, DFS, Dijkstra e aplicações práticas em software', icon: 'Network' },
+      { title: 'Criptografia Matemática', description: 'RSA, curvas elípticas e fundamentos de criptografia', icon: 'Shield' },
+      { title: 'Desafio Final: Algoritmo do Zero', description: 'Implemente um algoritmo clássico sem usar biblioteca', icon: 'Trophy' },
+    ]),
   },
 ];

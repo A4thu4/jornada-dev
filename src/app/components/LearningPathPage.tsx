@@ -3,6 +3,7 @@ import {
   Instagram, Github,
   Server, Monitor, Layers, Cloud, BarChart2, Brain, GitBranch,
   Gamepad2, Shield, Palette, Bug, Database, Cpu, Bot, Link, ArrowLeft,
+  Sparkles, Sigma, Flame,
 } from 'lucide-react';
 import type { Character } from '../data/tracks';
 import { StatsBar } from './StatsBar';
@@ -11,6 +12,7 @@ import { ModuleCard } from './ModuleCard';
 const iconMap: Record<string, React.ComponentType<{ size?: number; color?: string }>> = {
   Server, Monitor, Layers, Cloud, BarChart2, Brain, GitBranch,
   Gamepad2, Shield, Palette, Bug, Database, Cpu, Bot, Link,
+  Sparkles, Sigma, Flame,
 };
 
 interface LearningPathPageProps {
