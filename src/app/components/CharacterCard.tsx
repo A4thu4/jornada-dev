@@ -1,22 +1,7 @@
 import type React from 'react';
 import {
-	BarChart2,
-	Bot,
-	BrainCircuit,
-	Bug,
-	Cloud,
-	Cpu,
-	Cuboid,
-	Database,
-	Gamepad2,
-	GitBranch,
-	Layers,
-	Link,
-	Monitor,
-	Palette,
-	Server,
-	Shield,
-	Smartphone,
+	Server, Monitor, Layers, Cloud, BarChart2, BrainCircuit, GitBranch,
+	Smartphone, Gamepad2, Cuboid, Shield, Palette, Bug, Database, Cpu, Bot, Link,
 } from 'lucide-react';
 import type { Character } from '../data/tracks';
 

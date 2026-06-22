@@ -1,45 +1,10 @@
 import type React from 'react';
 import {
-	Activity,
-	BarChart2,
-	Bot,
-	Box,
-	Brain,
-	Bug,
-	Calculator,
-	CheckCircle,
-	ClipboardList,
-	Clock,
-	Cloud,
-	Code,
-	Coins,
-	Component,
-	Cpu,
-	Database,
-	Eye,
-	FileCode,
-	Gamepad2,
-	Gauge,
-	GitBranch,
-	Globe,
-	Layers,
-	Layout,
-	Link,
-	Lock,
-	MessageSquare,
-	Monitor,
-	Music,
-	Network,
-	Palette,
-	Radio,
-	Search,
-	Shield,
-	Star,
-	Table,
-	Terminal,
-	Trophy,
-	Users,
-	Zap,
+	Code, Database, Globe, Lock, Layers, Trophy, Monitor, Zap, Component,
+	Palette, Gauge, GitBranch, Cloud, Calculator, BarChart2, Brain, Network,
+	MessageSquare, Bot, Eye, Terminal, Box, Activity, Gamepad2, Layout,
+	Music, Shield, Search, Bug, CheckCircle, ClipboardList, Table, Radio,
+	Clock, Link, Coins, Users, Cpu, FileCode, Star,
 } from 'lucide-react';
 import type { Module } from '../data/tracks';
 
@@ -81,7 +46,7 @@ export function ModuleCard({ module, index, accentColor, accentGlow, isFeatured 
 						flexShrink: 0,
 						boxShadow: isAvailable && isFeatured ? `0 0 16px ${accentGlow}` : 'none',
 					}}
-				>
+					>
 					<span
 						style={{
 							fontFamily: "'Cinzel', serif",

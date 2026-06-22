@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { ChevronLeft, ChevronRight, Github } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Github, Instagram } from 'lucide-react';
 import { type Character, specialPaths, tracks } from '../data/tracks';
 import { CharacterCard } from './CharacterCard';
 import { SpecialPathCard } from './SpecialPathCard';

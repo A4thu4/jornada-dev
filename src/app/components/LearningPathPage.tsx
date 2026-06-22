@@ -1,26 +1,9 @@
 import type React from 'react';
 import {
-	ArrowLeft,
-	BarChart2,
-	Bot,
-	Brain,
-	Bug,
-	Cloud,
-	Cpu,
-	Database,
-	Flame,
-	Gamepad2,
-	GitBranch,
-	Github,
-	Instagram,
-	Layers,
-	Link,
-	Monitor,
-	Palette,
-	Server,
-	Shield,
-	Sigma,
-	Sparkles,
+	ArrowLeft, Github, Instagram,
+	Server, Monitor, Layers, Cloud, BarChart2, Brain, GitBranch,
+	Gamepad2, Shield, Palette, Bug, Database, Cpu, Bot, Link,
+	Sparkles, Sigma, Flame,
 } from 'lucide-react';
 import type { Character } from '../data/tracks';
 import { StatsBar } from './StatsBar';
