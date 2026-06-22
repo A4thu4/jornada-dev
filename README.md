@@ -65,24 +65,24 @@ src/app/
 
 ```ts
 type Character = {
-  id: string
-  name: string           // "Back End"
-  title: string          // "Guardião do Servidor"
-  archetype: string      // "Cavaleiro Sombrio"
-  accent: string         // Tailwind color class or hex
-  icon: string           // lucide-react icon name
-  stats: { fogo: number; espada: number; escudo: number; xp: number }
-  modules: Module[]
+	id: string
+	name: string           // "Back End"
+	title: string          // "Guardião do Servidor"
+	archetype: string      // "Cavaleiro Sombrio"
+	accent: string         // Tailwind color class or hex
+	icon: string           // lucide-react icon name
+	stats: { fogo: number; espada: number; escudo: number; xp: number }
+	modules: Module[]
 }
 
 type Module = {
-  id: string
-  title: string
-  description: string
-  icon: string
-  rating: number
-  lessonCount: number
-  status: 'bloqueado' | 'disponível' | 'em-progresso' | 'concluído'
+	id: string
+	title: string
+	description: string
+	icon: string
+	rating: number
+	lessonCount: number
+	status: 'bloqueado' | 'disponível' | 'em-progresso' | 'concluído'
 }
 ```
 
