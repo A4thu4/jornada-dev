@@ -1,5 +1,5 @@
-import { useRef } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useRef } from 'react';
+import { ChevronLeft, ChevronRight, Github } from 'lucide-react';
 import { type Character, specialPaths, tracks } from '../data/tracks';
 import { CharacterCard } from './CharacterCard';
 import { SpecialPathCard } from './SpecialPathCard';
@@ -242,7 +242,25 @@ export function CharacterSelectPage({ selected, onSelect, onStart, onStartSpecia
 			{/* Footer */}
 			<div className="text-center py-8 border-t" style={{borderColor: 'rgba(255,255,255,0.05)'}}>
 				<p style={{fontFamily: "'Cinzel', serif", fontSize: '11px', color: '#334155', letterSpacing: '0.2em'}}>
-					JORNADA DEV © 2026 · FORJE SEU DESTINO
+					JORNADA DEV © 2026 · FORJE SEU DESTINO ·
+
+					<button
+						onClick={() => window.open('https://github.com/A4thu4', '_blank')}
+						style={{
+							border: `transparent`,
+							color: '#334155',
+							fontFamily: "'Cinzel', serif",
+							fontSize: '11px',
+							letterSpacing: '0.2em',
+							padding: '2px 4px',
+							borderRadius: '0px',
+							cursor: 'pointer',
+							background: 'transparent',
+						}}
+						className="uppercase hover:opacity-70 transition-opacity inline-flex text-center justify-center gap-0.5 whitespace-nowrap"
+					>
+						<Github size={12}/> Github
+					</button>
 				</p>
 			</div>
 		</div>

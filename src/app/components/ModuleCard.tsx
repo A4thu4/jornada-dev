@@ -82,12 +82,18 @@ export function ModuleCard({ module, index, accentColor, accentGlow, isFeatured 
 						boxShadow: isAvailable && isFeatured ? `0 0 16px ${accentGlow}` : 'none',
 					}}
 				>
-          <span style={{ fontFamily: "'Cinzel', serif", fontSize: '12px', color: isAvailable ? accentColor : '#4B5563' }}>
-            {index + 1}
-          </span>
+					<span
+						style={{
+							fontFamily: "'Cinzel', serif",
+							fontSize: '12px',
+							color: isAvailable ? accentColor : '#4B5563'
+						}}>
+						{index + 1}
+					</span>
 				</div>
-				{index < 5 && (
-					<div style={{
+				{index < 10 && (
+					<div
+						style={{
 						width: '2px',
 						flex: 1,
 						background: `linear-gradient(to bottom, ${accentColor}40, transparent)`,
@@ -95,16 +101,11 @@ export function ModuleCard({ module, index, accentColor, accentGlow, isFeatured 
 					}}/>
 				)}
 			</div>
-
 			{/* Card */}
 			<div
 				style={{
-					background: isFeatured
-						? `linear-gradient(135deg, rgba(13,21,38,0.98), rgba(20,32,60,0.95))`
-						: 'rgba(13,21,38,0.6)',
-					border: isFeatured
-						? `1px solid ${accentColor}60`
-						: '1px solid rgba(255,255,255,0.07)',
+					background: isFeatured ? `linear-gradient(135deg, rgba(13,21,38,0.98), rgba(20,32,60,0.95))` : 'rgba(13,21,38,0.6)',
+					border: isFeatured ? `1px solid ${accentColor}60` : '1px solid rgba(255,255,255,0.07)',
 					boxShadow: isFeatured ? `0 0 30px ${accentGlow}, inset 0 0 20px ${accentGlow}30` : 'none',
 					opacity: isLocked ? 0.5 : 1,
 					marginBottom: '12px',
@@ -140,9 +141,14 @@ export function ModuleCard({ module, index, accentColor, accentGlow, isFeatured 
 								{module.description}
 							</p>
 							<div className="flex items-center gap-3 mt-2">
-                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px' }} className="text-gray-600">
-                  {module.lessonCount} aulas
-                </span>
+								<span
+									style={{
+										fontFamily: "'Inter', sans-serif",
+										fontSize: '11px'
+									}}
+									className="text-gray-600">
+									{module.lessonCount} aulas
+								</span>
 								<div className="flex gap-0.5">
 									{Array.from({length: 5}).map((_, i) => (
 										<Star key={i} size={10} color={i < module.rating ? accentColor : '#374151'}
@@ -153,18 +159,17 @@ export function ModuleCard({ module, index, accentColor, accentGlow, isFeatured 
 						</div>
 					</div>
 
-					<div className="flex flex-col items-end gap-2 flex-shrink-0">
-						{isLocked ? (
+					<div className="flex flex-col items-end gap-2 flex-shrink-0"> {isLocked ?
+						(
 							<span style={{fontFamily: "'Inter', sans-serif", fontSize: '11px'}}
 							      className="text-gray-600 uppercase tracking-wider">
-                Bloqueado
-              </span>
+						Bloqueado
+						</span>
 						) : (
 							<button
+								onClick={() => window.open(module.link, '_blank')}
 								style={{
-									background: isFeatured
-										? `linear-gradient(90deg, ${accentColor}, ${accentColor}cc)`
-										: `rgba(${accentColor}, 0.1)`,
+									background: isFeatured ? `linear-gradient(90deg, ${accentColor}, ${accentColor}cc)` : `rgba(${accentColor}, 0.1)`,
 									backgroundColor: isFeatured ? accentColor : 'transparent',
 									border: `1px solid ${accentColor}80`,
 									color: isFeatured ? '#000' : accentColor,

@@ -8,6 +8,7 @@ export interface Module {
 	rating: number;
 	lessonCount: number;
 	status: ModuleStatus;
+	link?: string;
 }
 
 export interface Character {
@@ -27,13 +28,20 @@ export interface SpecialPath extends Character {
 	buttonLabel: string;
 }
 
-const makeModules = (prefix: string, titles: { title: string; description: string; icon: string }[]): Module[] =>
+const makeModules = (prefix: string, titles: {
+	title: string;
+	description: string;
+	icon: string;
+	link?: string;
+	rating: number
+}[]): Module[] =>
 	titles.map((m, i) => ({
 		id: `${prefix}-${i + 1}`,
 		title: m.title,
 		description: m.description,
 		icon: m.icon,
-		rating: Math.floor(Math.random() * 2) + 4,
+		link: m.link,
+		rating: m.rating ? m.rating : Math.floor(Math.random() * 2) + 2,
 		lessonCount: Math.floor(Math.random() * 8) + 6,
 		status: i === 0 ? 'disponível' : 'bloqueado',
 	}));
@@ -49,14 +57,43 @@ export const tracks: Character[] = [
 		icon: 'Server',
 		stats: {nivel: 1, missoes: 2, progresso: 4, xp: 1200},
 		modules: makeModules('be', [
-			{title: 'Arquitetura de Software', description: 'Padrões MVC, Clean Architecture e SOLID', icon: 'Layers'},
-			{title: 'Java Firme', description: '', icon: 'Code'},
-			{title: 'Banco de Dados', description: 'SQL, NoSQL e modelagem relacional', icon: 'Database'},
-			{title: 'APIs REST', description: 'Construção e consumo de APIs HTTP modernas', icon: 'Globe'},
-			{title: 'Spring Boot', description: '', icon: ''},
-			{title: 'Autenticação & Segurança', description: 'JWT, OAuth2 e boas práticas de segurança', icon: 'Lock'},
-			{title: 'AWS', description: '', icon: 'AWS'},
-			{title: 'Desafio Final: API Completa', description: 'Construa uma API do zero ao deploy', icon: 'Trophy'},
+			{
+				title: 'Arquitetura de Software',
+				description: 'Padrões MVC, Clean Architecture e SOLID',
+				icon: 'Layers',
+				link: '',
+				rating: 1
+			},
+			{title: 'Java Firme', description: '', icon: 'Code', link: '', rating: 3},
+			{
+				title: 'Banco de Dados',
+				description: 'SQL, NoSQL e modelagem relacional',
+				icon: 'Database',
+				link: '',
+				rating: 2
+			},
+			{
+				title: 'APIs REST',
+				description: 'Construção e consumo de APIs HTTP modernas',
+				icon: 'Globe',
+				link: '',
+				rating: 1
+			},
+			{title: 'Spring Boot', description: '', icon: '', link: '', rating: 1},
+			{
+				title: 'Autenticação & Segurança',
+				description: 'JWT, OAuth2 e boas práticas de segurança',
+				icon: 'Lock',
+				link: '',
+				rating: 1
+			},
+			{title: 'AWS', description: '', icon: 'AWS', link: '', rating: 1},
+			{
+				title: 'Desafio Final: API Completa',
+				description: 'Construa uma API do zero ao deploy',
+				icon: 'Trophy',
+				rating: 4
+			},
 		]),
 	},
 	{
@@ -69,18 +106,49 @@ export const tracks: Character[] = [
 		icon: 'Monitor',
 		stats: {nivel: 1, missoes: 2, progresso: 4, xp: 1200},
 		modules: makeModules('fe', [
-			{title: 'HTML & CSS', description: 'Estrutura e estilização de páginas web', icon: 'Layout'},
-			{title: 'JavaScript', description: 'ES6+, assincronismo e manipulação do DOM', icon: 'Zap'},
-			{title: 'TypeScript', description: '', icon: ''},
-			{title: 'Consumo de APIs', description: '', icon: ''},
-			{title: 'React & Componentes', description: 'Criação de interfaces reativas com React', icon: 'Component'},
-			{title: 'Estilização Avançada', description: 'Tailwind CSS, animações e responsividade', icon: 'Palette'},
-			{title: 'Performance & Otimização', description: 'Web Vitals, lazy loading e bundle size', icon: 'Gauge'},
-			{title: 'Testes', description: '', icon: ''},
+			{
+				title: 'HTML & CSS',
+				description: 'Estrutura e estilização de páginas web',
+				icon: 'Layout',
+				link: '',
+				rating: 1
+			},
+			{
+				title: 'JavaScript',
+				description: 'ES6+, assincronismo e manipulação do DOM',
+				icon: 'Zap',
+				link: '',
+				rating: 1
+			},
+			{title: 'TypeScript', description: '', icon: '', link: '', rating: 1},
+			{title: 'Consumo de APIs', description: '', icon: '', link: '', rating: 1},
+			{
+				title: 'React & Componentes',
+				description: 'Criação de interfaces reativas com React',
+				icon: 'Component',
+				link: '',
+				rating: 1
+			},
+			{
+				title: 'Estilização Avançada',
+				description: 'Tailwind CSS, animações e responsividade',
+				icon: 'Palette',
+				link: '',
+				rating: 1
+			},
+			{
+				title: 'Performance & Otimização',
+				description: 'Web Vitals, lazy loading e bundle size',
+				icon: 'Gauge',
+				link: '',
+				rating: 1
+			},
+			{title: 'Testes', description: '', icon: '', link: '', rating: 1},
 			{
 				title: 'Desafio Final: App Completo',
 				description: 'Construa um app React do zero ao deploy',
-				icon: 'Trophy'
+				icon: 'Trophy',
+				rating: 5
 			},
 		]),
 	},
@@ -94,15 +162,46 @@ export const tracks: Character[] = [
 		icon: 'Layers',
 		stats: {nivel: 1, missoes: 2, progresso: 4, xp: 1200},
 		modules: makeModules('fs', [
-			{title: 'Fundamentos Web', description: 'HTML, CSS, JS e o ecossistema web completo', icon: 'Globe'},
-			{title: 'Back End com Node.js', description: 'APIs, banco de dados e autenticação', icon: 'Server'},
-			{title: 'Front End com React', description: 'Interfaces modernas e reativas', icon: 'Monitor'},
-			{title: 'Banco de Dados Full Stack', description: 'PostgreSQL + MongoDB na prática', icon: 'Database'},
-			{title: 'DevOps para Devs', description: 'CI/CD, Docker e deploy na nuvem', icon: 'Cloud'},
+			{
+				title: 'Fundamentos Web',
+				description: 'HTML, CSS, JS e o ecossistema web completo',
+				icon: 'Globe',
+				link: '',
+				rating: 1
+			},
+			{
+				title: 'Back End com Node.js',
+				description: 'APIs, banco de dados e autenticação',
+				icon: 'Server',
+				link: '',
+				rating: 1
+			},
+			{
+				title: 'Front End com React',
+				description: 'Interfaces modernas e reativas',
+				icon: 'Monitor',
+				link: '',
+				rating: 1
+			},
+			{
+				title: 'Banco de Dados Full Stack',
+				description: 'PostgreSQL + MongoDB na prática',
+				icon: 'Database',
+				link: '',
+				rating: 1
+			},
+			{
+				title: 'DevOps para Devs',
+				description: 'CI/CD, Docker e deploy na nuvem',
+				icon: 'Cloud',
+				link: '',
+				rating: 1
+			},
 			{
 				title: 'Desafio Final: SaaS Completo',
 				description: 'Construa e publique seu próprio produto',
-				icon: 'Trophy'
+				icon: 'Trophy',
+				rating: 1
 			},
 		]),
 	},
@@ -116,17 +215,48 @@ export const tracks: Character[] = [
 		icon: 'Cloud',
 		stats: {nivel: 1, missoes: 2, progresso: 4, xp: 1200},
 		modules: makeModules('cl', [
-			{title: 'Fundamentos de Cloud', description: 'Conceitos de IaaS, PaaS e SaaS', icon: 'Cloud'},
-			{title: 'GO', description: '', icon: ''},
-			{title: 'Linux e Bash', description: '', icon: ''},
-			{title: 'AWS Essentials', description: 'EC2, S3, RDS e serviços core da AWS', icon: 'Server'},
-			{title: 'Containers & Kubernetes', description: 'Docker, orquestração e clusters', icon: 'Box'},
-			{title: 'Infraestrutura como Código', description: 'Terraform e CloudFormation', icon: 'FileCode'},
-			{title: 'Cloud Security', description: 'IAM, VPC e políticas de segurança', icon: 'Shield'},
+			{
+				title: 'Fundamentos de Cloud',
+				description: 'Conceitos de IaaS, PaaS e SaaS',
+				icon: 'Cloud',
+				link: '',
+				rating: 1
+			},
+			{title: 'GO', description: '', icon: '', link: '', rating: 1},
+			{title: 'Linux e Bash', description: '', icon: '', link: '', rating: 1},
+			{
+				title: 'AWS Essentials',
+				description: 'EC2, S3, RDS e serviços core da AWS',
+				icon: 'Server',
+				link: '',
+				rating: 1
+			},
+			{
+				title: 'Containers & Kubernetes',
+				description: 'Docker, orquestração e clusters',
+				icon: 'Box',
+				link: '',
+				rating: 1
+			},
+			{
+				title: 'Infraestrutura como Código',
+				description: 'Terraform e CloudFormation',
+				icon: 'FileCode',
+				link: '',
+				rating: 1
+			},
+			{
+				title: 'Cloud Security',
+				description: 'IAM, VPC e políticas de segurança',
+				icon: 'Shield',
+				link: '',
+				rating: 1
+			},
 			{
 				title: 'Desafio Final: Arquitetura Cloud',
 				description: 'Projete e implante uma solução escalável',
-				icon: 'Trophy'
+				icon: 'Trophy',
+				rating: 1
 			},
 		]),
 	},
@@ -140,19 +270,56 @@ export const tracks: Character[] = [
 		icon: 'BarChart2',
 		stats: {nivel: 1, missoes: 2, progresso: 4, xp: 1200},
 		modules: makeModules('ds', [
-			{title: 'Python para Data Science', description: 'NumPy, Pandas e análise exploratória', icon: 'Code'},
-			{title: 'Python para Machine Learning', description: 'Machine Learning e Análise de Dados', icon: ''},
+			{
+				title: 'Python para Data Science',
+				description: 'NumPy, Pandas e análise exploratória',
+				icon: 'Code',
+				link: '',
+				rating: 1
+			},
+			{
+				title: 'Python para Machine Learning',
+				description: 'Machine Learning e Análise de Dados',
+				icon: '',
+				link: '',
+				rating: 1
+			},
 			{
 				title: 'Estatística & Probabilidade',
 				description: 'Fundamentos matemáticos para dados',
-				icon: 'Calculator'
+				icon: 'Calculator',
+				link: '',
+				rating: 1
 			},
-			{title: 'Visualização de Dados', description: 'Matplotlib, Seaborn e Plotly', icon: 'BarChart2'},
-			{title: 'Power Bi', description: 'Regressão, classificação e clustering', icon: 'Brain'},
-			{title: 'Deep Learning Intro', description: 'Redes neurais com TensorFlow/Keras', icon: 'Network'},
-			{title: 'Scikit-Learn', description: '', icon: ''},
-			{title: 'Intro à IA', description: '', icon: ''},
-			{title: 'Desafio Final: Modelo em Produção', description: 'Treine e publique seu modelo', icon: 'Trophy'},
+			{
+				title: 'Visualização de Dados',
+				description: 'Matplotlib, Seaborn e Plotly',
+				icon: 'BarChart2',
+				link: '',
+				rating: 1
+			},
+			{
+				title: 'Power Bi',
+				description: 'Regressão, classificação e clustering',
+				icon: 'Brain',
+				link: '',
+				rating: 1
+			},
+			{
+				title: 'Deep Learning Intro',
+				description: 'Redes neurais com TensorFlow/Keras',
+				icon: 'Network',
+				link: '',
+				rating: 1
+			},
+			{title: 'Scikit-Learn', description: '', icon: '', link: '', rating: 1},
+			{title: 'Intro à IA', description: '', icon: '', link: '', rating: 1},
+			{
+				title: 'Desafio Final: Modelo em Produção',
+				description: 'Treine e publique seu modelo',
+				icon: 'Trophy',
+				rating: 1
+			},
 		]),
 	},
 	{
@@ -165,22 +332,49 @@ export const tracks: Character[] = [
 		icon: 'BrainCircuit',
 		stats: {nivel: 1, missoes: 2, progresso: 4, xp: 1200},
 		modules: makeModules('ia', [
-			{title: 'Fundamentos de IA', description: 'História, conceitos e ética em IA', icon: 'Brain'},
-			{title: 'Python para IA', description: '', icon: ''},
-			{title: 'Estatística para ML', description: '', icon: ''},
+			{
+				title: 'Fundamentos de IA',
+				description: 'História, conceitos e ética em IA',
+				icon: 'Brain',
+				link: '',
+				rating: 1
+			},
+			{title: 'Python para IA', description: '', icon: '', link: '', rating: 1},
+			{title: 'Estatística para ML', description: '', icon: '', link: '', rating: 1},
 			{
 				title: 'Machine Learning Avançado',
 				description: 'Algoritmos supervisionados e não supervisionados',
-				icon: 'GitBranch'
+				icon: 'GitBranch',
+				link: '',
+				rating: 1
 			},
 			{
 				title: 'LLMs & Engenharia de Prompts',
 				description: 'GPT, Claude e técnicas de prompting',
-				icon: 'MessageSquare'
+				icon: 'MessageSquare',
+				link: '',
+				rating: 1
 			},
-			{title: 'Agentes e Automações com IA', description: 'LangChain, AutoGPT e agentes autônomos', icon: 'Bot'},
-			{title: 'IA Multimodal', description: 'Visão computacional e processamento de imagens', icon: 'Eye'},
-			{title: 'Desafio Final: App com IA', description: 'Construa um produto com IA integrada', icon: 'Trophy'},
+			{
+				title: 'Agentes e Automações com IA',
+				description: 'LangChain, AutoGPT e agentes autônomos',
+				icon: 'Bot',
+				link: '',
+				rating: 1
+			},
+			{
+				title: 'IA Multimodal',
+				description: 'Visão computacional e processamento de imagens',
+				icon: 'Eye',
+				link: '',
+				rating: 1
+			},
+			{
+				title: 'Desafio Final: App com IA',
+				description: 'Construa um produto com IA integrada',
+				icon: 'Trophy',
+				rating: 1
+			},
 		]),
 	},
 	{
@@ -193,23 +387,40 @@ export const tracks: Character[] = [
 		icon: 'GitBranch',
 		stats: {nivel: 1, missoes: 2, progresso: 4, xp: 1200},
 		modules: makeModules('do', [
-			{title: 'Linux & Shell Script', description: 'Terminal, bash scripting e automações', icon: 'Terminal'},
+			{
+				title: 'Linux & Shell Script',
+				description: 'Terminal, bash scripting e automações',
+				icon: 'Terminal',
+				link: '',
+				rating: 1
+			},
 			{
 				title: 'Git & Fluxos de Trabalho',
 				description: 'Gitflow, rebase e estratégias de branching',
-				icon: 'GitBranch'
+				icon: 'GitBranch',
+				link: '',
+				rating: 1
 			},
-			{title: 'Ansible', description: '', icon: 'Robot'},
-			{title: 'CI/CD Pipelines', description: 'GitHub Actions, GitLab CI e Jenkins', icon: 'Zap'},
+			{title: 'Ansible', description: '', icon: 'Robot', link: '', rating: 1},
+			{
+				title: 'CI/CD Pipelines',
+				description: 'GitHub Actions, GitLab CI e Jenkins',
+				icon: 'Zap',
+				link: '',
+				rating: 1
+			},
 			{
 				title: 'Monitoramento & Observabilidade',
 				description: 'Prometheus, Grafana e logs estruturados',
-				icon: 'Activity'
+				icon: 'Activity',
+				link: '',
+				rating: 1
 			},
 			{
 				title: 'Desafio Final: Pipeline Completo',
 				description: 'Configure CI/CD do zero ao deploy',
-				icon: 'Trophy'
+				icon: 'Trophy',
+				rating: 1
 			},
 		]),
 	},
@@ -223,11 +434,12 @@ export const tracks: Character[] = [
 		icon: 'Smartphone',
 		stats: {nivel: 1, missoes: 2, progresso: 4, xp: 1200},
 		modules: makeModules('gd', [
-			{title: 'Kotlin', description: '', icon: ''},
+			{title: 'Kotlin', description: '', icon: '', link: '', rating: 1},
 			{
 				title: 'Desafio Final: Publicar um Aplicativo',
 				description: 'Finalize e publique no Google Play',
-				icon: 'Trophy'
+				icon: 'Trophy',
+				rating: 1
 			},
 		]),
 	},
@@ -244,16 +456,37 @@ export const tracks: Character[] = [
 			{
 				title: 'Fundamentos de Game Design',
 				description: 'Mecânicas, loops e balanceamento de jogos',
-				icon: 'Gamepad2'
+				icon: 'Gamepad2',
+				link: '',
+				rating: 1
 			},
-			{title: 'Unity Básico', description: 'Interface, scripts C# e física', icon: 'Box'},
-			{title: 'Programação de Jogos 2D', description: 'Sprites, colisões e animações', icon: 'Layout'},
-			{title: 'Jogos 3D com Unity', description: 'Modelos 3D, câmeras e iluminação', icon: 'Layers'},
-			{title: 'Áudio & Efeitos Visuais', description: 'Trilha sonora, SFX e shaders', icon: 'Music'},
+			{title: 'Unity Básico', description: 'Interface, scripts C# e física', icon: 'Box', link: '', rating: 1},
+			{
+				title: 'Programação de Jogos 2D',
+				description: 'Sprites, colisões e animações',
+				icon: 'Layout',
+				link: '',
+				rating: 1
+			},
+			{
+				title: 'Jogos 3D com Unity',
+				description: 'Modelos 3D, câmeras e iluminação',
+				icon: 'Layers',
+				link: '',
+				rating: 1
+			},
+			{
+				title: 'Áudio & Efeitos Visuais',
+				description: 'Trilha sonora, SFX e shaders',
+				icon: 'Music',
+				link: '',
+				rating: 1
+			},
 			{
 				title: 'Desafio Final: Publicar seu Jogo',
 				description: 'Finalize e publique seu jogo na Steam/itch.io',
-				icon: 'Trophy'
+				icon: 'Trophy',
+				rating: 1
 			},
 		]),
 	},
@@ -267,7 +500,7 @@ export const tracks: Character[] = [
 		icon: 'Cuboid',
 		stats: {nivel: 1, missoes: 2, progresso: 4, xp: 1200},
 		modules: makeModules('gd', [
-			{title: '', description: '', icon: ''},
+			{title: '', description: '', icon: '', link: '', rating: 1},
 		]),
 	},
 	{
@@ -280,19 +513,46 @@ export const tracks: Character[] = [
 		icon: 'Shield',
 		stats: {nivel: 1, missoes: 2, progresso: 4, xp: 1200},
 		modules: makeModules('hs', [
-			{title: 'Fundamentos de Redes', description: 'TCP/IP, DNS, HTTP e protocolos essenciais', icon: 'Network'},
+			{
+				title: 'Fundamentos de Redes',
+				description: 'TCP/IP, DNS, HTTP e protocolos essenciais',
+				icon: 'Network',
+				link: '',
+				rating: 1
+			},
 			{
 				title: 'Linux para Hackers',
 				description: 'Kali Linux, terminal e ferramentas de segurança',
-				icon: 'Terminal'
+				icon: 'Terminal',
+				link: '',
+				rating: 1
 			},
-			{title: 'Pentest & Reconhecimento', description: 'OSINT, Nmap e fases do pentest', icon: 'Search'},
-			{title: 'Exploração de Vulnerabilidades', description: 'OWASP Top 10, SQLi e XSS na prática', icon: 'Bug'},
-			{title: 'Segurança Defensiva', description: 'SOC, SIEM e resposta a incidentes', icon: 'Shield'},
+			{
+				title: 'Pentest & Reconhecimento',
+				description: 'OSINT, Nmap e fases do pentest',
+				icon: 'Search',
+				link: '',
+				rating: 1
+			},
+			{
+				title: 'Exploração de Vulnerabilidades',
+				description: 'OWASP Top 10, SQLi e XSS na prática',
+				icon: 'Bug',
+				link: '',
+				rating: 1
+			},
+			{
+				title: 'Segurança Defensiva',
+				description: 'SOC, SIEM e resposta a incidentes',
+				icon: 'Shield',
+				link: '',
+				rating: 1
+			},
 			{
 				title: 'Desafio Final: CTF Challenge',
 				description: 'Resolva desafios reais de Capture The Flag',
-				icon: 'Trophy'
+				icon: 'Trophy',
+				rating: 1
 			},
 		]),
 	},
@@ -306,12 +566,47 @@ export const tracks: Character[] = [
 		icon: 'Palette',
 		stats: {nivel: 1, missoes: 2, progresso: 4, xp: 1200},
 		modules: makeModules('ux', [
-			{title: 'Fundamentos de Design', description: 'Princípios visuais, tipografia e cor', icon: 'Palette'},
-			{title: 'UX Research', description: 'Pesquisa com usuário, personas e jornadas', icon: 'Users'},
-			{title: 'Figma Completo', description: 'Do wireframe ao protótipo interativo', icon: 'Layout'},
-			{title: 'Design System', description: 'Criação de sistemas de design escaláveis', icon: 'Layers'},
-			{title: 'Testes de Usabilidade', description: 'Validação, métricas e iteração', icon: 'CheckCircle'},
-			{title: 'Desafio Final: App do Zero', description: 'Projete um app completo com entrega', icon: 'Trophy'},
+			{
+				title: 'Fundamentos de Design',
+				description: 'Princípios visuais, tipografia e cor',
+				icon: 'Palette',
+				link: '',
+				rating: 1
+			},
+			{
+				title: 'UX Research',
+				description: 'Pesquisa com usuário, personas e jornadas',
+				icon: 'Users',
+				link: '',
+				rating: 0
+			},
+			{
+				title: 'Figma Completo',
+				description: 'Do wireframe ao protótipo interativo',
+				icon: 'Layout',
+				link: '',
+				rating: 0
+			},
+			{
+				title: 'Design System',
+				description: 'Criação de sistemas de design escaláveis',
+				icon: 'Layers',
+				link: '',
+				rating: 0
+			},
+			{
+				title: 'Testes de Usabilidade',
+				description: 'Validação, métricas e iteração',
+				icon: 'CheckCircle',
+				link: '',
+				rating: 0
+			},
+			{
+				title: 'Desafio Final: App do Zero',
+				description: 'Projete um app completo com entrega',
+				icon: 'Trophy',
+				rating: 0
+			},
 		]),
 	},
 	{
@@ -325,22 +620,42 @@ export const tracks: Character[] = [
 		stats: {nivel: 1, missoes: 2, progresso: 4, xp: 1200},
 		modules: makeModules('qa', [
 			{
-				title: 'Fundamentos de QA',
-				description: 'Tipos de testes, ciclo de vida e metodologias',
-				icon: 'CheckCircle'
+				title: 'Fundamentos de QA', description: 'Tipos de testes, ciclo de vida e metodologias',
+				icon: 'CheckCircle', link: '', rating: 0
 			},
 			{
 				title: 'Testes Manuais',
 				description: 'Criação de casos de teste e relatórios de bugs',
-				icon: 'ClipboardList'
+				icon: 'ClipboardList',
+				link: '',
+				rating: 0
 			},
-			{title: 'Automação com Cypress', description: 'E2E testing com Cypress na prática', icon: 'Zap'},
-			{title: 'Testes de API', description: 'Postman, REST Assured e validações', icon: 'Globe'},
-			{title: 'Performance & Carga', description: 'JMeter e testes de estresse', icon: 'Gauge'},
+			{
+				title: 'Automação com Cypress',
+				description: 'E2E testing com Cypress na prática',
+				icon: 'Zap',
+				link: '',
+				rating: 0
+			},
+			{
+				title: 'Testes de API',
+				description: 'Postman, REST Assured e validações',
+				icon: 'Globe',
+				link: '',
+				rating: 0
+			},
+			{
+				title: 'Performance & Carga',
+				description: 'JMeter e testes de estresse',
+				icon: 'Gauge',
+				link: '',
+				rating: 0
+			},
 			{
 				title: 'Desafio Final: Suite de Testes',
 				description: 'Automatize os testes de um projeto real',
-				icon: 'Trophy'
+				icon: 'Trophy',
+				rating: 0
 			},
 		]),
 	},
@@ -354,15 +669,46 @@ export const tracks: Character[] = [
 		icon: 'Database',
 		stats: {nivel: 1, missoes: 2, progresso: 4, xp: 1200},
 		modules: makeModules('de', [
-			{title: 'Fundamentos de Dados', description: 'Batch vs stream, data lake e warehouse', icon: 'Database'},
-			{title: 'SQL Avançado', description: 'Window functions, CTEs e otimização', icon: 'Table'},
-			{title: 'Apache Spark', description: 'Processamento distribuído com PySpark', icon: 'Zap'},
-			{title: 'Pipelines com Airflow', description: 'Orquestração e agendamento de pipelines', icon: 'GitBranch'},
-			{title: 'Data Warehouse Moderno', description: 'BigQuery, Snowflake e dbt', icon: 'Layers'},
+			{
+				title: 'Fundamentos de Dados',
+				description: 'Batch vs stream, data lake e warehouse',
+				icon: 'Database',
+				link: '',
+				rating: 0
+			},
+			{
+				title: 'SQL Avançado',
+				description: 'Window functions, CTEs e otimização',
+				icon: 'Table',
+				link: '',
+				rating: 0
+			},
+			{
+				title: 'Apache Spark',
+				description: 'Processamento distribuído com PySpark',
+				icon: 'Zap',
+				link: '',
+				rating: 0
+			},
+			{
+				title: 'Pipelines com Airflow',
+				description: 'Orquestração e agendamento de pipelines',
+				icon: 'GitBranch',
+				link: '',
+				rating: 0
+			},
+			{
+				title: 'Data Warehouse Moderno',
+				description: 'BigQuery, Snowflake e dbt',
+				icon: 'Layers',
+				link: '',
+				rating: 0
+			},
 			{
 				title: 'Desafio Final: Pipeline E2E',
 				description: 'Construa um pipeline de dados completo',
-				icon: 'Trophy'
+				icon: 'Trophy',
+				rating: 0
 			},
 		]),
 	},
@@ -376,15 +722,40 @@ export const tracks: Character[] = [
 		icon: 'Cpu',
 		stats: {nivel: 1, missoes: 2, progresso: 4, xp: 1200},
 		modules: makeModules('em', [
-			{title: 'Eletrônica Básica', description: 'Circuitos, resistores, capacitores e Arduino', icon: 'Cpu'},
-			{title: 'Programação em C Embarcado', description: 'Ponteiros, memória e periféricos', icon: 'Code'},
-			{title: 'Microcontroladores', description: 'ARM Cortex-M, timers e interrupções', icon: 'Cpu'},
-			{title: 'Comunicação Serial', description: 'UART, SPI, I2C e protocolos de campo', icon: 'Radio'},
-			{title: 'RTOS', description: 'FreeRTOS e sistemas de tempo real', icon: 'Clock'},
+			{
+				title: 'Eletrônica Básica',
+				description: 'Circuitos, resistores, capacitores e Arduino',
+				icon: 'Cpu',
+				link: '',
+				rating: 0
+			},
+			{
+				title: 'Programação em C Embarcado',
+				description: 'Ponteiros, memória e periféricos',
+				icon: 'Code',
+				link: '',
+				rating: 0
+			},
+			{
+				title: 'Microcontroladores',
+				description: 'ARM Cortex-M, timers e interrupções',
+				icon: 'Cpu',
+				link: '',
+				rating: 0
+			},
+			{
+				title: 'Comunicação Serial',
+				description: 'UART, SPI, I2C e protocolos de campo',
+				icon: 'Radio',
+				link: '',
+				rating: 0
+			},
+			{title: 'RTOS', description: 'FreeRTOS e sistemas de tempo real', icon: 'Clock', link: '', rating: 0},
 			{
 				title: 'Desafio Final: Projeto IoT',
 				description: 'Construa e publique um dispositivo IoT',
-				icon: 'Trophy'
+				icon: 'Trophy',
+				rating: 0
 			},
 		]),
 	},
@@ -398,15 +769,40 @@ export const tracks: Character[] = [
 		icon: 'Bot',
 		stats: {nivel: 1, missoes: 2, progresso: 4, xp: 1200},
 		modules: makeModules('au', [
-			{title: 'Python para Automação', description: 'Scripts, arquivos e automações do dia a dia', icon: 'Code'},
-			{title: 'Web Scraping', description: 'BeautifulSoup, Selenium e Playwright', icon: 'Globe'},
-			{title: 'Automação de Desktop', description: 'PyAutoGUI e controle de interface', icon: 'Monitor'},
-			{title: 'Integração via APIs', description: 'Zapier, Make e conexão entre sistemas', icon: 'Link'},
-			{title: 'Robôs com RPA', description: 'UiPath e automação empresarial', icon: 'Bot'},
+			{
+				title: 'Python para Automação',
+				description: 'Scripts, arquivos e automações do dia a dia',
+				icon: 'Code',
+				link: '',
+				rating: 0
+			},
+			{
+				title: 'Web Scraping',
+				description: 'BeautifulSoup, Selenium e Playwright',
+				icon: 'Globe',
+				link: '',
+				rating: 0
+			},
+			{
+				title: 'Automação de Desktop',
+				description: 'PyAutoGUI e controle de interface',
+				icon: 'Monitor',
+				link: '',
+				rating: 0
+			},
+			{
+				title: 'Integração via APIs',
+				description: 'Zapier, Make e conexão entre sistemas',
+				icon: 'Link',
+				link: '',
+				rating: 0
+			},
+			{title: 'Robôs com RPA', description: 'UiPath e automação empresarial', icon: 'Bot', link: '', rating: 0},
 			{
 				title: 'Desafio Final: Robô Completo',
 				description: 'Automatize um processo real do início ao fim',
-				icon: 'Trophy'
+				icon: 'Trophy',
+				rating: 0
 			},
 		]),
 	},
@@ -423,20 +819,37 @@ export const tracks: Character[] = [
 			{
 				title: 'Fundamentos de Blockchain',
 				description: 'Criptografia, consenso e descentralização',
-				icon: 'Link'
+				icon: 'Link',
+				link: '',
+				rating: 0
 			},
-			{title: 'Ethereum & Solidity', description: 'Smart contracts e a EVM', icon: 'Code'},
-			{title: 'DeFi & Tokens', description: 'ERC-20, ERC-721 e finanças descentralizadas', icon: 'Coins'},
-			{title: 'Web3 & dApps', description: 'Ethers.js, Wagmi e front-end Web3', icon: 'Globe'},
+			{title: 'Ethereum & Solidity', description: 'Smart contracts e a EVM', icon: 'Code', link: '', rating: 0},
+			{
+				title: 'DeFi & Tokens',
+				description: 'ERC-20, ERC-721 e finanças descentralizadas',
+				icon: 'Coins',
+				link: '',
+				rating: 0
+			},
+			{
+				title: 'Web3 & dApps',
+				description: 'Ethers.js, Wagmi e front-end Web3',
+				icon: 'Globe',
+				link: '',
+				rating: 0
+			},
 			{
 				title: 'Segurança em Smart Contracts',
 				description: 'Auditorias, reentrância e vulnerabilidades',
-				icon: 'Shield'
+				icon: 'Shield',
+				link: '',
+				rating: 0
 			},
 			{
 				title: 'Desafio Final: Lançar um Token',
 				description: 'Crie e publique seu próprio contrato na main-net',
-				icon: 'Trophy'
+				icon: 'Trophy',
+				rating: 0
 			},
 		]),
 	},
@@ -458,36 +871,60 @@ export const specialPaths: SpecialPath[] = [
 			{
 				title: 'Lógica de Programação',
 				description: 'Variáveis, condicionais, loops e funções do zero',
-				icon: 'Code'
+				icon: 'Code',
+				link: '',
+				rating: 0
 			},
-			{title: 'Estruturas de Dados', description: 'Arrays, listas, pilhas, filas e dicionários', icon: 'Layers'},
+			{
+				title: 'Estruturas de Dados',
+				description: 'Arrays, listas, pilhas, filas e dicionários',
+				icon: 'Layers',
+				link: '',
+				rating: 0
+			},
 			{
 				title: 'Orientação a Objetos',
 				description: 'Classes, herança, polimorfismo e encapsulamento',
-				icon: 'Brain'
+				icon: 'Brain',
+				link: '',
+				rating: 0
 			},
-			{title: 'Git & GitHub', description: 'Commits, branches, pull requests e colaboração', icon: 'GitBranch'},
-			{title: 'Docker Essencial', description: '', icon: 'Docker'},
-			{title: 'Redes de Computadores', description: '', icon: ''},
+			{
+				title: 'Git & GitHub',
+				description: 'Commits, branches, pull requests e colaboração',
+				icon: 'GitBranch',
+				link: '',
+				rating: 0
+			},
+			{title: 'Docker Essencial', description: '', icon: 'Docker', link: '', rating: 0},
+			{title: 'Redes de Computadores', description: '', icon: '', link: '', rating: 0},
 			{
 				title: 'Linha de Comando',
 				description: 'Terminal Linux/Mac e scripts básicos de automação',
-				icon: 'Terminal'
+				icon: 'Terminal',
+				link: '',
+				rating: 0
 			},
 			{
 				title: 'Algoritmos Essenciais',
 				description: 'Busca, ordenação e análise de complexidade básica',
-				icon: 'Code'
+				icon: 'Code',
+				link: '',
+				rating: 0
 			},
 			{
 				title: 'Como Aprender Tech',
 				description: 'Método, consistência e como construir projetos reais',
-				icon: 'Brain'
+				icon: 'Brain',
+				link: '',
+				rating: 0
 			},
 			{
 				title: 'Desafio Final: Primeiro Projeto',
 				description: 'Crie um projeto do zero e publique no GitHub',
-				icon: 'Trophy'
+				icon: 'Trophy',
+				link: '',
+				rating: 0
 			},
 		]),
 	},
@@ -506,37 +943,51 @@ export const specialPaths: SpecialPath[] = [
 			{
 				title: 'Design Patterns',
 				description: 'GoF, padrões comportamentais e aplicação no mundo real',
-				icon: 'Layers'
+				icon: 'Layers',
+				link: '',
+				rating: 0
 			},
 			{
 				title: 'Arquiteturas Distribuídas',
 				description: 'Microsserviços, event-driven e comunicação assíncrona',
-				icon: 'Network'
+				icon: 'Network',
+				link: '',
+				rating: 0
 			},
 			{
 				title: 'Performance & Otimização',
 				description: 'Profiling, caching, lazy loading e métricas de performance',
-				icon: 'Gauge'
+				icon: 'Gauge',
+				link: '',
+				rating: 0
 			},
 			{
 				title: 'Testes Avançados',
 				description: 'TDD, BDD, mocks, contratos e testes de mutação',
-				icon: 'CheckCircle'
+				icon: 'CheckCircle',
+				link: '',
+				rating: 0
 			},
 			{
 				title: 'Segurança Aplicada',
 				description: 'OWASP, threat modeling e secure coding na prática',
-				icon: 'Shield'
+				icon: 'Shield',
+				link: '',
+				rating: 0
 			},
 			{
 				title: 'Open Source & Carreira',
 				description: 'Contribuições, code review e posicionamento técnico',
-				icon: 'GitBranch'
+				icon: 'GitBranch',
+				link: '',
+				rating: 0
 			},
 			{
 				title: 'Desafio Final: Projeto Enterprise',
 				description: 'Arquitete e implemente um sistema de produção',
-				icon: 'Trophy'
+				icon: 'Trophy',
+				link: '',
+				rating: 0
 			},
 		]),
 	},
@@ -555,37 +1006,51 @@ export const specialPaths: SpecialPath[] = [
 			{
 				title: 'Matemática Discreta',
 				description: 'Lógica proposicional, conjuntos e combinatória',
-				icon: 'Calculator'
+				icon: 'Calculator',
+				link: '',
+				rating: 0
 			},
 			{
 				title: 'Álgebra Linear para Dev',
 				description: 'Vetores, matrizes e aplicações em IA e gráficos',
-				icon: 'Calculator'
+				icon: 'Calculator',
+				link: '',
+				rating: 0
 			},
 			{
 				title: 'Estatística & Probabilidade',
 				description: 'Distribuições, testes de hipótese e teorema de Bayes',
-				icon: 'BarChart2'
+				icon: 'BarChart2',
+				link: '',
+				rating: 0
 			},
 			{
 				title: 'Algoritmos & Complexidade',
 				description: 'Big-O, sorting avançado e análise de algoritmos',
-				icon: 'Code'
+				icon: 'Code',
+				link: '',
+				rating: 0
 			},
 			{
 				title: 'Teoria dos Grafos',
 				description: 'BFS, DFS, Dijkstra e aplicações práticas em software',
-				icon: 'Network'
+				icon: 'Network',
+				link: '',
+				rating: 0
 			},
 			{
 				title: 'Criptografia Matemática',
 				description: 'RSA, curvas elípticas e fundamentos de criptografia',
-				icon: 'Shield'
+				icon: 'Shield',
+				link: '',
+				rating: 0
 			},
 			{
 				title: 'Desafio Final: Algoritmo do Zero',
 				description: 'Implemente um algoritmo clássico sem usar biblioteca',
-				icon: 'Trophy'
+				icon: 'Trophy',
+				link: '',
+				rating: 0
 			},
 		]),
 	},

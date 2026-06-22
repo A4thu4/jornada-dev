@@ -108,7 +108,7 @@ export function LearningPathPage({ character, onBack }: LearningPathPageProps) {
 							className="uppercase mb-1"
 						>
 							Trilha ·{' '}
-							<span style={{color: character.accentColor}}>{character.archetype}</span>
+							<span style={{color: character.accentColor}}>{character.title}</span>
 						</p>
 						<h1
 							style={{
@@ -122,29 +122,31 @@ export function LearningPathPage({ character, onBack }: LearningPathPageProps) {
 							{character.name.toUpperCase()}
 						</h1>
 						<p style={{fontSize: '14px', color: '#64748B', marginTop: '6px'}}>
-							{character.title}
+							{character.archetype}
 						</p>
 					</div>
 
 					<div className="flex gap-2">
 						<button
+							onClick={() => window.open('https://instagram.com/arthur.mamedes', '_blank')}
 							style={{
-								border: `1px solid rgba(227,6,46,0.15)`,
-								color: '#e3062e',
+								border: `1px solid rgba(233,54,250,0.15)`,
+								color: '#e936fa',
 								fontFamily: "'Cinzel', serif",
 								fontSize: '11px',
 								letterSpacing: '0.1em',
 								padding: '8px 16px',
 								borderRadius: '8px',
 								cursor: 'pointer',
-								background: 'rgba(244,75,86,0.15)',
+								background: 'rgba(190,54,130,0.15)',
 							}}
 							className="uppercase hover:opacity-70 transition-opacity inline-flex items-center justify-center gap-2 whitespace-nowrap"
 						>
-							<Instagram size={14}/> Instagram
+							<Instagram size={14}/> @arthur.mamedes
 						</button>
 
 						<button
+							onClick={() => window.open('https://github.com/A4thu4', '_blank')}
 							style={{
 								border: `1px solid ${character.accentColor}60`,
 								color: character.accentColor,

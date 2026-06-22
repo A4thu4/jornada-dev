@@ -70,7 +70,7 @@ export function CharacterCard({ character, isSelected, onClick }: CharacterCardP
 				style={{fontFamily: "'Inter', sans-serif", fontSize: '9px'}}
 				className="text-gray-500 text-center leading-tight"
 			>
-				{character.archetype}
+				{character.title}
 			</span>
 			{isSelected && (
 				<div
