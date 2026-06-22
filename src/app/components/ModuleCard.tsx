@@ -52,7 +52,8 @@ export function ModuleCard({ module, index, accentColor, accentGlow, isFeatured 
 							fontFamily: "'Cinzel', serif",
 							fontSize: '12px',
 							color: isAvailable ? accentColor : '#4B5563'
-						}}>
+						}}
+						>
 						{index + 1}
 					</span>
 				</div>
@@ -63,7 +64,8 @@ export function ModuleCard({ module, index, accentColor, accentGlow, isFeatured 
 						flex: 1,
 						background: `linear-gradient(to bottom, ${accentColor}40, transparent)`,
 						minHeight: '20px'
-					}}/>
+						}}
+					/>
 				)}
 			</div>
 			{/* Card */}
@@ -76,7 +78,7 @@ export function ModuleCard({ module, index, accentColor, accentGlow, isFeatured 
 					marginBottom: '12px',
 				}}
 				className="flex-1 rounded-xl p-4"
-			>
+				>
 				<div className="flex items-start justify-between gap-3">
 					<div className="flex items-start gap-3 flex-1">
 						<div
@@ -87,7 +89,7 @@ export function ModuleCard({ module, index, accentColor, accentGlow, isFeatured 
 								borderRadius: '8px',
 								flexShrink: 0,
 							}}
-						>
+							>
 							<Icon size={18} color={isAvailable ? accentColor : '#6B7280'}/>
 						</div>
 						<div className="flex-1">
@@ -98,7 +100,7 @@ export function ModuleCard({ module, index, accentColor, accentGlow, isFeatured 
 									color: isAvailable ? '#F1F5F9' : '#6B7280',
 									marginBottom: '4px',
 								}}
-							>
+								>
 								{module.title}
 							</h4>
 							<p style={{fontFamily: "'Inter', sans-serif", fontSize: '12px'}}
@@ -117,7 +119,7 @@ export function ModuleCard({ module, index, accentColor, accentGlow, isFeatured 
 								<div className="flex gap-0.5">
 									{Array.from({length: 5}).map((_, i) => (
 										<Star key={i} size={10} color={i < module.rating ? accentColor : '#374151'}
-										      fill={i < module.rating ? accentColor : 'transparent'}/>
+								        fill={i < module.rating ? accentColor : 'transparent'}/>
 									))}
 								</div>
 							</div>
@@ -126,9 +128,9 @@ export function ModuleCard({ module, index, accentColor, accentGlow, isFeatured 
 
 					<div className="flex flex-col items-end gap-2 flex-shrink-0"> {isLocked ?
 						(
-							<span style={{fontFamily: "'Inter', sans-serif", fontSize: '11px'}}
-							      className="text-gray-600 uppercase tracking-wider">
-						Bloqueado
+						<span style={{fontFamily: "'Inter', sans-serif", fontSize: '11px'}}
+					        className="text-gray-600 uppercase tracking-wider">
+							Bloqueado
 						</span>
 						) : (
 							<button
@@ -147,7 +149,7 @@ export function ModuleCard({ module, index, accentColor, accentGlow, isFeatured 
 									whiteSpace: 'nowrap',
 								}}
 								className="uppercase hover:opacity-80 transition-opacity"
-							>
+								>
 								{isFeatured ? '▶ Iniciar' : '▶ Começar'}
 							</button>
 						)}

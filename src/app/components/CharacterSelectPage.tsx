@@ -30,7 +30,7 @@ export function CharacterSelectPage({ selected, onSelect, onStart, onStartSpecia
 				background: 'linear-gradient(180deg, #060B1A 0%, #0A1428 50%, #060B1A 100%)',
 				fontFamily: "'Inter', sans-serif",
 			}}
-		>
+			>
 			{/* Hero Banner */}
 			<div className="relative overflow-hidden" style={{height: '380px'}}>
 				<ImageWithFallback
@@ -65,7 +65,7 @@ export function CharacterSelectPage({ selected, onSelect, onStart, onStartSpecia
 							color: '#64748B',
 						}}
 						className="uppercase"
-					>
+						>
 						✦ Bem-vindo à ✦
 					</p>
 					<h1
@@ -80,7 +80,7 @@ export function CharacterSelectPage({ selected, onSelect, onStart, onStartSpecia
 							textAlign: 'center',
 							lineHeight: '1.1',
 						}}
-					>
+						>
 						JORNADA DEV
 					</h1>
 					<p
@@ -91,7 +91,7 @@ export function CharacterSelectPage({ selected, onSelect, onStart, onStartSpecia
 							textAlign: 'center',
 							maxWidth: '480px',
 						}}
-					>
+						>
 						Escolha seu caminho. Forje suas habilidades. Torne-se uma lenda do código.
 					</p>
 				</div>
@@ -108,7 +108,7 @@ export function CharacterSelectPage({ selected, onSelect, onStart, onStartSpecia
 							color: '#475569',
 						}}
 						className="uppercase mb-2"
-					>
+						>
 						✦ Selecione sua trilha ✦
 					</p>
 					<h2
@@ -118,7 +118,7 @@ export function CharacterSelectPage({ selected, onSelect, onStart, onStartSpecia
 							color: '#60A5FA',
 							letterSpacing: '0.05em',
 						}}
-					>
+						>
 						SELECIONE SEU PERSONAGEM
 					</h2>
 					<p style={{fontSize: '13px'}} className="text-gray-500 mt-2">
@@ -132,7 +132,7 @@ export function CharacterSelectPage({ selected, onSelect, onStart, onStartSpecia
 						onClick={() => scrollBy('left')}
 						style={{background: 'rgba(13,21,38,0.9)', border: '1px solid rgba(255,255,255,0.1)'}}
 						className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 z-10 w-9 h-9 rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition-opacity"
-					>
+						>
 						<ChevronLeft size={18} color="#9CA3AF"/>
 					</button>
 
@@ -140,7 +140,7 @@ export function CharacterSelectPage({ selected, onSelect, onStart, onStartSpecia
 						ref={scrollRef}
 						className="flex gap-3 overflow-x-auto pb-3"
 						style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}
-					>
+						>
 						{tracks.map((c) => (
 							<CharacterCard
 								key={c.id}
@@ -155,7 +155,7 @@ export function CharacterSelectPage({ selected, onSelect, onStart, onStartSpecia
 						onClick={() => scrollBy('right')}
 						style={{background: 'rgba(13,21,38,0.9)', border: '1px solid rgba(255,255,255,0.1)'}}
 						className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 z-10 w-9 h-9 rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition-opacity"
-					>
+						>
 						<ChevronRight size={18} color="#9CA3AF"/>
 					</button>
 				</div>
@@ -168,7 +168,8 @@ export function CharacterSelectPage({ selected, onSelect, onStart, onStartSpecia
 							fontSize: '12px',
 							color: '#475569',
 							letterSpacing: '0.2em'
-						}} className="uppercase">
+						}}
+						   className="uppercase">
 							{selected.archetype}
 						</p>
 						<h3
@@ -177,7 +178,7 @@ export function CharacterSelectPage({ selected, onSelect, onStart, onStartSpecia
 								fontSize: '24px',
 								color: selected.accentColor,
 							}}
-						>
+							>
 							{selected.title}
 						</h3>
 					</div>
@@ -211,7 +212,7 @@ export function CharacterSelectPage({ selected, onSelect, onStart, onStartSpecia
 							boxShadow: `0 0 24px ${selected.accentGlow}`,
 						}}
 						className="px-8 py-3 rounded-xl uppercase cursor-pointer hover:opacity-90 transition-opacity"
-					>
+						>
 						✦ Iniciar Jornada — {selected.name} ✦
 					</button>
 				</div>
@@ -227,7 +228,7 @@ export function CharacterSelectPage({ selected, onSelect, onStart, onStartSpecia
 								color: '#475569',
 							}}
 							className="uppercase"
-						>
+							>
 							✦ Caminho Especial ✦
 						</p>
 					</div>
@@ -258,7 +259,7 @@ export function CharacterSelectPage({ selected, onSelect, onStart, onStartSpecia
 							background: 'transparent',
 						}}
 						className="uppercase hover:opacity-70 transition-opacity inline-flex text-center justify-center gap-0.5 whitespace-nowrap"
-					>
+						>
 						<Github size={12}/> Github
 					</button>
 				</p>

@@ -31,14 +31,14 @@ export function CharacterCard({ character, isSelected, onClick }: CharacterCardP
 				transition: 'all 0.3s ease',
 			}}
 			className="flex flex-col items-center gap-2 p-4 rounded-xl border cursor-pointer flex-shrink-0"
-		>
+			>
 			<div
 				style={{
 					background: isSelected ? `radial-gradient(circle, ${character.accentGlow}, transparent)` : 'rgba(255,255,255,0.05)',
 					border: `1px solid ${isSelected ? character.accentColor : 'rgba(255,255,255,0.1)'}`,
 				}}
 				className="w-14 h-14 rounded-full flex items-center justify-center"
-			>
+				>
 				<Icon size={24} color={isSelected ? character.accentColor : '#9CA3AF'}/>
 			</div>
 			<span
@@ -48,13 +48,13 @@ export function CharacterCard({ character, isSelected, onClick }: CharacterCardP
 					fontSize: '11px',
 				}}
 				className="text-center leading-tight"
-			>
+				>
 				{character.name}
 			</span>
 			<span
 				style={{fontFamily: "'Inter', sans-serif", fontSize: '9px'}}
 				className="text-gray-500 text-center leading-tight"
-			>
+				>
 				{character.title}
 			</span>
 			{isSelected && (
