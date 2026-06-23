@@ -57,7 +57,7 @@ export function ModuleCard({ module, index, accentColor, accentGlow, isFeatured 
 						{index + 1}
 					</span>
 				</div>
-				{index < 10 && (
+				{index < 20 && (
 					<div
 						style={{
 						width: '2px',

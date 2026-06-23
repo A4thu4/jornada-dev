@@ -33,7 +33,8 @@ const makeModules = (prefix: string, titles: {
 	description: string;
 	icon: string;
 	link?: string;
-	rating: number
+	rating: number;
+	lessonCount?: number
 }[]): Module[] =>
 	titles.map((m, i) => ({
 		id: `${prefix}-${i + 1}`,
@@ -42,7 +43,7 @@ const makeModules = (prefix: string, titles: {
 		icon: m.icon,
 		link: m.link,
 		rating: m.rating ? m.rating : Math.floor(Math.random() * 2) + 2,
-		lessonCount: Math.floor(Math.random() * 8) + 6,
+		lessonCount: m.lessonCount ? m.lessonCount : Math.floor(Math.random() * 8) + 6,
 		status: i === 0 ? 'disponível' : 'bloqueado',
 	}));
 
@@ -57,14 +58,14 @@ export const tracks: Character[] = [
 		icon: 'Code',
 		stats: { nivel: 1, missoes: 2, progresso: 4, xp: 1200 },
 		modules: makeModules('be', [
-			{ title: 'Arquitetura de Software', description: 'Padrões MVC, Clean Architecture e princípios SOLID na prática', icon: 'Layers', link: '', rating: 2 },
-			{ title: 'Java Firme', description: 'POO, coleções, generics e tratamento de exceções em Java', icon: 'Code', link: 'https://www.youtube.com/playlist?list=PL62G310vn6nFIsOCC0H-C2infYgwm8SWW', rating: 2 },
-			{ title: 'Banco de Dados', description: 'SQL, NoSQL, modelagem relacional e otimização de queries', icon: 'Database', link: 'https://www.youtube.com/playlist?list=PLbIBj8vQhvm2WT-pjGS5x7zUzmh4VgvRk', rating: 3 },
-			{ title: 'APIs REST', description: 'Design, construção e documentação de APIs HTTP modernas', icon: 'Globe', link: 'https://www.youtube.com/playlist?list=PLf8x7B3nFTl17WeEVj405tHlstiq1kNBX', rating: 3 },
-			{ title: 'Spring Boot', description: 'Framework Java para APIs robustas, escaláveis e prontas para produção', icon: 'FileCode', link: 'https://www.youtube.com/playlist?list=PL62G310vn6nFBIxp6ZwGnm8xMcGE3VA5H', rating: 3 },
-			{ title: 'Autenticação & Segurança', description: 'JWT, OAuth2, HTTPS e boas práticas de segurança em APIs', icon: 'Lock', link: '', rating: 4 },
-			{ title: 'Microsserviços', description: 'Arquitetura distribuída, mensageria com Kafka e orquestração', icon: 'Network', link: '', rating: 4 },
-			{ title: 'Desafio Final: API Completa', description: 'Construa uma API do zero ao deploy com autenticação e testes', icon: 'Trophy', rating: 5 },
+			{ title: 'Arquitetura de Software', description: 'Padrões MVC, Clean Architecture e princípios SOLID na prática', icon: 'Layers', link: '', rating: 2, lessonCount: 0 },
+			{ title: 'Java Firme', description: 'POO, coleções, generics e tratamento de exceções em Java', icon: 'Code', link: 'https://www.youtube.com/playlist?list=PL62G310vn6nFIsOCC0H-C2infYgwm8SWW', rating: 2, lessonCount: 0  },
+			{ title: 'Banco de Dados', description: 'SQL, NoSQL, modelagem relacional e otimização de queries', icon: 'Database', link: 'https://www.youtube.com/playlist?list=PLbIBj8vQhvm2WT-pjGS5x7zUzmh4VgvRk', rating: 3, lessonCount: 1 },
+			{ title: 'APIs REST', description: 'Design, construção e documentação de APIs HTTP modernas', icon: 'Globe', link: 'https://www.youtube.com/playlist?list=PLf8x7B3nFTl17WeEVj405tHlstiq1kNBX', rating: 3, lessonCount: 1 },
+			{ title: 'Spring Boot', description: 'Framework Java para APIs robustas, escaláveis e prontas para produção', icon: 'FileCode', link: 'https://www.youtube.com/playlist?list=PL62G310vn6nFBIxp6ZwGnm8xMcGE3VA5H', rating: 3, lessonCount: 1 },
+			{ title: 'Autenticação & Segurança', description: 'JWT, OAuth2, HTTPS e boas práticas de segurança em APIs', icon: 'Lock', link: '', rating: 4, lessonCount: 1 },
+			{ title: 'Microsserviços', description: 'Arquitetura distribuída, mensageria com Kafka e orquestração', icon: 'Network', link: '', rating: 4, lessonCount: 1},
+			{ title: 'Desafio Final: API Completa', description: 'Construa uma API do zero ao deploy com autenticação e testes', icon: 'Trophy', rating: 5, lessonCount: 1 },
 		]),
 	},
 	{

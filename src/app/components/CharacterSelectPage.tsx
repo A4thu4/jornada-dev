@@ -12,7 +12,7 @@ interface CharacterSelectPageProps {
 	onStartSpecial: (c: Character) => void;
 }
 
-const HERO_IMG = 'https://images.unsplash.com/photo-1769221909844-9795db07a67a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080';
+const HERO_IMG = 'assets/banner.jpeg';
 
 export function CharacterSelectPage({ selected, onSelect, onStart, onStartSpecial }: CharacterSelectPageProps) {
 	const scrollRef = useRef<HTMLDivElement>(null);
@@ -60,9 +60,9 @@ export function CharacterSelectPage({ selected, onSelect, onStart, onStartSpecia
 					<p
 						style={{
 							fontFamily: "'Cinzel', serif",
-							fontSize: '13px',
+							fontSize: '14px',
 							letterSpacing: '0.4em',
-							color: '#64748B',
+							color: '#94A3B8',
 						}}
 						className="uppercase"
 						>
@@ -81,7 +81,7 @@ export function CharacterSelectPage({ selected, onSelect, onStart, onStartSpecia
 							lineHeight: '1.1',
 						}}
 						>
-						JORNADA DEV
+						JORNADA DEV ARTHEMIZ
 					</h1>
 					<p
 						style={{
@@ -119,7 +119,7 @@ export function CharacterSelectPage({ selected, onSelect, onStart, onStartSpecia
 							letterSpacing: '0.05em',
 						}}
 						>
-						SELECIONE SEU PERSONAGEM
+						SELECIONE SEU DESTINO
 					</h2>
 					<p style={{fontSize: '13px'}} className="text-gray-500 mt-2">
 						Cada trilha é uma jornada única. Escolha um personagem para descobrir seu caminho.
@@ -232,7 +232,7 @@ export function CharacterSelectPage({ selected, onSelect, onStart, onStartSpecia
 							✦ Caminho Especial ✦
 						</p>
 					</div>
-					<div className="flex flex-wrap justify-center gap-4">
+					<div className="flex flex-wrap justify-center gap-6">
 						{specialPaths.map((sp) => (
 							<SpecialPathCard key={sp.id} path={sp} onClick={() => onStartSpecial(sp)}/>
 						))}
