@@ -2,18 +2,18 @@ import type React from 'react';
 import {
 	Code, Database, Globe, Lock, Layers, Trophy, Monitor, Zap, Component,
 	Palette, Gauge, GitBranch, Cloud, Calculator, BarChart2, Brain, Network,
-	MessageSquare, Bot, Eye, Terminal, Box, Activity, Gamepad2, Layout,
-	Music, Shield, Search, Bug, CheckCircle, ClipboardList, Table, Radio,
-	Clock, Link, Coins, Users, Cpu, FileCode, Star,
+	MessageSquare, Bot, Eye, Terminal, Box, Activity, Gamepad2, Layout, ShieldBan,
+	Music, Shield, Search, Bug, CheckCircle, ClipboardList, Table, Radio, GitCommit,
+	Clock, Link, Coins, Users, Cpu, FileCode, Star, Type, AtomIcon, FigmaIcon, ShieldAlert
 } from 'lucide-react';
 import type { Module } from '../data/tracks';
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; color?: string }>> = {
 	Code, Database, Globe, Lock, Layers, Trophy, Monitor, Zap, Component,
 	Palette, Gauge, GitBranch, Cloud, Calculator, BarChart2, Brain, Network,
-	MessageSquare, Bot, Eye, Terminal, Box, Activity, Gamepad2, Layout,
-	Music, Shield, Search, Bug, CheckCircle, ClipboardList, Table, Radio,
-	Clock, Link, Coins, Users, Cpu, FileCode,
+	MessageSquare, Bot, Eye, Terminal, Box, Activity, Gamepad2, Layout, ShieldBan,
+	Music, Shield, Search, Bug, CheckCircle, ClipboardList, Table, Radio, GitCommit,
+	Clock, Link, Coins, Users, Cpu, FileCode, Type, AtomIcon, FigmaIcon, ShieldAlert
 };
 
 interface ModuleCardProps {
@@ -57,7 +57,7 @@ export function ModuleCard({ module, index, accentColor, accentGlow, isFeatured 
 						{index + 1}
 					</span>
 				</div>
-				{index < 20 && (
+				{index < 10 && (
 					<div
 						style={{
 						width: '2px',
@@ -134,7 +134,13 @@ export function ModuleCard({ module, index, accentColor, accentGlow, isFeatured 
 						</span>
 						) : (
 							<button
-								onClick={() => window.open(module.link, '_blank')}
+								onClick={() => {
+									if (!module.book) {
+										console.warn('O PDF referenciado não existe para este módulo.');
+										return;
+									}
+									window.open(module.book, '_blank', 'noopener,noreferrer');
+								}}
 								style={{
 									background: isFeatured ? `linear-gradient(90deg, ${accentColor}, ${accentColor}cc)` : `rgba(${accentColor}, 0.1)`,
 									backgroundColor: isFeatured ? accentColor : 'transparent',
@@ -150,6 +156,35 @@ export function ModuleCard({ module, index, accentColor, accentGlow, isFeatured 
 								}}
 								className="uppercase hover:opacity-80 transition-opacity"
 								>
+								{isFeatured ? '▶ Leitura' : '▶ Documentação'}
+							</button>
+						)}
+					</div>
+
+					<div className="flex flex-col items-end gap-2 flex-shrink-0"> {isLocked ?
+						(
+							<span style={{fontFamily: "'Inter', sans-serif", fontSize: '11px'}}
+							      className="text-gray-600 uppercase tracking-wider">
+							Bloqueado
+						</span>
+						) : (
+							<button
+								onClick={() => window.open(module.link, '_blank')}
+								style={{
+									background: isFeatured ? `linear-gradient(90deg, ${accentColor}, ${accentColor}cc)` : `rgba(${accentColor}, 0.1)`,
+									backgroundColor: isFeatured ? accentColor : 'transparent',
+									border: `1px solid ${accentColor}80`,
+									color: isFeatured ? '#000' : accentColor,
+									fontFamily: "'Cinzel', serif",
+									fontSize: '10px',
+									letterSpacing: '0.05em',
+									padding: '6px 14px',
+									borderRadius: '6px',
+									cursor: 'pointer',
+									whiteSpace: 'nowrap',
+								}}
+								className="uppercase hover:opacity-80 transition-opacity"
+							>
 								{isFeatured ? '▶ Iniciar' : '▶ Começar'}
 							</button>
 						)}

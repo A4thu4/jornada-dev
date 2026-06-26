@@ -17,28 +17,28 @@ Multipage app with view-switching (URL routing needed):
 
 Each character gets a unique fantasy/sci-fi mixed archetype and color accent:
 
-| Track              | Character Name           | Archetype             | Accent Color         |
-|--------------------|--------------------------|-----------------------|:---------------------|
-| Back End           | Guardião do Servidor     | Cavaleiro Sombrio     | #2196f3 (Blue)       |
-| Front End          | Arquiteto Visual         | Mago da Luz           | #18833c (Dark Green) |
-| Full Stack         | Lenda Completa           | Herói Lendário        | #FDC333 (Gold)       |
-| Cloud              | Viajante das Nuvens      | Druida Nômade         | #22D3EE (Cyan)       |
-| Data Science       | Oráculo dos Dados        | Vidente               | #EE82EE (Violet)     |
-| IA                 | Louco Artificial         | Golem Arcano          | #4ADE80 (Green)      |
-| DevOps             | Engenheiro do Caos       | Alquimista            | #FB923C (Orange)     |
-| Mobile             | Viking dos Apps          | Andarilho             | #813B10 (Brown)      |
-| GameDev            | Criador de Mundos        | Demiurgo              | #F87171 (Red)        |
-| 3D Modeling        | Escultor de Realidades   | Artífice Dimensional  | #500101 (Dark Red)   |
-| Hacking & CyberSec | Sombra Digital           | Assassino Cibernético | #8B5CF6 (Purple)     |
-| UI/UX              | Escultor de Experiências | Artesão Élfico        | #E91E63 (Pink)       |
-| QA                 | Caçador de Bugs          | Detetive              | #FACC15 (Yellow)     |
-| Data Engineering   | Construtor de Pipelines  | Ferreiro de Dados     | #B45309 (Bronze)     |
-| Embedded Systems   | Espírito do Hardware     | Mecânico Arcano       | #94A3B8 (Steel)      |
-| Automations        | Maestro das Máquinas     | Conjurador de Scripts | #2DD4BF (Teal)       |
-| Blockchain         | Guardião do Ledger       | Monge Criptográfico   | #F97316 (Amber)      |
-| Essentials         | Arcanjo dos Códigos      | Arcanjo               | #00FF98 (Dark Green) |
-| Advanced           | Demônio dos Códigos      | Demonio               | #D92639 (Dark Red)   |
-| Matématica         | Louco Matemático         | Sábio dos Números     | #1497b1 (Dark Cyan)  |
+| Track            | Character Name           | Archetype             | Accent Color         |
+|------------------|--------------------------|-----------------------|:---------------------|
+| Back End         | Guardião do Servidor     | Cavaleiro Sombrio     | #2196f3 (Blue)       |
+| Front End        | Arquiteto Visual         | Mago da Luz           | #18833c (Dark Green) |
+| Full Stack       | Lenda Completa           | Herói Lendário        | #FDC333 (Gold)       |
+| Cloud            | Viajante das Nuvens      | Druida do Caos        | #22D3EE (Cyan)       |
+| Data Science     | Oráculo dos Dados        | Vidente               | #EE82EE (Violet)     |
+| IA               | Louco Artificial         | Golem Arcano          | #4ADE80 (Green)      |
+| Mobile           | Viking dos Apps          | Andarilho             | #813B10 (Brown)      |
+| GameDev          | Criador de Mundos        | Demiurgo              | #F87171 (Red)        |
+| 3D Modeling      | Escultor de Realidades   | Artífice Dimensional  | #500101 (Dark Red)   |
+| Hacking          | Sombra Digital           | Assassino Cibernético | #8B5CF6 (Purple)     |
+| CyberSec         | Sombra Digital           | Assassino Cibernético | #c542f6 (lilac)      |
+| UI/UX            | Escultor de Experiências | Artesão Élfico        | #E91E63 (Pink)       |
+| QA               | Caçador de Bugs          | Detetive              | #FACC15 (Yellow)     |
+| Data Engineering | Construtor de Pipelines  | Ferreiro de Dados     | #B45309 (Bronze)     |
+| Embedded Systems | Espírito do Hardware     | Mecânico Arcano       | #94A3B8 (Steel)      |
+| Automations      | Maestro das Máquinas     | Conjurador de Scripts | #2DD4BF (Teal)       |
+| Blockchain       | Guardião do Ledger       | Monge Criptográfico   | #F97316 (Amber)      |
+| Essentials       | Arcanjo dos Códigos      | Arcanjo               | #00FF98 (Dark Green) |
+| Advanced         | Demônio dos Códigos      | Demonio               | #D92639 (Dark Red)   |
+| Matématica       | Louco Matemático         | Sábio dos Números     | #1497b1 (Dark Cyan)  |
 
 Each track gets 6–8 placeholder modules (with generic titles like "Fundamentos", "Intermediário", "Avançado", etc.) that the user can replace later.
 
