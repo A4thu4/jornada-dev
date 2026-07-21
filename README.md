@@ -13,9 +13,18 @@ Interface em **Português (BR)**. Construído com **React 18 + TypeScript + Vite
 ## Rodando o projeto
 
 ```bash
-npm i          # instala as dependências
-npm run dev    # servidor de desenvolvimento (Vite)
-npm run build  # build de produção em dist/
+1. Clonar o projeto
+`git clone https://github.com/A4thu4/jornada-dev`
+
+2. Entrar no diretório
+`cd jornada-dev`
+
+3. Instalar dependências
+`npm i`          
+
+4. rodar o projeto
+`npm run dev`    # servidor de desenvolvimento (Vite)
+`npm run build`  # build de produção em dist/
 ```
 
 O build respeita a variável `BASE_PATH` (padrão `/`), usada pelo deploy no GitHub Pages.
@@ -55,7 +64,7 @@ persistido em `localStorage` na chave `jornada-dev:progress:{trackId}`.
 ## Learning Tracks
 
 Cada trilha tem um personagem com arquétipo e cor de destaque (`accentColor` + `accentGlow`) únicos.
-Cada uma traz de 6 a 9 módulos — do fundamento ao **Desafio Final** — mais uma lista de **certificações** reais
+Cada uma traz de 6 a 10 módulos — do fundamento ao **Desafio Final** — mais uma lista de **Certificações** reais
 sugeridas, desbloqueadas ao concluir a trilha inteira.
 
 | Track            | Character Name           | Archetype             | Accent Color          |
