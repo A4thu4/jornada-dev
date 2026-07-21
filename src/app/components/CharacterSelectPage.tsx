@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Github, Instagram } from 'lucide-react';
 import { type Character, specialPaths, tracks } from '../data/tracks';
 import { CharacterCard } from './CharacterCard';
@@ -16,6 +16,32 @@ const HERO_IMG = 'assets/banner.jpeg';
 
 export function CharacterSelectPage({ selected, onSelect, onStart, onStartSpecial }: CharacterSelectPageProps) {
 	const scrollRef = useRef<HTMLDivElement>(null);
+	const recentering = useRef(false);
+
+	// Carrossel infinito: renderiza a lista 3x e mantém a rolagem na cópia central,
+	// reposicionando de forma invisível ao se aproximar das bordas.
+	const loop = [...tracks, ...tracks, ...tracks];
+
+	const recenter = () => {
+		const el = scrollRef.current;
+		if (!el || recentering.current) return;
+		const third = el.scrollWidth / 3;
+		if (el.scrollLeft <= third * 0.25) {
+			recentering.current = true;
+			el.scrollLeft += third;
+			requestAnimationFrame(() => { recentering.current = false; });
+		} else if (el.scrollLeft >= third * 1.75) {
+			recentering.current = true;
+			el.scrollLeft -= third;
+			requestAnimationFrame(() => { recentering.current = false; });
+		}
+	};
+
+	// Posiciona no início da cópia central após montar
+	useEffect(() => {
+		const el = scrollRef.current;
+		if (el) el.scrollLeft = el.scrollWidth / 3;
+	}, []);
 
 	const scrollBy = (dir: 'left' | 'right') => {
 		if(scrollRef.current) {
@@ -138,12 +164,13 @@ export function CharacterSelectPage({ selected, onSelect, onStart, onStartSpecia
 
 					<div
 						ref={scrollRef}
+						onScroll={recenter}
 						className="flex gap-3 overflow-x-auto pb-3"
 						style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}
 						>
-						{tracks.map((c) => (
+						{loop.map((c, i) => (
 							<CharacterCard
-								key={c.id}
+								key={`${c.id}-${i}`}
 								character={c}
 								isSelected={selected.id === c.id}
 								onClick={() => onSelect(c)}

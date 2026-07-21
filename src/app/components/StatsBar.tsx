@@ -35,7 +35,7 @@ function StatItem({ icon, label, value, max = 5, accentColor }: StatItemProps) {
 			      className="text-gray-500 uppercase tracking-widest">
         {label}
       </span>
-			<div className="flex">
+			<div className="flex flex-wrap justify-center" style={{maxWidth: '90px'}}>
 				{Array.from({length: max}).map((_, i) => (
 					<StatDot key={i} filled={i < value} color={accentColor}/>
 				))}

@@ -1,131 +1,159 @@
 # JornadaDev — RPG Learning Platform
 
-A gamified RPG-themed course platform called **JornadaDev** inspired by [Jornada Dev Herói](https://jornadadevheroi.com/). Learners pick a character (learning track) and see a sequential list of course modules for that path. UI in **Portuguese**.
+Uma plataforma de cursos gamificada com tema de RPG, inspirada em [Jornada Dev Herói](https://jornadadevheroi.com/).
+O aprendiz escolhe um personagem (uma trilha de aprendizado) e percorre uma lista sequencial de módulos, desbloqueando o
+próximo conforme conclui o anterior, ganhando XP, subindo de nível e forjando certificações ao completar a trilha.
+
+Interface em **Português (BR)**. Construído com **React 18 + TypeScript + Vite 6 + Tailwind CSS**.
+
+**17 trilhas** de carreira + **3 caminhos especiais**, cada um com arquétipo de fantasia/sci-fi e cor de destaque própria.
 
 ---
 
-## Pages / Views
+## Rodando o projeto
 
-Multipage app with view-switching (URL routing needed):
+```bash
+# 1. Clonar o projeto
+git clone https://github.com/A4thu4/jornada-dev
 
-1. **`CharacterSelectPage`** — hero group banner, character carousel (15 tracks), "Caminho Sagrado" special paths
-2. **`LearningPathPages`** — selected track's module list, stat bar, character art, back navigation
+# 2. Entrar no diretório
+cd jornada-dev
 
----
+# 3. Instalar dependências
+npm i
 
-## Learning Tracks (20 Characters)
+# 4. rodar o projeto
+npm run dev    # servidor de desenvolvimento (Vite)
+npm run build  # build de produção em dist/
+```
 
-Each character gets a unique fantasy/sci-fi mixed archetype and color accent:
-
-| Track            | Character Name           | Archetype             | Accent Color         |
-|------------------|--------------------------|-----------------------|:---------------------|
-| Back End         | Guardião do Servidor     | Cavaleiro Sombrio     | #2196f3 (Blue)       |
-| Front End        | Arquiteto Visual         | Mago da Luz           | #18833c (Dark Green) |
-| Full Stack       | Lenda Completa           | Herói Lendário        | #FDC333 (Gold)       |
-| Cloud            | Viajante das Nuvens      | Druida do Caos        | #22D3EE (Cyan)       |
-| Data Science     | Oráculo dos Dados        | Vidente               | #EE82EE (Violet)     |
-| IA               | Louco Artificial         | Golem Arcano          | #4ADE80 (Green)      |
-| Mobile           | Viking dos Apps          | Andarilho             | #813B10 (Brown)      |
-| GameDev          | Criador de Mundos        | Demiurgo              | #F87171 (Red)        |
-| 3D Modeling      | Escultor de Realidades   | Artífice Dimensional  | #500101 (Dark Red)   |
-| Hacking          | Sombra Digital           | Assassino Cibernético | #8B5CF6 (Purple)     |
-| CyberSec         | Sombra Digital           | Assassino Cibernético | #c542f6 (lilac)      |
-| UI/UX            | Escultor de Experiências | Artesão Élfico        | #E91E63 (Pink)       |
-| QA               | Caçador de Bugs          | Detetive              | #FACC15 (Yellow)     |
-| Data Engineering | Construtor de Pipelines  | Ferreiro de Dados     | #B45309 (Bronze)     |
-| Embedded Systems | Espírito do Hardware     | Mecânico Arcano       | #94A3B8 (Steel)      |
-| Automations      | Maestro das Máquinas     | Conjurador de Scripts | #2DD4BF (Teal)       |
-| Blockchain       | Guardião do Ledger       | Monge Criptográfico   | #F97316 (Amber)      |
-| Essentials       | Arcanjo dos Códigos      | Arcanjo               | #00FF98 (Dark Green) |
-| Advanced         | Demônio dos Códigos      | Demonio               | #D92639 (Dark Red)   |
-| Matématica       | Louco Matemático         | Sábio dos Números     | #1497b1 (Dark Cyan)  |
-
-Each track gets 6–8 placeholder modules (with generic titles like "Fundamentos", "Intermediário", "Avançado", etc.) that the user can replace later.
+O build respeita a variável `BASE_PATH` (padrão `/`), usada pelo deploy no GitHub Pages.
 
 ---
 
 ## Project Structure
 
 ```cmd
-src/app/
-  App.tsx                        ← root: currentPage + selectedCharacter state
-  components/
-    CharacterSelectPage.tsx      ← full character selection view
-    LearningPathPage.tsx         ← course modules for selected character
-    CharacterCard.tsx            ← card in carousel (name, archetype, icon, accent)
-    ModuleCard.tsx               ← individual module row (icon, title, status, rating)
-    StatsBar.tsx                 ← XP/stats row under character header
-    SpecialPathCard.tsx          ← "Caminho Sagrado" premium track cards
-    HeroBanner.tsx               ← top illustration placeholder + title
+src/
+  main.tsx                       ← entrypoint React
+  app/
+    App.tsx                      ← raiz: estado de página ('select' | 'path') + personagem selecionado
+    components/
+      CharacterCard.tsx          ← card do personagem no carrossel (nome, arquétipo, ícone, accent)
+      CharacterSelectPage.tsx    ← tela de seleção: carrossel de trilhas + caminhos especiais
+      LearningPathPage.tsx       ← trilha selecionada: módulos, StatsBar, certificações, progresso
+      ModuleCard.tsx             ← módulo individual (ícone, título, status, rating, link, concluir/desfazer)
+      SpecialPathCard.tsx        ← cards dos caminhos especiais (Essenciais, Avançado, Matemática)
+      StatsBar.tsx               ← barra de stats sob o header (Nível, Missões, Progresso, XP)
+      shared/
+        ImageWithFallback.tsx    ← <img> com fallback de erro
+    data/
+      tracks.ts                  ← todas as 17 trilhas + 3 caminhos especiais, módulos e certificações
+  styles/
+    fonts.css                    ← import das fontes Cinzel + Inter (Google Fonts)
+    index.css / tailwind.css / theme.css
+assets/                          ← artes de referência das trilhas (.png)
+.github/workflows/deploy.yml     ← deploy automático no GitHub Pages (com Git LFS)
 ```
+
+Estado e navegação vivem em `App.tsx` (sem router — troca de view por `useState`). O progresso de cada trilha é
+persistido em `localStorage` na chave `jornada-dev:progress:{trackId}`.
 
 ---
 
-## Data
+## Learning Tracks
 
-```ts
-type Character = {
-	id: string
-	name: string           // "Back End"
-	title: string          // "Guardião do Servidor"
-	archetype: string      // "Cavaleiro Sombrio"
-	accent: string         // Tailwind color class or hex
-	icon: string           // lucide-react icon name
-	stats: { fogo: number; espada: number; escudo: number; xp: number }
-	modules: Module[]
-}
+Cada trilha tem um personagem com arquétipo e cor de destaque (`accentColor` + `accentGlow`) únicos.
+Cada uma traz de 6 a 9 módulos — do fundamento ao **Desafio Final** — mais uma lista de **certificações** reais
+sugeridas, desbloqueadas ao concluir a trilha inteira.
 
-type Module = {
-	id: string
-	title: string
-	description: string
-	icon: string
-	rating: number
-	lessonCount: number
-	status: 'bloqueado' | 'disponível' | 'em-progresso' | 'concluído'
-}
-```
+| Track            | Character Name           | Archetype             | Accent Color          |
+|------------------|--------------------------|-----------------------|:----------------------|
+| Back End         | Guardião do Servidor     | Cavaleiro Sombrio     | `#2196f3` Blue        |
+| Front End        | Arquiteto Visual         | Mago da Luz           | `#18833c` Green       |
+| Full Stack       | Lenda Completa           | Herói Lendário        | `#FDC333` Gold        |
+| Cloud & DevOps   | Viajante das Nuvens      | Druida do Caos        | `#22D3EE` Cyan        |
+| Data Science     | Oráculo dos Dados        | Vidente Arcano        | `#EE82EE` Violet      |
+| IA               | Louco Artificial         | Golem Arcano          | `#4ADE80` Lime        |
+| Mobile           | Viking dos Apps          | Andarilho Portátil    | `#813B10` Brown       |
+| GameDev          | Criador de Mundos        | Demiurgo Digital      | `#F87171` Red         |
+| 3D Modeling      | Escultor de Realidades   | Artífice Dimensional  | `#500101` Dark Red    |
+| Hacking          | Sombra Digital           | Assassino Cibernético | `#8B5CF6` Purple      |
+| CyberSec         | Guardião da Fortaleza    | Sentinela Vigilante   | `#c542f6` Lilac       |
+| UI/UX            | Escultor de Experiências | Artesão Élfico        | `#E91E63` Pink        |
+| QA               | Caçador de Bugs          | Detetive Implacável   | `#FACC15` Yellow      |
+| Data Engineering | Construtor de Pipelines  | Ferreiro de Dados     | `#B45309` Bronze      |
+| Embedded Systems | Espírito do Hardware     | Mecânico Arcano       | `#94A3B8` Steel       |
+| Automações       | Maestro das Máquinas     | Conjurador de Scripts | `#2DD4BF` Teal        |
+| Blockchain       | Guardião do Ledger       | Monge Criptográfico   | `#F97316` Amber       |
 
-Placeholder modules per track (6 each): Fundamentos → Intermediário → Avançado → Projeto Prático → Especialização → Desafio Final.
+### Caminhos Especiais
+
+Exibidos abaixo do carrossel — trilhas transversais que não pertencem a uma stack específica:
+
+| Path       | Character Name       | Accent Color         | Foco                                          |
+|------------|----------------------|:---------------------|-----------------------------------------------|
+| Essenciais | Arcanjo dos Códigos  | `#00FF98` Neon Green | A base que todo dev precisa dominar           |
+| Avançado   | Demônio dos Códigos  | `#D92639` Crimson    | Arquitetura, performance e engenharia sênior  |
+| Matemática | Sábio dos Números    | `#1497b1` Teal-Cyan  | A matemática e os algoritmos do programador   |
 
 ---
 
 ## Design
 
-- **Background**: `#060B1A` deep navy-black
-- **Cards**: `#0D1526` with border `rgba(255,255,255,0.08)`
-- **Active/highlighted module**: blue glow (`box-shadow: 0 0 20px #00BFFF`)
-- **Typography**: `Cinzel` (Google Font) for headings, `Inter` for body — both via `src/styles/fonts.css`
-- **Icons**: `lucide-react` throughout
-- **Character images**: Unsplash fantasy/tech warrior images via `mcp__plugin_make_unsplash__search_photos` + `ImageWithFallback`
-- **No @make-kits** (not installed) — use existing `src/app/components/ui/` components (Button, Card, Badge, etc.) + custom styled components
-- **Special Paths**: 2 cards — "Avançado" and a second (e.g. "O Louco da IA") — shown below character carousel
+- **Fundo:** gradiente `#060B1A → #0A1428 → #060B1A` (deep navy-black)
+- **Cards / painéis:** `rgba(13,21,38,0.9)` com borda `rgba(255,255,255,0.08–0.1)`
+- **Accent por trilha:** cada personagem define `accentColor` + `accentGlow`, aplicados em botões, barras e no
+  glow (`box-shadow`) do módulo em destaque
+- **Título:** gradiente `linear-gradient(135deg, #60A5FA, #A78BFA, #60A5FA)`
+- **Tipografia:** `Cinzel` para títulos e `Inter` para corpo — ambas via Google Fonts em `src/styles/fonts.css`
+- **Ícones:** `lucide-react` em todo o app
+- **Status dos módulos:** badge no card — `Bloqueado`, `Disponível`, `Em Andamento` ou `✓ Concluído`,
+  com o nó da timeline preenchido ao concluir
+- **StatsBar:** Nível, Missões e Progresso como conjuntos de 5 dots que preenchem conforme a trilha avança; XP numérico
+
+### Tipos de dados (`src/app/data/tracks.ts`)
+
+```ts
+type Character = {
+  id: string
+  name: string          // "Back End"
+  title: string         // "Guardião do Servidor"
+  archetype: string     // "Cavaleiro Sombrio"
+  accentColor: string   // hex, ex. "#2196f3"
+  accentGlow: string    // rgba usada no box-shadow
+  icon: string          // nome do ícone lucide-react
+  stats: { nivel: number; progresso: number; missoes: number; xp: number }
+  modules: Module[]
+  certificates?: Certificate[]
+}
+
+type Module = {
+  id: string
+  title: string
+  description: string
+  icon: string
+  rating: number        // 1–5
+  lessonCount: number
+  status: 'bloqueado' | 'disponível' | 'em-progresso' | 'concluído'
+  link?: string         // material externo do módulo
+}
+
+type Certificate = { title: string; issuer: string; link: string }
+
+type SpecialPath = Character & { description: string; buttonLabel: string }
+```
 
 ---
 
-## Implementation Order
+## Future Enhancements
 
-1. Write data file `src/app/data/tracks.ts` with all 15 characters + placeholder modules
-2. Build `HeroBanner` with group art (Unsplash) + platform title
-3. Build `CharacterCard` and carousel in `CharacterSelectPage`
-4. Build `SpecialPathCard` for Caminho Sagrado section
-5. Build `ModuleCard` and `StatsBar` for `LearningPathPage`
-6. Wire state in `App.tsx` — page switching + selected character
-7. Apply dark theme, glow effects, Cinzel font
-
----
-
-## Verification
-
-- All 15 tracks appear in the carousel, selectable
-- Clicking a character navigates to their learning path
-- Module cards show placeholder content with correct status styling
-- The back button returns to character select
-- Dark theme with colored accents renders correctly
-- Responsive on desktop and mobile
-
-## Running the code
-
-Run `npm i` to install the dependencies.
-
-Run `npm run dev` to start the development server.
+- Autenticação de usuário e sincronização de progresso na nuvem
+  *(hoje o progresso é salvo apenas localmente, via `localStorage`)*
+- Backend para armazenar progresso, conclusão de módulos e histórico entre dispositivos
+- Adicionar `Boss Tracks` — trilhas de graduação universitária (ex.: "Ciência da Computação", "ADS")
+  - Referências ([GitHub Stars](https://github.com/A4thu4?tab=stars)):
+    - [Computer Science](https://github.com/ossu/computer-science)
+    - [ADS](https://github.com/Universidade-Livre/ciencia-da-computacao)
+    - [Math](https://github.com/Universidade-Livre/matematica)
+- Trazer a pasta de favoritos `Estudos` para dentro da plataforma
