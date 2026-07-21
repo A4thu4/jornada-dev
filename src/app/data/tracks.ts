@@ -12,6 +12,12 @@ export interface Module {
 	book?: string;
 }
 
+export interface Certificate {
+	title: string;
+	issuer: string;
+	link?: string;
+}
+
 export interface Character {
 	id: string;
 	name: string;
@@ -22,6 +28,7 @@ export interface Character {
 	icon: string;
 	stats: { nivel: number; progresso: number; missoes: number; xp: number };
 	modules: Module[];
+	certificates?: Certificate[];
 }
 
 export interface SpecialPath extends Character {
@@ -60,6 +67,11 @@ export const tracks: Character[] = [
 		accentGlow: 'rgba(0,191,255,0.25)',
 		icon: 'Code',
 		stats: { nivel: 1, missoes: 2, progresso: 4, xp: 1200 },
+		certificates: [
+			{ title: 'Oracle Certified Professional: Java SE 17 Developer (1Z0-829)', issuer: 'Oracle', link: 'https://education.oracle.com/java-se-17-developer/pexam_1Z0-829' },
+			{ title: 'Spring Certified Professional', issuer: 'Broadcom (VMware)', link: 'https://www.spring.academy/courses' },
+			{ title: 'Oracle Database SQL (1Z0-071)', issuer: 'Oracle', link: 'https://education.oracle.com/oracle-database-sql/pexam_1Z0-071' },
+		],
 		modules: makeModules('be', [
 			{ title: 'Java Firme & JVM', description: 'POO, coleções, generics e tratamento de exceções em Java', icon: 'Code', link: 'https://www.youtube.com/playlist?list=PL62G310vn6nFIsOCC0H-C2infYgwm8SWW', book: '/docs/backend/effective_java.pdf', rating: 2, lessonCount: 0  },
 			{ title: 'Arquitetura & Clean Code', description: 'Padrões de projeto GoF e MVC, Clean Architecture e princípios SOLID na prática', icon: 'Layers', link: 'https://www.youtube.com/playlist?list=PLNCSWIsR6ADL_qsxAayXkSzzCCf2xlIy9', book: '/docs/backend/clean_architecture.pdf', rating: 2, lessonCount: 0 },
@@ -81,6 +93,10 @@ export const tracks: Character[] = [
 		accentGlow: 'rgb(24 131 60 / 0.25)',
 		icon: 'Monitor',
 		stats: { nivel: 1, missoes: 2, progresso: 4, xp: 1200 },
+		certificates: [
+			{ title: 'Meta Front-End Developer', issuer: 'Meta / Coursera', link: 'https://www.coursera.org/professional-certificates/meta-front-end-developer' },
+			{ title: 'JavaScript Algorithms and Data Structures', issuer: 'freeCodeCamp', link: 'https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures-v8/' },
+		],
 		modules: makeModules('fe', [
 			{ title: 'HTML5', description: 'Estrutura semântica e estilização de páginas web do zero, DOM, acessibilidade (A11y), SEO técnico', icon: 'Layout', link: 'https://www.cursoemvideo.com/curso/html5-css3-modulo1/', book: '/docs/frontend/html_definitive.pdf', rating: 1 },
 			{ title: 'CSS3', description: 'Flexbox, Grid, Variáveis CSS, Box Model e arquitetura CSS', icon: 'Palette', link: 'https://www.cursoemvideo.com/curso/html5-css3-modulo1/', book: '/docs/frontend/css_definitive.pdf', rating: 1 },
@@ -101,6 +117,10 @@ export const tracks: Character[] = [
 		accentGlow: 'rgba(245,158,11,0.25)',
 		icon: 'Layers',
 		stats: { nivel: 1, missoes: 2, progresso: 4, xp: 1200 },
+		certificates: [
+			{ title: 'IBM Full Stack Software Developer', issuer: 'IBM / Coursera', link: 'https://www.coursera.org/professional-certificates/ibm-full-stack-cloud-developer' },
+			{ title: 'AWS Certified Developer – Associate', issuer: 'AWS', link: 'https://aws.amazon.com/certification/certified-developer-associate/' },
+		],
 		modules: makeModules('fs', [
 			{ title: 'Persistência & Modelagem com ORMs', description: 'Modelagem relacional e não-relacional integrada ao Node.js usando Prisma ORM ou Mongoose. Migrations na prática.', icon: 'Database', link: 'https://www.youtube.com/playlist?list=PLfvOpw8k80WpKTtloa7fMbfPWL7D6X5cC', book: '/docs/fullstack/node_databases.pdf', rating: 1 },
 			{ title: 'Back End com Node.js', description: 'APIs com Express, banco de dados, validação de dados (Zod) e autenticação JWT', icon: 'Code', link: 'https://www.youtube.com/playlist?list=PLJ_KhUnlXUPtbtLwaxxUxHqvcNQndmI4B', book: '/docs/fullstack/production_ready_node.pdf', rating: 2 },
@@ -120,6 +140,12 @@ export const tracks: Character[] = [
 		accentGlow: 'rgba(34,211,238,0.25)',
 		icon: 'Cloud',
 		stats: { nivel: 1, missoes: 2, progresso: 4, xp: 1200 },
+		certificates: [
+			{ title: 'AWS Certified Cloud Practitioner (CLF-C02)', issuer: 'AWS', link: 'https://aws.amazon.com/certification/certified-cloud-practitioner/' },
+			{ title: 'AWS Certified Solutions Architect – Associate (SAA-C03)', issuer: 'AWS', link: 'https://aws.amazon.com/certification/certified-solutions-architect-associate/' },
+			{ title: 'HashiCorp Certified: Terraform Associate', issuer: 'HashiCorp', link: 'https://www.hashicorp.com/certification/terraform-associate' },
+			{ title: 'CKA – Certified Kubernetes Administrator', issuer: 'CNCF', link: 'https://www.cncf.io/training/certification/cka/' },
+		],
 		modules: makeModules('cd', [
 			{ title: 'Fundamentos de Cloud', description: 'IaaS, PaaS, SaaS, IAM, VPC e modelos de responsabilidade e precificação', icon: 'Shield', link: 'https://skillbuilder.aws/learning-plan/8UUCEZGNX4/exam-prep-plan-aws-certified-cloud-practitioner-clfc02--portugus/1FKNHGZFR3', book: '/docs/cloud/aws_certified_cloud.pdf', rating: 1 },
 			{ title: 'GO', description: 'A linguagem Go para serviços cloud-native, alta performance e concorrência', icon: 'Code', link: 'https://www.youtube.com/playlist?list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg', book: '/docs/cloud/learning_go.pdf', rating: 2 },
@@ -139,6 +165,10 @@ export const tracks: Character[] = [
 		accentGlow: 'rgb(238 130 238 / 0.25)',
 		icon: 'BarChart2',
 		stats: { nivel: 1, missoes: 2, progresso: 4, xp: 1200 },
+		certificates: [
+			{ title: 'Microsoft Azure Data Fundamentals (DP-900)', issuer: 'Microsoft', link: 'https://learn.microsoft.com/credentials/certifications/azure-data-fundamentals/' },
+			{ title: 'Google Data Analytics', issuer: 'Google / Coursera', link: 'https://www.coursera.org/professional-certificates/google-data-analytics' },
+		],
 		modules: makeModules('ds', [
 			{ title: 'Python para Data Science', description: 'NumPy, Pandas e análise exploratória de dados na prática', icon: 'Code', link: 'https://www.youtube.com/playlist?list=PLvE-ZAFRgX8hnECDn1v9HNTI71veL3oW0', book: '/docs/datascience/python_data_analysis.pdf', rating: 2 },
 			{ title: 'Visualização de Dados', description: 'Construção de gráficos estáticos e interativos usando Matplotlib, Seaborn, Plotly e storytelling com dados', icon: 'BarChart2', link: 'https://plotly.com/python/', book: '/docs/datascience/storytelling_with_data.pdf', rating: 2 },
@@ -160,6 +190,10 @@ export const tracks: Character[] = [
 		accentGlow: 'rgba(74,222,128,0.25)',
 		icon: 'Brain',
 		stats: { nivel: 1, missoes: 2, progresso: 4, xp: 1200 },
+		certificates: [
+			{ title: 'AWS Certified AI Practitioner', issuer: 'AWS', link: 'https://aws.amazon.com/certification/certified-ai-practitioner/' },
+			{ title: 'DeepLearning.AI TensorFlow Developer', issuer: 'DeepLearning.AI / Coursera', link: 'https://www.coursera.org/professional-certificates/tensorflow-in-practice' },
+		],
 		modules: makeModules('ia', [
 			{ title: 'Fundamentos de IA', description: 'História, conceitos, limites computacionais, arquiteturas baseadas em agentes e ética no desenvolvimento de modelos.', icon: 'Brain', link: 'https://www.youtube.com/playlist?list=PLHz_AreHm4dm24MhlWJYiR_Rm7TFtvs6S', book: '/docs/ia/artificial_intelligence_modern_approach.pdf', rating: 1 },
 			{ title: 'Machine Learning', description: 'Matrizes conceituais de aprendizado supervisionado e não supervisionado. Otimização por gradiente descendente, funções de custo e (overfitting) e validação cruzada', icon: 'GitBranch', link: 'https://www.youtube.com/playlist?list=PL-t7zzWJWPtzhZtI-bWWHFtCfxtjmBdIW', book: '/docs/ia/mathematics_for_machine_learning.pdf', rating: 3 },
@@ -182,6 +216,9 @@ export const tracks: Character[] = [
 		accentGlow: 'rgb(129 59 16 / 0.25)',
 		icon: 'Monitor',
 		stats: { nivel: 1, missoes: 2, progresso: 4, xp: 1200 },
+		certificates: [
+			{ title: 'Meta Android Developer', issuer: 'Meta / Coursera', link: 'https://www.coursera.org/professional-certificates/meta-android-developer' },
+		],
 		modules: makeModules('mb', [
 			{ title: 'Fundamentos de Desenvolvimento Mobile', description: 'Ciclo de vida da aplicação, gerenciamento de estados, princípios de navegação estável e padrões fundamentais de UI/UX para dispositivos portáteis.', icon: 'Smartphone', link: 'https://www.youtube.com/playlist?list=PL50rZONmv8ZRsWj0L3rvSicPSEJl6sQ40', book: '/docs/mobile/android_programming_guide.pdf', rating: 1 },
 			{ title: 'Kotlin Essencial & Programação Funcional', description: 'Sintaxe moderna do Kotlin, tipos de dados, null safety estrito, lambdas, escopos de funções e os pilares da linguagem para o desenvolvimento Android.', icon: 'Code', link: 'https://www.youtube.com/playlist?list=PLRHt7FXZbVCSExTvJ6_qTrt_K8NsL0l6N', book: '/docs/mobile/kotlin_in_action.pdf', rating: 2 },
@@ -204,6 +241,9 @@ export const tracks: Character[] = [
 		accentGlow: 'rgb(248 113 113 / 0.25)',
 		icon: 'Gamepad2',
 		stats: { nivel: 1, missoes: 2, progresso: 4, xp: 1200 },
+		certificates: [
+			{ title: 'Unity Certified Associate: Game Developer', issuer: 'Unity', link: 'https://unity.com/products/unity-certifications' },
+		],
 		modules: makeModules('gd', [
 			{ title: 'Fundamentos de Game Design', description: 'Mecânicas centrais, loops de gameplay, curvas de interesse, balanceamento matemático de regras e estruturação do Game Design Document (GDD).', icon: 'Gamepad2', link: 'https://gamedev.net/', book: '/docs/gamedev/art_of_game_design.pdf', rating: 1 },
 			{ title: 'C# Essencial & Lógica para Jogos', description: 'Sintaxe do C# voltada para a Unity, tipos primitivos, estruturas condicionais, coleções genéricas e introdução à Orientação a Objetos aplicada.', icon: 'Code', link: 'https://www.youtube.com/playlist?list=PLEI5qdfLBErZuMSareAo-TLTFYU9hGDsR', book: '/docs/gamedev/learning_csharp_unity.pdf', rating: 1 },
@@ -226,6 +266,9 @@ export const tracks: Character[] = [
 		accentGlow: 'rgb(80 1 1 / 0.25)',
 		icon: 'Box',
 		stats: { nivel: 1, missoes: 2, progresso: 4, xp: 1200 },
+		certificates: [
+			{ title: 'Unity Certified Associate: 3D Artist', issuer: 'Unity', link: 'https://unity.com/products/unity-certifications' },
+		],
 		modules: makeModules('3d', [
 			{ title: 'Fundamentos de Espaço Vetorial & Geometria', description: 'Visão espacial, anatomia das malhas (vértices, arestas, faces), topologia de polígonos, projeções e navegação em viewports tridimensionais.', icon: 'Box', link: 'https://docs.blender.org/manual/en/latest/modeling/introduction.html', book: '/docs/3dmod/3d_modeling_fundamentals.pdf', rating: 1 },
 			{ title: 'PixelArt & Sprites 2D para Jogos', description: 'Teoria das cores aplicada, design de paletas restritas, técnicas de dithering, criação de tilesets modulares e animação frame-a-frame de sprites.', icon: 'Layout', link: 'https://www.youtube.com/playlist?list=PLYOZqxNe79xIUDs_xpzpcvFIt0lR5bQ5C', book: '/docs/3dmod/pixel_art_handbook.pdf', rating: 2 },
@@ -248,6 +291,10 @@ export const tracks: Character[] = [
 		accentGlow: 'rgb(139 92 246 / 0.25)',
 		icon: 'ShieldAlert',
 		stats: { nivel: 1, missoes: 2, progresso: 4, xp: 1200 },
+		certificates: [
+			{ title: 'eJPT – Junior Penetration Tester', issuer: 'INE Security', link: 'https://security.ine.com/certifications/ejpt-certification/' },
+			{ title: 'OSCP – Offensive Security Certified Professional', issuer: 'OffSec', link: 'https://www.offsec.com/courses/pen-200/' },
+		],
 		modules: makeModules('hk', [
 			{ title: 'Linux para Hackers', description: 'Kali Linux, terminal avançado e ferramentas de segurança ofensiva', icon: 'Terminal', link: 'https://www.kali.org/docs/', book: '/docs/hacking/linux_basics_hackers.pdf', rating: 2 },
 			{ title: 'Segurança & Vulnerabilidades Web', description: 'OWASP top 10, SQL Injection, XSS, CSRF, broken authentication e manipulação de requisições HTTP.', icon: 'Bug', link: 'https://portswigger.net/web-security', book: '/docs/hacking/web_application_hacker_handbook.pdf', rating: 3 },
@@ -262,12 +309,16 @@ export const tracks: Character[] = [
 	{
 		id: 'cybersec',
 		name: 'CyberSec',
-		title: '',
-		archetype: '',
+		title: 'Guardião da Fortaleza',
+		archetype: 'Sentinela Vigilante',
 		accentColor: '#c542f6',
 		accentGlow: 'rgb(197 66 246 / 0.25)',
 		icon: 'ShieldBan',
 		stats: { nivel: 1, missoes: 2, progresso: 4, xp: 1200 },
+		certificates: [
+			{ title: 'CompTIA Security+', issuer: 'CompTIA', link: 'https://www.comptia.org/certifications/security' },
+			{ title: 'ISC2 Certified in Cybersecurity (CC)', issuer: 'ISC2', link: 'https://www.isc2.org/certifications/cc' },
+		],
 		modules: makeModules('cs', [
 			{ title: 'Intro a CyberSec', description: 'Fundamentos de segurança da informação, Confidencialidade, Integridade e Disponibilidade, vetores de ataque e engenharia social.', icon: 'Shield', link: 'https://www.edx.org/learn/cybersecurity/harvard-university-cs50-s-introduction-to-cybersecurity', book: '/docs/cybersec/introduction_to_cybersecurity.pdf', rating: 3 },
 			{ title: 'LGPD', description: 'Conceitos da Lei Geral de Proteção de Dados aplicados à engenharia de software: anonimização, mascaramento de dados sensíveis e governança.', icon: 'ShieldBan', link: 'https://www.escolavirtual.gov.br/curso/603', book: '/docs/cybersec/lgpd.pdf', rating: 4 },
@@ -289,6 +340,9 @@ export const tracks: Character[] = [
 		accentGlow: 'rgb(233 30 99 / 0.25)',
 		icon: 'Palette',
 		stats: { nivel: 1, missoes: 2, progresso: 4, xp: 1200 },
+		certificates: [
+			{ title: 'Google UX Design', issuer: 'Google / Coursera', link: 'https://www.coursera.org/professional-certificates/google-ux-design' },
+		],
 		modules: makeModules('ux', [
 			{ title: 'Fundamentos de Design & Heurísticas', description: 'Lei de Hick, Princípios da Gestalt, heurísticas de Nielsen e princípios visuais, tipografia, hierarquia e teoria das cores', icon: 'Palette', link: 'https://www.youtube.com/playlist?list=PLwgL9IEA0PxUl0eXSqqI_78rvlog15lHl', book: '/docs/ux/design_of_everyday_things.pdf', rating: 1 },
 			{ title: 'UX Research & Discovery', description: 'Entrevistas, personas, mapas de empatia, Customer Journey Maps e validação de problemas.', icon: 'Users', link: 'https://www.youtube.com/playlist?list=PLwgL9IEA0PxVxs3z5_q0Sl4zV7YkM8AAH', book: '/docs/ux/lean_ux.pdf', rating: 2 },
@@ -309,6 +363,9 @@ export const tracks: Character[] = [
 		accentGlow: 'rgba(250,204,21,0.25)',
 		icon: 'Bug',
 		stats: { nivel: 1, missoes: 2, progresso: 4, xp: 1200 },
+		certificates: [
+			{ title: 'ISTQB Certified Tester Foundation Level (CTFL)', issuer: 'ISTQB', link: 'https://www.istqb.org/certifications/certified-tester-foundation-level' },
+		],
 		modules: makeModules('qa', [
 			{ title: 'Fundamentos de Engenharia de Qualidade', description: 'Ciclo de vida de bugs (STLC), níveis e tipos de testes, mentalidade analítica de QA e os pilares de garantia de qualidade no ciclo de desenvolvimento de software.', icon: 'CheckCircle', link: 'https://www.youtube.com/playlist?list=PL0nYAInGtru1q0laP62tgjTWohsij782i', book: '/docs/qa/foundations_software_testing.pdf', rating: 1 },
 			{ title: 'Testes Manuais & Engenharia de Casos', description: 'Design de cenários de teste, técnicas de caixa-preta, particionamento de equivalência, análise de valor limite e abertura de reports de falhas estruturados em ferramentas como Jira.', icon: 'ClipboardList', link: 'https://www.youtube.com/playlist?list=PL7NDvV6PnYODio6jp-dYLXPL8SQHzTJxy', book: '/docs/qa/software_testing_craft.pdf', rating: 2 },
@@ -331,6 +388,10 @@ export const tracks: Character[] = [
 		accentGlow: 'rgba(180,83,9,0.25)',
 		icon: 'Database',
 		stats: { nivel: 1, missoes: 2, progresso: 4, xp: 1200 },
+		certificates: [
+			{ title: 'Databricks Certified Data Engineer Associate', issuer: 'Databricks', link: 'https://www.databricks.com/learn/certification/data-engineer-associate' },
+			{ title: 'Google Professional Data Engineer', issuer: 'Google Cloud', link: 'https://cloud.google.com/learn/certification/data-engineer' },
+		],
 		modules: makeModules('de', [
 			{ title: 'Fundamentos & Arquiteturas de Dados', description: 'Evolução dos paradigmas de dados: do paradigma Batch ao Streaming. Conceituação e taxonomia de Data Lakes, Data Warehouses e a convergência para o Lakehouse.', icon: 'Database', link: 'https://www.youtube.com/playlist?list=PLs5wTEi6ddhBsgqe6Rs5NBb6rKc9y4tNW', book: '/docs/dataeng/fundamentals_data_engineering.pdf', rating: 2 },
 			{ title: 'SQL Avançado & Otimização Analítica', description: 'Domínio de Window Functions, Expressões de Tabela Comuns (CTEs), estratégias de particionamento, indexação e tunagem de queries complexas.', icon: 'Table', link: 'https://www.postgresql.org/docs/', book: '/docs/dataeng/sql_for_smarties.pdf', rating: 2 },
@@ -353,6 +414,9 @@ export const tracks: Character[] = [
 		accentGlow: 'rgba(148,163,184,0.25)',
 		icon: 'Cpu',
 		stats: { nivel: 1, missoes: 2, progresso: 4, xp: 1200 },
+		certificates: [
+			{ title: 'CLA – C Certified Associate Programmer', issuer: 'C++ Institute', link: 'https://cppinstitute.org/cla' },
+		],
 		modules: makeModules('em', [
 			{ title: 'Fundamentos de Eletrônica Analógica & Digital', description: 'Leis de Ohm e Kirchhoff, análise de circuitos CC, comportamento de componentes passivos (resistores, capacitores, indutores) e lógica booleana em portas lógicas.', icon: 'Cpu', link: 'https://www.youtube.com/playlist?list=PLfdR3_dt2rbcv2CmrbeT8wu50Yga0fjE8', book: '/docs/embedded/practical_electronics_inventors.pdf', rating: 1 },
 			{ title: 'Programação em C Embarcado & Manipulação de Memória', description: 'Ponteiros avançados, aritmética de ponteiros, alocação estática vs dinâmica, estruturas de dados otimizadas, modificador volatile e máscaras de bits.', icon: 'Code', link: 'https://www.youtube.com/playlist?list=PLIfZMtpPYFP5qaS2RFQxcNVkmJLGQwyKE', book: '/docs/embedded/embedded_c_coding_standard.pdf', rating: 2 },
@@ -375,6 +439,10 @@ export const tracks: Character[] = [
 		accentGlow: 'rgba(45,212,191,0.25)',
 		icon: 'Bot',
 		stats: { nivel: 1, missoes: 2, progresso: 4, xp: 1200 },
+		certificates: [
+			{ title: 'PCEP – Certified Entry-Level Python Programmer', issuer: 'Python Institute', link: 'https://pythoninstitute.org/pcep' },
+			{ title: 'PCAP – Certified Associate Python Programmer', issuer: 'Python Institute', link: 'https://pythoninstitute.org/pcap' },
+		],
 		modules: makeModules('au', [
 			{ title: 'Python Avançado para Automação de Sistemas', description: 'Manipulação avançada do sistema de arquivos (OS, Pathlib), gerenciamento de subprocessos, Expressões Regulares (Regex) e agendamento crontab nativo.', icon: 'Code', link: 'https://www.youtube.com/playlist?list=PLpdAy0tYrnKyjrY1Fr72DhmrRmeWI_5C8', book: '/docs/automations/automate_the_boring_stuff.pdf', rating: 1 },
 			{ title: 'Web Scraping & Data Extraction Avançado', description: 'Raspagem estruturada de dados na web em escala. Manipulação de requisições HTTP com HTTPX, parsing de HTML com BeautifulSoup e extração robusta via framework Scrapy.', icon: 'Globe', link: 'https://docs.scrapy.org/en/latest/', book: '/docs/automations/web_scraping_python.pdf', rating: 2 },
@@ -397,6 +465,9 @@ export const tracks: Character[] = [
 		accentGlow: 'rgba(249,115,22,0.25)',
 		icon: 'Link',
 		stats: { nivel: 1, missoes: 2, progresso: 4, xp: 1200 },
+		certificates: [
+			{ title: 'Certified Blockchain Developer', issuer: 'Blockchain Council', link: 'https://www.blockchain-council.org/certifications/' },
+		],
 		modules: makeModules('bc', [
 			{ title: 'Fundamentos de Redes Descentralizadas & P2P', description: 'Histórico dos sistemas distribuídos, arquitetura peer-to-peer (P2P), o problema dos generais bizantinos e a mecânica de livros-razão imutáveis (ledgers).', icon: 'Link', link: 'https://www.youtube.com/playlist?list=PL4PvbJTuGFzu1Xw5mMTvCLy4pY5S3ZBGO', book: '/docs/blockchain/mastering_bitcoin.pdf', rating: 2 },
 			{ title: 'Criptografia Primitiva & Algoritmos de Consenso', description: 'Funções de hash (SHA-256, Keccak-256), criptografia de chave assimétrica (ECDSA), Árvores de Merkle e análise matemática de Proof-of-Work vs Proof-of-Stake.', icon: 'Key', link: 'https://ethereum.org/en/developers/docs/consensus-mechanisms/', book: '/docs/blockchain/blockchain_theoretical_foundations.pdf', rating: 2 },
@@ -424,6 +495,10 @@ export const specialPaths: SpecialPath[] = [
 		stats: { nivel: 1, missoes: 0, progresso: 0, xp: 0 },
 		description: 'Conteúdos essenciais para a base da programação. Para quem está começando ou quer solidificar o alicerce.',
 		buttonLabel: 'Despertar o Arcanjo',
+		certificates: [
+			{ title: 'GitHub Foundations', issuer: 'GitHub', link: 'https://resources.github.com/learn/certifications/' },
+			{ title: 'Scrum Foundation Professional Certificate (SFPC)', issuer: 'CertiProf', link: 'https://certiprof.com/products/scrum-foundation-professional-certificate-sfpc' },
+		],
 		modules: makeModules('es', [
 			{ title: 'Lógica de Programação & Algoritmos', description: 'Variáveis, condicionais, loops, funções e o raciocínio lógico do zero', icon: 'Code', link: 'https://www.youtube.com/playlist?list=PLHz_AreHm4dmSj0MHol_aoNYCSGFqvfXV', book: '/docs/essentials/entendendo_algoritmos.pdf', rating: 1 },
 			{ title: 'Estruturas de Dados', description: 'Busca binária, arrays, listas encadeadas, pilhas, filas, sets, dicionários e análise de complexidade na prática', icon: 'Layers', link: '', book: '/docs/essentials/introduction_algorithms.pdf', rating: 1 },
@@ -448,6 +523,9 @@ export const specialPaths: SpecialPath[] = [
 		stats: { nivel: 1, missoes: 0, progresso: 0, xp: 0 },
 		description: 'Conteúdos avançados para devs experientes que querem dominar arquitetura, performance e engenharia de software.',
 		buttonLabel: 'Invocar o Demônio',
+		certificates: [
+			{ title: 'AWS Certified Solutions Architect – Professional', issuer: 'AWS', link: 'https://aws.amazon.com/certification/certified-solutions-architect-professional/' },
+		],
 		modules: makeModules('av', [
 			{ title: 'Design Patterns & Padrões GoF de Código', description: 'Implementação de padrões de projeto criacionais, estruturais e comportamentais (GoF) com foco em desacoplamento, extensibilidade e legibilidade.', icon: 'Layers', link: 'https://refactoring.guru/design-patterns', book: '/docs/advanced/design_patterns_elements.pdf', rating: 3 },
 			{ title: 'Domain-Driven Design (DDD) & Clean Architecture', description: 'Arquitetura em camadas, separação de conceitos, modelagem estratégica de domínios, contextos delimitados (Bounded Contexts), entidades, agregados e value objects.', icon: 'Box', link: 'https://martinfowler.com/tags/domain%20driven%20design.html', book: '/docs/advanced/domain_driven_design.pdf', rating: 3 },
@@ -472,8 +550,11 @@ export const specialPaths: SpecialPath[] = [
 		stats: { nivel: 1, missoes: 0, progresso: 0, xp: 0 },
 		description: 'A matemática e os algoritmos que todo programador precisa. Da lógica à criptografia.',
 		buttonLabel: 'Consultar o Sábio',
+		certificates: [
+			{ title: 'FE – Fundamental Information Technology Engineer', issuer: 'IPA (Japão)', link: 'https://www.ipa.go.jp/en/it-examinations/fe.html' },
+		],
 		modules: makeModules('mt', [
-			{ title: 'Matemática Básica & Nivelamento Aritmético', description: 'Revisão de propriedades algébricas, produtos notáveis, fatoração de expressões, equações, inequações, potenciação e radiciação aplicadas à modelagem computacional.', icon: 'PlusMinus', link: 'https://www.youtube.com/playlist?list=PLTPg64KdGgYgFpOFt2TETLdEuBB4fvxxf', book: '/docs/math/basic_mathematics.pdf', rating: 2 },
+			{ title: 'Matemática Básica & Nivelamento Aritmético', description: 'Revisão de propriedades algébricas, produtos notáveis, fatoração de expressões, equações, inequações, potenciação e radiciação aplicadas à modelagem computacional.', icon: 'Diff', link: 'https://www.youtube.com/playlist?list=PLTPg64KdGgYgFpOFt2TETLdEuBB4fvxxf', book: '/docs/math/basic_mathematics.pdf', rating: 2 },
 			{ title: 'Lógica Matemática & Proposicional', description: 'Conectivos lógicos, tabelas-verdade, tautologias, inferência, predicados, quantificadores e métodos de demonstração matemática aplicados a circuitos e condicionais.', icon: 'Binary', link: 'https://www.youtube.com/playlist?list=PLdFLgROzdbuIf5UsBA_VxTqDVDihXlIYN', book: '/docs/math/logic_for_computer_science.pdf', rating: 2 },
 			{ title: 'Matemática Discreta & Estruturas Combinatórias', description: 'Teoria dos conjuntos, relações, funções injetoras e sobrejetoras, indução matemática, análise combinatória avançada, permutações e o princípio da casa dos pombos.', icon: 'Calculator', link: 'https://www.youtube.com/playlist?list=PLdFLgROzdbuIf5UsBA_VxTqDVDihXlIYN', book: '/docs/math/discrete_mathematics_applications.pdf', rating: 2 },
 			{ title: 'Análise Combinatória & Probabilidade', description: 'Princípio fundamental da contagem, permutações, arranjos, combinações, binômio de Newton, espaço amostral e probabilidade condicional via Teorema de Bayes.', icon: 'BarChart', link: 'https://www.youtube.com/playlist?list=PLzvYXXKDUPquxp8QqYzd-_O5tzbC4HaJl', book: '/docs/math/concrete_mathematics.pdf', rating: 3 },
