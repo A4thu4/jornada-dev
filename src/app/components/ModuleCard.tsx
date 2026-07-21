@@ -148,7 +148,7 @@ export function ModuleCard({ module, index, accentColor, accentGlow, isFeatured,
 										}}
 										className="uppercase hover:opacity-80 transition-opacity"
 									>
-										{isFeatured ? '▶ Concluir' : '▶ Completar'}
+										{isFeatured ? '▶ Concluir' : '▶ Desfazer'}
 									</button>
 								)}
 							</div>
@@ -185,7 +185,7 @@ export function ModuleCard({ module, index, accentColor, accentGlow, isFeatured,
 								}}
 								className="uppercase hover:opacity-80 transition-opacity"
 								>
-								{isFeatured ? '▶ Leitura' : '▶ Documentação'}
+								{isFeatured ? '▶ Leitura' : '▶ Re-Ler'}
 							</button>
 						)}
 					</div>
@@ -214,7 +214,7 @@ export function ModuleCard({ module, index, accentColor, accentGlow, isFeatured,
 								}}
 								className="uppercase hover:opacity-80 transition-opacity"
 							>
-								{isFeatured ? '▶ Iniciar' : '▶ Começar'}
+								{isFeatured ? '▶ Iniciar' : '▶ Rever'}
 							</button>
 						)}
 					</div>
