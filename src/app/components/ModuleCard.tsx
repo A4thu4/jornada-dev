@@ -22,9 +22,10 @@ interface ModuleCardProps {
 	accentColor: string;
 	accentGlow: string;
 	isFeatured?: boolean;
+	onComplete?: (moduleId: string) => void;
 }
 
-export function ModuleCard({ module, index, accentColor, accentGlow, isFeatured }: ModuleCardProps) {
+export function ModuleCard({ module, index, accentColor, accentGlow, isFeatured, onComplete }: ModuleCardProps) {
 	const Icon = iconMap[module.icon] ?? Code;
 	const isAvailable = module.status === 'disponível' || module.status === 'em-progresso' || module.status === 'concluído';
 	const isLocked = module.status === 'bloqueado';
@@ -122,6 +123,34 @@ export function ModuleCard({ module, index, accentColor, accentGlow, isFeatured 
 								        fill={i < module.rating ? accentColor : 'transparent'}/>
 									))}
 								</div>
+							</div>
+
+							<div className="flex items-center gap-2 flex-shrink-0"> {isLocked ?
+								(
+									<span style={{fontFamily: "'Inter', sans-serif", fontSize: '11px'}}
+									      className="text-gray-600 uppercase tracking-wider">
+								</span>
+									) : (
+									<button
+										onClick={() => onComplete?.(module.id)}
+										style={{
+											background: isFeatured ? `linear-gradient(90deg, ${accentColor}, ${accentColor}cc)` : `rgba(${accentColor}, 0.1)`,
+											backgroundColor: isFeatured ? accentColor : 'transparent',
+											border: `1px solid ${accentColor}80`,
+											color: isFeatured ? '#000' : accentColor,
+											fontFamily: "'Cinzel', serif",
+											fontSize: '10px',
+											letterSpacing: '0.05em',
+											padding: '6px 14px',
+											borderRadius: '6px',
+											cursor: 'pointer',
+											whiteSpace: 'nowrap',
+										}}
+										className="uppercase hover:opacity-80 transition-opacity"
+									>
+										{isFeatured ? '▶ Concluir' : '▶ Completar'}
+									</button>
+								)}
 							</div>
 						</div>
 					</div>

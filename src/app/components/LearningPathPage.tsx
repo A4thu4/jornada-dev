@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import type React from 'react';
 import {
 	ArrowLeft, Github, Instagram,
@@ -22,6 +23,34 @@ interface LearningPathPageProps {
 
 export function LearningPathPage({ character, onBack }: LearningPathPageProps) {
 	const Icon = iconMap[character.icon] ?? Server;
+	const [modules, setModules] = useState(character.modules);
+
+	useEffect(() => {
+		setModules(character.modules);
+	}, [character.modules]);
+
+	const featuredModuleIndex = modules.findIndex((module) => module.status === 'disponível' || module.status === 'em-progresso');
+
+	const handleCompleteModule = (moduleId: string) => {
+		setModules((currentModules) => {
+			const currentIndex = currentModules.findIndex((module) => module.id === moduleId);
+			if (currentIndex === -1) {
+				return currentModules;
+			}
+
+			return currentModules.map((module, index) => {
+				if (index === currentIndex) {
+					return { ...module, status: 'concluído' };
+				}
+
+				if (index === currentIndex + 1 && module.status === 'bloqueado') {
+					return { ...module, status: 'disponível' };
+				}
+
+				return module;
+			});
+		});
+	};
 
 	return (
 		<div
@@ -170,14 +199,15 @@ export function LearningPathPage({ character, onBack }: LearningPathPageProps) {
 
 				{/* Module list */}
 				<div className="flex flex-col">
-					{character.modules.map((module, i) => (
+					{modules.map((module, i) => (
 						<ModuleCard
 							key={module.id}
 							module={module}
 							index={i}
 							accentColor={character.accentColor}
 							accentGlow={character.accentGlow}
-							isFeatured={module.status === 'disponível' && i === 0}
+							isFeatured={i === featuredModuleIndex}
+							onComplete={handleCompleteModule}
 						/>
 					))}
 				</div>
