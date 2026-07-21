@@ -4,8 +4,6 @@ import { Award, ListTodo, Loader, Star } from 'lucide-react';
 interface StatsBarProps {
 	stats: { nivel: number; missoes: number; progresso: number; xp: number };
 	accentColor: string;
-	/** Total de módulos da trilha — vira a quantidade de dots de "Missões" */
-	missoesMax?: number;
 }
 
 const StatDot = ({ filled, color }: { filled: boolean; color: string }) => (
@@ -46,7 +44,7 @@ function StatItem({ icon, label, value, max = 5, accentColor }: StatItemProps) {
 	);
 }
 
-export function StatsBar({ stats, accentColor, missoesMax }: StatsBarProps) {
+export function StatsBar({ stats, accentColor }: StatsBarProps) {
 	return (
 		<div
 			style={{
@@ -57,7 +55,7 @@ export function StatsBar({ stats, accentColor, missoesMax }: StatsBarProps) {
 		>
 			<StatItem icon={<Award size={16}/>} label="Nível" value={stats.nivel} accentColor={accentColor}/>
 			<div style={{width: '1px', height: '40px', backgroundColor: 'rgba(255,255,255,0.08)'}}/>
-			<StatItem icon={<ListTodo size={16}/>} label="Missões" value={stats.missoes} max={missoesMax ?? 5} accentColor={accentColor}/>
+			<StatItem icon={<ListTodo size={16}/>} label="Missões" value={stats.missoes} accentColor={accentColor}/>
 			<div style={{width: '1px', height: '40px', backgroundColor: 'rgba(255,255,255,0.08)'}}/>
 			<StatItem icon={<Loader size={16}/>} label="Progresso" value={stats.progresso} accentColor={accentColor}/>
 			<div style={{width: '1px', height: '40px', backgroundColor: 'rgba(255,255,255,0.08)'}}/>

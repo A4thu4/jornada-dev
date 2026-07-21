@@ -60,7 +60,7 @@ export function LearningPathPage({ character, onBack }: LearningPathPageProps) {
 	const trackDone = completedCount === totalModules;
 	const derivedStats = {
 		nivel: Math.min(5, 1 + Math.floor(completedCount / 3)),
-		missoes: completedCount,
+		missoes: Math.round((completedCount / totalModules) * 5),
 		progresso: Math.round((completedCount / totalModules) * 5),
 		xp: completedCount * 250,
 	};
@@ -234,7 +234,7 @@ export function LearningPathPage({ character, onBack }: LearningPathPageProps) {
 				</div>
 
 				{/* Stats */}
-				<StatsBar stats={derivedStats} missoesMax={totalModules} accentColor={character.accentColor}/>
+				<StatsBar stats={derivedStats} accentColor={character.accentColor}/>
 
 				{/* Módulos header */}
 				<div className="flex items-center gap-3">
