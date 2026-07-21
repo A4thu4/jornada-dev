@@ -7,6 +7,7 @@ import {
 	Sparkles, Sigma, Flame,
 } from 'lucide-react';
 import type { Character, Module } from '../data/tracks';
+import { moduleIndex, isModuleCompleted, progressKey } from '../data/tracks';
 import { StatsBar } from './StatsBar';
 import { ModuleCard } from './ModuleCard';
 
@@ -15,9 +16,6 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; color?: strin
 	Gamepad2, Shield, Palette, Bug, Database, Cpu, Bot, Link, Box, Code,
 	Sparkles, Sigma, Flame,
 };
-
-// Persistência do progresso da trilha entre sessões
-const progressKey = (characterId: string) => `jornada-dev:progress:${characterId}`;
 
 const applyStoredProgress = (character: Character): Module[] => {
 	try {
@@ -52,7 +50,28 @@ export function LearningPathPage({ character, onBack }: LearningPathPageProps) {
 		}
 	}, [modules, character.id]);
 
-	const featuredModuleIndex = modules.findIndex((module) => module.status === 'disponível' || module.status === 'em-progresso');
+	// Resolve os pré-requisitos cross-trilha de cada módulo com o status de conclusão
+	const resolvePrereqs = (module: Module) =>
+		(module.requires ?? []).map((reqId) => {
+			const ref = moduleIndex[reqId];
+			const met = ref && ref.trackId === character.id
+				? modules.find((m) => m.id === reqId)?.status === 'concluído'
+				: isModuleCompleted(reqId);
+			return {
+				id: reqId,
+				title: ref?.moduleTitle ?? reqId,
+				trackName: ref?.trackName ?? '???',
+				met: Boolean(met),
+			};
+		});
+
+	const prereqsByModule = modules.map(resolvePrereqs);
+	const isGated = (i: number) => prereqsByModule[i].some((p) => !p.met);
+
+	// Módulo em destaque: primeiro disponível que não esteja travado por pré-requisitos
+	const featuredModuleIndex = modules.findIndex(
+		(module, i) => (module.status === 'disponível' || module.status === 'em-progresso') && !isGated(i),
+	);
 
 	// Stats reais da trilha, derivadas do andamento dos módulos
 	const totalModules = modules.length;
@@ -66,6 +85,10 @@ export function LearningPathPage({ character, onBack }: LearningPathPageProps) {
 	};
 
 	const handleCompleteModule = (moduleId: string) => {
+		const gateIndex = modules.findIndex((module) => module.id === moduleId);
+		if (gateIndex !== -1 && isGated(gateIndex)) {
+			return; // travado por pré-requisitos de outra trilha
+		}
 		setModules((currentModules) => {
 			const currentIndex = currentModules.findIndex((module) => module.id === moduleId);
 			if (currentIndex === -1) {
@@ -264,6 +287,8 @@ export function LearningPathPage({ character, onBack }: LearningPathPageProps) {
 							accentGlow={character.accentGlow}
 							isFeatured={i === featuredModuleIndex}
 							isLast={i === modules.length - 1}
+							prereqs={prereqsByModule[i]}
+							gated={isGated(i)}
 							onComplete={handleCompleteModule}
 							onUndo={handleUndoModule}
 						/>

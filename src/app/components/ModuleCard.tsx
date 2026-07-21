@@ -21,6 +21,13 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; color?: strin
 	Binary, BarChart, Compass, Grid, Variable, Diff,
 };
 
+interface PrereqInfo {
+	id: string;
+	title: string;
+	trackName: string;
+	met: boolean;
+}
+
 interface ModuleCardProps {
 	module: Module;
 	index: number;
@@ -28,26 +35,33 @@ interface ModuleCardProps {
 	accentGlow: string;
 	isFeatured?: boolean;
 	isLast?: boolean;
+	prereqs?: PrereqInfo[];
+	gated?: boolean;
 	onComplete?: (moduleId: string) => void;
 	onUndo?: (moduleId: string) => void;
 }
 
-export function ModuleCard({ module, index, accentColor, accentGlow, isFeatured, isLast, onComplete, onUndo }: ModuleCardProps) {
+export function ModuleCard({ module, index, accentColor, accentGlow, isFeatured, isLast, prereqs, gated, onComplete, onUndo }: ModuleCardProps) {
 	const Icon = iconMap[module.icon] ?? Code;
 	const isCompleted = module.status === 'concluído';
-	const isLocked = module.status === 'bloqueado';
+	const seqLocked = module.status === 'bloqueado';
+	const gatedByPrereq = Boolean(gated) && !isCompleted;
+	const isLocked = seqLocked || gatedByPrereq;
 	const isAvailable = !isLocked;
 	const hasBook = Boolean(module.book && module.book.trim());
 	const hasLink = Boolean(module.link && module.link.trim());
+	const hasPrereqs = Boolean(prereqs && prereqs.length > 0);
 
 	// Badge de status na borda superior do card
-	const badge = isLocked
-		? { label: 'Bloqueado', color: '#64748B', border: 'rgba(255,255,255,0.15)', shadow: 'none' }
-		: isCompleted
-			? { label: '✓ Concluído', color: accentColor, border: `${accentColor}80`, shadow: `0 0 10px ${accentGlow}` }
-			: isFeatured
-				? { label: 'Em Andamento', color: accentColor, border: accentColor, shadow: `0 0 14px ${accentGlow}` }
-				: { label: 'Disponível', color: accentColor, border: `${accentColor}50`, shadow: 'none' };
+	const badge = isCompleted
+		? { label: '✓ Concluído', color: accentColor, border: `${accentColor}80`, shadow: `0 0 10px ${accentGlow}` }
+		: seqLocked
+			? { label: 'Bloqueado', color: '#64748B', border: 'rgba(255,255,255,0.15)', shadow: 'none' }
+			: gatedByPrereq
+				? { label: 'Requisitos', color: '#F59E0B', border: 'rgba(245,158,11,0.5)', shadow: 'none' }
+				: isFeatured
+					? { label: 'Em Andamento', color: accentColor, border: accentColor, shadow: `0 0 14px ${accentGlow}` }
+					: { label: 'Disponível', color: accentColor, border: `${accentColor}50`, shadow: 'none' };
 
 	// Botões secundários (Leitura/Iniciar) — contorno; só o Concluir do card em destaque é sólido
 	const secondaryButtonStyle: React.CSSProperties = {
@@ -199,6 +213,46 @@ export function ModuleCard({ module, index, accentColor, accentGlow, isFeatured,
 						</div>
 					</div>
 				</div>
+
+				{/* Requisitos — pré-requisitos de outras trilhas */}
+				{hasPrereqs && (
+					<div style={{marginTop: '10px', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '8px'}}>
+						<p
+							style={{
+								fontFamily: "'Cinzel', serif",
+								fontSize: '9px',
+								letterSpacing: '0.15em',
+								color: '#64748B',
+								marginBottom: '6px',
+							}}
+							className="uppercase"
+						>
+							Requisitos
+						</p>
+						<div className="flex flex-wrap gap-1.5">
+							{prereqs!.map((p) => (
+								<span
+									key={p.id}
+									style={{
+										display: 'inline-flex',
+										alignItems: 'center',
+										gap: '4px',
+										fontFamily: "'Inter', sans-serif",
+										fontSize: '10px',
+										padding: '3px 8px',
+										borderRadius: '999px',
+										color: p.met ? '#22C55E' : '#F59E0B',
+										background: p.met ? 'rgba(34,197,94,0.1)' : 'rgba(245,158,11,0.1)',
+										border: `1px solid ${p.met ? 'rgba(34,197,94,0.3)' : 'rgba(245,158,11,0.3)'}`,
+									}}
+								>
+									{p.met ? <Check size={10}/> : <Lock size={10}/>}
+									{p.title} · {p.trackName}
+								</span>
+							))}
+						</div>
+					</div>
+				)}
 
 				{/* Ações — só aparecem quando o módulo está liberado */}
 				{!isLocked && (

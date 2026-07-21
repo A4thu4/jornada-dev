@@ -10,6 +10,8 @@ export interface Module {
 	status: ModuleStatus;
 	link?: string;
 	book?: string;
+	/** IDs de módulos de outras trilhas que precisam estar concluídos antes deste. */
+	requires?: string[];
 }
 
 export interface Certificate {
@@ -43,7 +45,8 @@ const makeModules = (prefix: string, titles: {
 	link?: string;
 	book?: string;
 	rating: number;
-	lessonCount?: number
+	lessonCount?: number;
+	requires?: string[];
 }[]): Module[] =>
 	titles.map((m, i) => ({
 		id: `${prefix}-${i + 1}`,
@@ -52,6 +55,7 @@ const makeModules = (prefix: string, titles: {
 		icon: m.icon,
 		link: m.link,
 		book: m.book,
+		requires: m.requires,
 		rating: m.rating ? m.rating : Math.floor(Math.random() * 2) + 2,
 		lessonCount: m.lessonCount ? m.lessonCount : Math.floor(Math.random() * 8) + 6,
 		status: i === 0 ? 'disponível' : 'bloqueado',
@@ -73,10 +77,10 @@ export const tracks: Character[] = [
 			{ title: 'Oracle Database SQL (1Z0-071)', issuer: 'Oracle', link: 'https://mylearn.oracle.com/ou/learning-path/earn-the-oracle-database-sql-associate-credential/80636' },
 		],
 		modules: makeModules('be', [
-			{ title: 'Java Firme & JVM', description: 'POO, coleções, generics e tratamento de exceções em Java', icon: 'Code', link: 'https://www.youtube.com/playlist?list=PL62G310vn6nFIsOCC0H-C2infYgwm8SWW', book: '/docs/backend/effective_java.pdf', rating: 2, lessonCount: 0  },
+			{ requires: ['es-1', 'es-7'], title: 'Java Firme & JVM', description: 'POO, coleções, generics e tratamento de exceções em Java', icon: 'Code', link: 'https://www.youtube.com/playlist?list=PL62G310vn6nFIsOCC0H-C2infYgwm8SWW', book: '/docs/backend/effective_java.pdf', rating: 2, lessonCount: 0  },
 			{ title: 'Arquitetura & Clean Code', description: 'Padrões de projeto GoF e MVC, Clean Architecture e princípios SOLID na prática', icon: 'Layers', link: 'https://www.youtube.com/playlist?list=PLNCSWIsR6ADL_qsxAayXkSzzCCf2xlIy9', book: '/docs/backend/clean_architecture.pdf', rating: 2, lessonCount: 0 },
 			{ title: 'Banco de Dados', description: 'SQL, NoSQL, modelagem relacional e otimização de queries', icon: 'Database', link: 'https://www.youtube.com/playlist?list=PLbIBj8vQhvm2WT-pjGS5x7zUzmh4VgvRk', book: '/docs/backend/database_system_concepts.pdf', rating: 3, lessonCount: 1 },
-			{ title: 'APIs REST', description: 'Design, construção e documentação de APIs HTTP modernas', icon: 'Globe', link: 'https://www.youtube.com/playlist?list=PLf8x7B3nFTl17WeEVj405tHlstiq1kNBX', book: '/docs/backend/rest_in_practice.pdf', rating: 3, lessonCount: 1 },
+			{ requires: ['es-6'], title: 'APIs REST', description: 'Design, construção e documentação de APIs HTTP modernas', icon: 'Globe', link: 'https://www.youtube.com/playlist?list=PLf8x7B3nFTl17WeEVj405tHlstiq1kNBX', book: '/docs/backend/rest_in_practice.pdf', rating: 3, lessonCount: 1 },
 			{ title: 'Testes Automatizados', description: 'TDD, testes unitários, mocks e testes de integração usando JUnit e Mockito.', icon: 'CheckCircle', link: 'https://www.youtube.com/watch?v=Geq60OVyBPg',  book: '/docs/backend/td_development.pdf', rating: 4, lessonCount: 1 },
 			{ title: 'Ecossistema Spring Boot', description: 'Framework Java para APIs robustas, escaláveis e prontas para produção', icon: 'FileCode', link: 'https://www.youtube.com/playlist?list=PL62G310vn6nFBIxp6ZwGnm8xMcGE3VA5H', book: '/docs/backend/spring_action.pdf', rating: 4, lessonCount: 1 },
 			{ title: 'Autenticação & Segurança', description: 'JWT, OAuth2, HTTPS e boas práticas de segurança em APIs', icon: 'Lock', link: 'https://docs.spring.io/spring-security/reference/index.html', book: '/docs/backend/oauth_2_action.pdf',rating: 4, lessonCount: 1 },
@@ -100,7 +104,7 @@ export const tracks: Character[] = [
 		modules: makeModules('fe', [
 			{ title: 'HTML5', description: 'Estrutura semântica e estilização de páginas web do zero, DOM, acessibilidade (A11y), SEO técnico', icon: 'Layout', link: 'https://www.cursoemvideo.com/curso/html5-css3-modulo1/', book: '/docs/frontend/html_definitive.pdf', rating: 1 },
 			{ title: 'CSS3', description: 'Flexbox, Grid, Variáveis CSS, Box Model e arquitetura CSS', icon: 'Palette', link: 'https://www.cursoemvideo.com/curso/html5-css3-modulo1/', book: '/docs/frontend/css_definitive.pdf', rating: 1 },
-			{ title: 'JavaScript', description: 'ES6+, assincronismo, closures e manipulação do DOM', icon: 'Zap', link: 'https://www.youtube.com/playlist?list=PLnDvRpP8BneysKU8KivhnrVaKpILD3gZ6', book: '/docs/frontend/js_definitive.pdf', rating: 2 },
+			{ requires: ['es-1'], title: 'JavaScript', description: 'ES6+, assincronismo, closures e manipulação do DOM', icon: 'Zap', link: 'https://www.youtube.com/playlist?list=PLnDvRpP8BneysKU8KivhnrVaKpILD3gZ6', book: '/docs/frontend/js_definitive.pdf', rating: 2 },
 			{ title: 'TypeScript', description: 'Tipagem estática, interfaces, generics e integração com projetos reais', icon: 'Type', link: 'https://www.youtube.com/playlist?list=PL9tY_tDo_Q0DOAzTaPnWYsryfNLsz1K6U', book: '/docs/essentials/programming_typescript.pdf', rating: 3 },
 			{ title: 'React & Componentes', description: 'Criação de interfaces reativas com hooks, context e estado', icon: 'AtomIcon', link: 'https://www.youtube.com/playlist?list=PLnDvRpP8BneyVA0SZ2okm-QBojomniQVO', book: '/docs/frontend/learning_react.pdf', rating: 3 },
 			{ title: 'Performance & Otimização', description: 'Web Vitals, lazy loading, code splitting e bundle size', icon: 'Gauge', link: 'https://web.dev/learn/performance/', book: '/docs/frontend/high_performance_browser_networking.pdf', rating: 4 },
@@ -122,7 +126,7 @@ export const tracks: Character[] = [
 			{ title: 'AWS Certified Developer – Associate', issuer: 'AWS', link: 'https://aws.amazon.com/certification/certified-developer-associate/' },
 		],
 		modules: makeModules('fs', [
-			{ title: 'Persistência & Modelagem com ORMs', description: 'Modelagem relacional e não-relacional integrada ao Node.js usando Prisma ORM ou Mongoose. Migrations na prática.', icon: 'Database', link: 'https://www.youtube.com/playlist?list=PLfvOpw8k80WpKTtloa7fMbfPWL7D6X5cC', book: '/docs/fullstack/node_databases.pdf', rating: 1 },
+			{ requires: ['be-4', 'fe-5'], title: 'Persistência & Modelagem com ORMs', description: 'Modelagem relacional e não-relacional integrada ao Node.js usando Prisma ORM ou Mongoose. Migrations na prática.', icon: 'Database', link: 'https://www.youtube.com/playlist?list=PLfvOpw8k80WpKTtloa7fMbfPWL7D6X5cC', book: '/docs/fullstack/node_databases.pdf', rating: 1 },
 			{ title: 'Back End com Node.js', description: 'APIs com Express, banco de dados, validação de dados (Zod) e autenticação JWT', icon: 'Code', link: 'https://www.youtube.com/playlist?list=PLJ_KhUnlXUPtbtLwaxxUxHqvcNQndmI4B', book: '/docs/fullstack/production_ready_node.pdf', rating: 2 },
 			{ title: 'Front End com React', description: 'Criação da SPA (Single Page Application), interfaces modernas, reativas e responsivas com React', icon: 'Monitor', link: 'https://www.youtube.com/playlist?list=PL45Hr6NzteIJQyvk6v0T78Ye8IsGm0mYS', book: '/docs/frontend/learning_react.pdf', rating: 2 },
 			{ title: 'Autenticação & Sessões', description: 'JWT, refresh tokens, cookies e segurança end-to-end', icon: 'Lock', link: 'https://www.youtube.com/watch?v=QOGnkj3T_q0', book: '/docs/fullstack/web_security_testing.pdf', rating: 3 },
@@ -147,7 +151,7 @@ export const tracks: Character[] = [
 			{ title: 'CKA – Certified Kubernetes Administrator', issuer: 'CNCF', link: 'https://www.cncf.io/training/certification/cka/' },
 		],
 		modules: makeModules('cd', [
-			{ title: 'Fundamentos de Cloud', description: 'IaaS, PaaS, SaaS, IAM, VPC e modelos de responsabilidade e precificação', icon: 'Shield', link: 'https://skillbuilder.aws/learning-plan/8UUCEZGNX4/exam-prep-plan-aws-certified-cloud-practitioner-clfc02--portugus/1FKNHGZFR3', book: '/docs/cloud/aws_certified_cloud.pdf', rating: 1 },
+			{ requires: ['es-5', 'es-8'], title: 'Fundamentos de Cloud', description: 'IaaS, PaaS, SaaS, IAM, VPC e modelos de responsabilidade e precificação', icon: 'Shield', link: 'https://skillbuilder.aws/learning-plan/8UUCEZGNX4/exam-prep-plan-aws-certified-cloud-practitioner-clfc02--portugus/1FKNHGZFR3', book: '/docs/cloud/aws_certified_cloud.pdf', rating: 1 },
 			{ title: 'GO', description: 'A linguagem Go para serviços cloud-native, alta performance e concorrência', icon: 'Code', link: 'https://www.youtube.com/playlist?list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg', book: '/docs/cloud/learning_go.pdf', rating: 2 },
 			{ title: 'AWS Essentials', description: 'EC2, S3, RDS, Lambda e os serviços core da AWS na prática', icon: 'Cloud', link: 'https://www.youtube.com/playlist?list=PL62G310vn6nHwfC31Q2hqh-3nO-6Rceyd', book: '/docs/cloud/aws_architecture.pdf', rating: 3 },
 			{ title: 'Infraestrutura como Código', description: 'Terraform e CloudFormation para provisionamento automatizado', icon: 'FileCode', link: 'https://www.youtube.com/playlist?list=PLWQmZVQayUUIgSmOj3GPH2BJcn0hOzIaP', book: '/docs/cloud/terraform_up_running.pdf', rating: 4 },
@@ -170,12 +174,12 @@ export const tracks: Character[] = [
 			{ title: 'Google Data Analytics', issuer: 'Google / Coursera', link: 'https://www.coursera.org/professional-certificates/google-data-analytics' },
 		],
 		modules: makeModules('ds', [
-			{ title: 'Python para Data Science', description: 'NumPy, Pandas e análise exploratória de dados na prática', icon: 'Code', link: 'https://www.youtube.com/playlist?list=PLvE-ZAFRgX8hnECDn1v9HNTI71veL3oW0', book: '/docs/datascience/python_data_analysis.pdf', rating: 2 },
+			{ requires: ['es-1'], title: 'Python para Data Science', description: 'NumPy, Pandas e análise exploratória de dados na prática', icon: 'Code', link: 'https://www.youtube.com/playlist?list=PLvE-ZAFRgX8hnECDn1v9HNTI71veL3oW0', book: '/docs/datascience/python_data_analysis.pdf', rating: 2 },
 			{ title: 'Visualização de Dados', description: 'Construção de gráficos estáticos e interativos usando Matplotlib, Seaborn, Plotly e storytelling com dados', icon: 'BarChart2', link: 'https://plotly.com/python/', book: '/docs/datascience/storytelling_with_data.pdf', rating: 2 },
 			{ title: 'Estatística & Probabilidade', description: 'Cálculo de distribuições, probabilidade condicional, testes de hipótese, intervalos de confiança e inferência estatística.', icon: 'Calculator', link: 'https://www.youtube.com/playlist?list=PLjdDBZW3EmXe6hO2Rt5Q9I5wzRZ7j7K8P', book: '/docs/datascience/practical_statistics.pdf', rating: 2 },
 			{ title: 'Bancos de Dados & SQL para Analistas', description: 'Modelagem e manipulação de grandes volumes de dados. Queries avançadas, joins complexos, subconsultas e agregações para extração de insights.', icon: 'Database', link: 'https://www.postgresql.org/docs/', book: '/docs/datascience/sql_for_data_analysis.pdf', rating: 2 },
 			{ title: 'Power BI & Dashboards', description: 'Business intelligence, DAX e relatórios executivos interativos', icon: 'Table', link: 'https://www.youtube.com/playlist?list=PLFKhhNd35zq90tdc3PYpx4IA-SoxSNlmN', book: '/docs/datascience/definitive_guide_dax.pdf', rating: 3 },
-			{ title: 'Machine Learning com Scikit-Learn', description: 'Regressão, classificação, clustering e avaliação de modelos', icon: 'Brain', link: 'https://www.youtube.com/playlist?list=PL8PS-tykU-MiZtXZAYjfSW5-2WN4FwCGA', book: '/docs/datascience/hands_on_machine_learning.pdf', rating: 3 },
+			{ requires: ['mt-7'], title: 'Machine Learning com Scikit-Learn', description: 'Regressão, classificação, clustering e avaliação de modelos', icon: 'Brain', link: 'https://www.youtube.com/playlist?list=PL8PS-tykU-MiZtXZAYjfSW5-2WN4FwCGA', book: '/docs/datascience/hands_on_machine_learning.pdf', rating: 3 },
 			{ title: 'Deep Learning Intro', description: 'Redes neurais, backpropagation e primeiros modelos com Keras', icon: 'Network', link: 'https://www.youtube.com/playlist?list=PLHz_AreHm4dm24MhlWJYiR_Rm7TFtvs6S',  book: '/docs/datascience/deep_learning_python.pdf', rating: 4 },
 			{ title: 'NLP & Dados Não-Estruturados', description: 'Processamento de texto, embeddings e análise de sentimentos', icon: 'MessageSquare', link: 'https://www.youtube.com/playlist?list=PLQVvvaa0QuDf2JswnfiGkliBInZnIC4HL', book: '/docs/datascience/speech_and_language_processing.pdf', rating: 4 },
 			{ title: 'Desafio Final: Modelo em Produção', description: 'Treine um modelo preditivo robusto, exponha por API , empacote em Docker e publique um dashboard interativo para consumo final.', icon: 'Trophy', rating: 5 },
@@ -195,8 +199,8 @@ export const tracks: Character[] = [
 			{ title: 'DeepLearning.AI TensorFlow Developer', issuer: 'DeepLearning.AI / Coursera', link: 'https://www.coursera.org/professional-certificates/tensorflow-in-practice' },
 		],
 		modules: makeModules('ia', [
-			{ title: 'Fundamentos de IA', description: 'História, conceitos, limites computacionais, arquiteturas baseadas em agentes e ética no desenvolvimento de modelos.', icon: 'Brain', link: 'https://www.youtube.com/playlist?list=PLHz_AreHm4dm24MhlWJYiR_Rm7TFtvs6S', book: '/docs/ia/artificial_intelligence_modern_approach.pdf', rating: 1 },
-			{ title: 'Machine Learning', description: 'Matrizes conceituais de aprendizado supervisionado e não supervisionado. Otimização por gradiente descendente, funções de custo e (overfitting) e validação cruzada', icon: 'GitBranch', link: 'https://www.youtube.com/playlist?list=PL-t7zzWJWPtzhZtI-bWWHFtCfxtjmBdIW', book: '/docs/ia/mathematics_for_machine_learning.pdf', rating: 3 },
+			{ requires: ['es-1'], title: 'Fundamentos de IA', description: 'História, conceitos, limites computacionais, arquiteturas baseadas em agentes e ética no desenvolvimento de modelos.', icon: 'Brain', link: 'https://www.youtube.com/playlist?list=PLHz_AreHm4dm24MhlWJYiR_Rm7TFtvs6S', book: '/docs/ia/artificial_intelligence_modern_approach.pdf', rating: 1 },
+			{ requires: ['ds-6', 'mt-6'], title: 'Machine Learning', description: 'Matrizes conceituais de aprendizado supervisionado e não supervisionado. Otimização por gradiente descendente, funções de custo e (overfitting) e validação cruzada', icon: 'GitBranch', link: 'https://www.youtube.com/playlist?list=PL-t7zzWJWPtzhZtI-bWWHFtCfxtjmBdIW', book: '/docs/ia/mathematics_for_machine_learning.pdf', rating: 3 },
 			{ title: 'Arquiteturas de Deep Learning', description: 'Redes Neurais Convolucionais (CNNs) para imagens e Redes Recorrentes (RNNs/LSTMs) para sequências. Engenharia de tensores e treinamento com PyTorch.', icon: 'Network', link: 'https://www.youtube.com/watch?v=V_xro1bcAuA', book: '/docs/ia/deep_learning_book.pdf', rating: 3 },
 			{ title: 'A Revolução dos Transformers & LLMs', description: 'Entendimento profundo do mecanismo de Atenção (Self-Attention), codificadores, decodificadores e a arquitetura que originou os modelos GPT, Claude e Llama.', icon: 'Cpu', link: 'https://huggingface.co/docs/transformers/index', book: '/docs/ia/transformers_natural_language_processing.pdf', rating: 3 },
 			{ title: 'Engenharia de Prompts Avançada', description: 'Técnicas de direcionamento de contexto para LLMs corporativos: Few-Shot prompting, Chain-of-Thought (CoT), ReAct e estruturação de saídas em formatos rígidos (JSON Schema).', icon: 'MessageSquare', link: 'https://www.promptingguide.ai/pt', book: '/docs/ia/prompt_engineering_for_developers.pdf', rating: 3 },
@@ -220,7 +224,7 @@ export const tracks: Character[] = [
 			{ title: 'Meta Android Developer', issuer: 'Meta / Coursera', link: 'https://www.coursera.org/professional-certificates/meta-android-developer' },
 		],
 		modules: makeModules('mb', [
-			{ title: 'Fundamentos de Desenvolvimento Mobile', description: 'Ciclo de vida da aplicação, gerenciamento de estados, princípios de navegação estável e padrões fundamentais de UI/UX para dispositivos portáteis.', icon: 'Smartphone', link: 'https://www.youtube.com/playlist?list=PL50rZONmv8ZRsWj0L3rvSicPSEJl6sQ40', book: '/docs/mobile/android_programming_guide.pdf', rating: 1 },
+			{ requires: ['es-1'], title: 'Fundamentos de Desenvolvimento Mobile', description: 'Ciclo de vida da aplicação, gerenciamento de estados, princípios de navegação estável e padrões fundamentais de UI/UX para dispositivos portáteis.', icon: 'Smartphone', link: 'https://www.youtube.com/playlist?list=PL50rZONmv8ZRsWj0L3rvSicPSEJl6sQ40', book: '/docs/mobile/android_programming_guide.pdf', rating: 1 },
 			{ title: 'Kotlin Essencial & Programação Funcional', description: 'Sintaxe moderna do Kotlin, tipos de dados, null safety estrito, lambdas, escopos de funções e os pilares da linguagem para o desenvolvimento Android.', icon: 'Code', link: 'https://www.youtube.com/playlist?list=PLRHt7FXZbVCSExTvJ6_qTrt_K8NsL0l6N', book: '/docs/mobile/kotlin_in_action.pdf', rating: 2 },
 			{ title: 'Arquitetura de UI Moderna com Jetpack Compose', description: 'Construção de interfaces declarativas baseadas em funções compostas, gerenciamento de temas dinâmicos, modificadores de layout e animações nativas.', icon: 'Layout', link: 'https://www.youtube.com/playlist?list=PLizN3WA8HR1yvdN7FcfYYc2zAvdAAgel6', book: '/docs/mobile/jetpack_compose_by_tutorials.pdf', rating: 3 },
 			{ title: 'Gerenciamento de Estado Avançado', description: 'Implementação do padrão de arquitetura MVVM, uso prático de StateFlow, SharedFlow e delegação de estados para garantir telas reativas e desacopladas.', icon: 'Sliders', link: 'https://developer.android.com/topic/architecture/ui-state/state-holder', book: '/docs/mobile/clean_architecture_android.pdf', rating: 3 },
@@ -246,7 +250,7 @@ export const tracks: Character[] = [
 		],
 		modules: makeModules('gd', [
 			{ title: 'Fundamentos de Game Design', description: 'Mecânicas centrais, loops de gameplay, curvas de interesse, balanceamento matemático de regras e estruturação do Game Design Document (GDD).', icon: 'Gamepad2', link: 'https://gamedev.net/', book: '/docs/gamedev/art_of_game_design.pdf', rating: 1 },
-			{ title: 'C# Essencial & Lógica para Jogos', description: 'Sintaxe do C# voltada para a Unity, tipos primitivos, estruturas condicionais, coleções genéricas e introdução à Orientação a Objetos aplicada.', icon: 'Code', link: 'https://www.youtube.com/playlist?list=PLEI5qdfLBErZuMSareAo-TLTFYU9hGDsR', book: '/docs/gamedev/learning_csharp_unity.pdf', rating: 1 },
+			{ requires: ['es-1'], title: 'C# Essencial & Lógica para Jogos', description: 'Sintaxe do C# voltada para a Unity, tipos primitivos, estruturas condicionais, coleções genéricas e introdução à Orientação a Objetos aplicada.', icon: 'Code', link: 'https://www.youtube.com/playlist?list=PLEI5qdfLBErZuMSareAo-TLTFYU9hGDsR', book: '/docs/gamedev/learning_csharp_unity.pdf', rating: 1 },
 			{ title: 'Unity & Manipulação do GameLoop', description: 'Ciclo de vida dos scripts (Awake, Start, Update, FixedUpdate), física básica (Rigidbodies, Colliders), gerenciamento de cenas e manipulação do transform.', icon: 'Box', link: 'https://www.youtube.com/playlist?list=PLARDsRa4d7UyZF3cf9tbp_6vN3M737DY2l', book: '/docs/gamedev/unity_in_action.pdf', rating: 2 },
 			{ title: 'Desenvolvimento e Lógica de Jogos 2D', description: 'Manipulação de Spritesheets, sistemas de coordenadas bidimensionais, renderização via Tilemaps, criação de camadas de colisão e gerenciamento de inputs.', icon: 'Layout', link: 'https://www.youtube.com/playlist?list=PLciEA-M4VWn284pBB2e29Vo-MxlokLRx9', book: '/docs/gamedev/unity_2d_game_development.pdf', rating: 2 },
 			{ title: 'Animação & Sistemas de Estado 2D', description: 'Criação de máquinas de estado usando o Mecanim, transições de animação baseadas em parâmetros lógicos e controle dinâmico de estados de personagens via código.', icon: 'Activity', link: 'https://docs.unity3d.com/Manual/AnimationSection.html', book: '/docs/gamedev/unity_animation_essentials.pdf', rating: 2 },
@@ -270,7 +274,7 @@ export const tracks: Character[] = [
 			{ title: 'Unity Certified Associate: 3D Artist', issuer: 'Unity', link: 'https://unity.com/products/unity-certifications/user-programmer' },
 		],
 		modules: makeModules('3d', [
-			{ title: 'Fundamentos de Espaço Vetorial & Geometria', description: 'Visão espacial, anatomia das malhas (vértices, arestas, faces), topologia de polígonos, projeções e navegação em viewports tridimensionais.', icon: 'Box', link: 'https://docs.blender.org/manual/en/latest/modeling/introduction.html', book: '/docs/3dmod/3d_modeling_fundamentals.pdf', rating: 1 },
+			{ requires: ['mt-5'], title: 'Fundamentos de Espaço Vetorial & Geometria', description: 'Visão espacial, anatomia das malhas (vértices, arestas, faces), topologia de polígonos, projeções e navegação em viewports tridimensionais.', icon: 'Box', link: 'https://docs.blender.org/manual/en/latest/modeling/introduction.html', book: '/docs/3dmod/3d_modeling_fundamentals.pdf', rating: 1 },
 			{ title: 'PixelArt & Sprites 2D para Jogos', description: 'Teoria das cores aplicada, design de paletas restritas, técnicas de dithering, criação de tilesets modulares e animação frame-a-frame de sprites.', icon: 'Layout', link: 'https://www.youtube.com/playlist?list=PLYOZqxNe79xIUDs_xpzpcvFIt0lR5bQ5C', book: '/docs/3dmod/pixel_art_handbook.pdf', rating: 2 },
 			{ title: 'Blender Essencial & Fluxo Poligonal', description: 'Domínio da interface do Blender, ferramentas de manipulação direta (extrude, bevel, loop cut) e aplicação de modificadores não-destrutivos.', icon: 'Monitor', link: 'https://docs.blender.org/manual/en/latest/', book: '/docs/3dmod/blender_3d_basics.pdf', rating: 2 },
 			{ title: 'Modelagem Hard Surface & Escultura', description: 'Técnicas de modelagem de superfícies rígidas (maquinários, cenários) e introdução aos pincéis de escultura digital para formas orgânicas complexas.', icon: 'Component', link: 'https://docs.blender.org/manual/en/latest/sculpt_paint/index.html', book: '/docs/3dmod/blender_secrets.pdf', rating: 3 },
@@ -296,7 +300,7 @@ export const tracks: Character[] = [
 			{ title: 'OSCP – Offensive Security Certified Professional', issuer: 'OffSec', link: 'https://www.offsec.com/courses/pen-200/' },
 		],
 		modules: makeModules('hk', [
-			{ title: 'Linux para Hackers', description: 'Kali Linux, terminal avançado e ferramentas de segurança ofensiva', icon: 'Terminal', link: 'https://www.kali.org/docs/', book: '/docs/hacking/linux_basics_hackers.pdf', rating: 2 },
+			{ requires: ['es-3', 'es-5'], title: 'Linux para Hackers', description: 'Kali Linux, terminal avançado e ferramentas de segurança ofensiva', icon: 'Terminal', link: 'https://www.kali.org/docs/', book: '/docs/hacking/linux_basics_hackers.pdf', rating: 2 },
 			{ title: 'Segurança & Vulnerabilidades Web', description: 'OWASP top 10, SQL Injection, XSS, CSRF, broken authentication e manipulação de requisições HTTP.', icon: 'Bug', link: 'https://portswigger.net/web-security', book: '/docs/hacking/web_application_hacker_handbook.pdf', rating: 3 },
 			{ title: 'Pentest & Reconhecimento', description: 'OSINT, Nmap, Shodan e as fases de um pentest profissional', icon: 'Search', link: 'https://www.tryhackme.com/', book: '/docs/hacking/the_pentester_blueprint.pdf', rating: 3 },
 			{ title: 'Varredura & Análise de Vulnerabilidades', description: 'Uso profissional de scanners automatizados como Nessus e OpenVAS. Análise, priorização e validação de relatórios de falhas técnicas.', icon: 'Eye', link: 'https://www.tenable.com/products/nessus/nessus-essentials', book: '/docs/hacking/vulnerability_assessment.pdf', rating: 3 },
@@ -320,7 +324,7 @@ export const tracks: Character[] = [
 			{ title: 'ISC2 Certified in Cybersecurity (CC)', issuer: 'ISC2', link: 'https://www.isc2.org/certifications/cc' },
 		],
 		modules: makeModules('cs', [
-			{ title: 'Intro a CyberSec', description: 'Fundamentos de segurança da informação, Confidencialidade, Integridade e Disponibilidade, vetores de ataque e engenharia social.', icon: 'Shield', link: 'https://www.edx.org/learn/cybersecurity/harvard-university-cs50-s-introduction-to-cybersecurity', book: '/docs/cybersec/introduction_to_cybersecurity.pdf', rating: 3 },
+			{ requires: ['es-5'], title: 'Intro a CyberSec', description: 'Fundamentos de segurança da informação, Confidencialidade, Integridade e Disponibilidade, vetores de ataque e engenharia social.', icon: 'Shield', link: 'https://www.edx.org/learn/cybersecurity/harvard-university-cs50-s-introduction-to-cybersecurity', book: '/docs/cybersec/introduction_to_cybersecurity.pdf', rating: 3 },
 			{ title: 'LGPD', description: 'Conceitos da Lei Geral de Proteção de Dados aplicados à engenharia de software: anonimização, mascaramento de dados sensíveis e governança.', icon: 'ShieldBan', link: 'https://www.escolavirtual.gov.br/curso/603', book: '/docs/cybersec/lgpd.pdf', rating: 4 },
 			{ title: 'Criptografia 1 & 2', description: 'Algoritmos de cifragem (AES e RSA), hashing, ataques a geradores de números pseudoaleatórios e quebra de hashes.', icon: 'Lock', link: 'https://www.youtube.com/playlist?list=PLB8Qk_jff08g', book: '/docs/cybersec/serious_cryptography.pdf', rating: 4 },
 			{ title: 'Segurança em Aplicações (DevSecOps)', description: 'Alinhamento de segurança no ciclo de desenvolvimento (SDLC). Análise estática de código (SAST), análise dinâmica (DAST) e proteção de dependências',icon: 'Code',link: 'https://owasp.org/www-project-top-ten/', book: '/docs/cybersec/alice_and_bob_security.pdf', rating: 3 },
@@ -367,7 +371,7 @@ export const tracks: Character[] = [
 			{ title: 'ISTQB Certified Tester Foundation Level (CTFL)', issuer: 'ISTQB', link: 'https://www.istqb.org/certifications/certified-tester-foundation-level' },
 		],
 		modules: makeModules('qa', [
-			{ title: 'Fundamentos de Engenharia de Qualidade', description: 'Ciclo de vida de bugs (STLC), níveis e tipos de testes, mentalidade analítica de QA e os pilares de garantia de qualidade no ciclo de desenvolvimento de software.', icon: 'CheckCircle', link: 'https://www.youtube.com/playlist?list=PL0nYAInGtru1q0laP62tgjTWohsij782i', book: '/docs/qa/foundations_software_testing.pdf', rating: 1 },
+			{ requires: ['es-1'], title: 'Fundamentos de Engenharia de Qualidade', description: 'Ciclo de vida de bugs (STLC), níveis e tipos de testes, mentalidade analítica de QA e os pilares de garantia de qualidade no ciclo de desenvolvimento de software.', icon: 'CheckCircle', link: 'https://www.youtube.com/playlist?list=PL0nYAInGtru1q0laP62tgjTWohsij782i', book: '/docs/qa/foundations_software_testing.pdf', rating: 1 },
 			{ title: 'Testes Manuais & Engenharia de Casos', description: 'Design de cenários de teste, técnicas de caixa-preta, particionamento de equivalência, análise de valor limite e abertura de reports de falhas estruturados em ferramentas como Jira.', icon: 'ClipboardList', link: 'https://www.youtube.com/playlist?list=PL7NDvV6PnYODio6jp-dYLXPL8SQHzTJxy', book: '/docs/qa/software_testing_craft.pdf', rating: 2 },
 			{ title: 'Testes Unitários & Estratégias de TDD', description: 'Criação de asserções, isolamento de escopo com Mocks/Stubs, conceitos de code coverage e aplicação prática do desenvolvimento orientado a testes (TDD).', icon: 'Code', link: 'https://www.youtube.com/watch?v=Azv3jxXkKeY', book: '/docs/qa/test_driven_development.pdf', rating: 2 },
 			{ title: 'Testes de Integração & Arquitetura', description: 'Validação da comunicação entre componentes internos do sistema, persistência de dados em ambientes isolados e simulação de dependências externas via WireMock.', icon: 'GitBranch', link: 'https://www.wiremock.org/docs/', book: '/docs/qa/testing_software_architectures.pdf', rating: 3 },
@@ -393,8 +397,8 @@ export const tracks: Character[] = [
 			{ title: 'Google Professional Data Engineer', issuer: 'Google Cloud', link: 'https://cloud.google.com/learn/certification/data-engineer' },
 		],
 		modules: makeModules('de', [
-			{ title: 'Fundamentos & Arquiteturas de Dados', description: 'Evolução dos paradigmas de dados: do paradigma Batch ao Streaming. Conceituação e taxonomia de Data Lakes, Data Warehouses e a convergência para o Lakehouse.', icon: 'Database', link: 'https://www.youtube.com/playlist?list=PLs5wTEi6ddhBsgqe6Rs5NBb6rKc9y4tNW', book: '/docs/dataeng/fundamentals_data_engineering.pdf', rating: 2 },
-			{ title: 'SQL Avançado & Otimização Analítica', description: 'Domínio de Window Functions, Expressões de Tabela Comuns (CTEs), estratégias de particionamento, indexação e tunagem de queries complexas.', icon: 'Table', link: 'https://www.postgresql.org/docs/', book: '/docs/dataeng/sql_for_smarties.pdf', rating: 2 },
+			{ requires: ['es-1'], title: 'Fundamentos & Arquiteturas de Dados', description: 'Evolução dos paradigmas de dados: do paradigma Batch ao Streaming. Conceituação e taxonomia de Data Lakes, Data Warehouses e a convergência para o Lakehouse.', icon: 'Database', link: 'https://www.youtube.com/playlist?list=PLs5wTEi6ddhBsgqe6Rs5NBb6rKc9y4tNW', book: '/docs/dataeng/fundamentals_data_engineering.pdf', rating: 2 },
+			{ requires: ['ds-4'], title: 'SQL Avançado & Otimização Analítica', description: 'Domínio de Window Functions, Expressões de Tabela Comuns (CTEs), estratégias de particionamento, indexação e tunagem de queries complexas.', icon: 'Table', link: 'https://www.postgresql.org/docs/', book: '/docs/dataeng/sql_for_smarties.pdf', rating: 2 },
 			{ title: 'Programação Reativa com Pandas & Ingestão', description: 'Scripts em Python para extração de dados estruturados e semi-estruturados (APIs, JSON, Parquet) e manipulação vetorial de alto desempenho com Pandas.', icon: 'Code', link: 'https://pandas.pydata.org/docs/', book: '/docs/dataeng/python_data_wrangling.pdf', rating: 3 },
 			{ title: 'Docker & Infraestrutura para Engenharia de Dados', description: 'Isolamento de ambientes de dados. Configuração de redes internas, volumes persistentes e orquestração de múltiplos serviços locais (Postgres, MinIO) via Docker Compose.', icon: 'Component', link: 'https://docs.docker.com/', book: '/docs/dataeng/docker_for_data_science.pdf', rating: 3 },
 			{ title: 'Orquestração de Workflows com Apache Airflow', description: 'Desenvolvimento de pipelines programáticos baseados em Grafos Acíclicos Dirigidos (DAGs). Agendamento controlado, gerenciamento de Tasks, XComs e monitoramento.', icon: 'GitBranch', link: 'https://airflow.apache.org/docs/', book: '/docs/dataeng/data_pipelines_with_airflow.pdf', rating: 3 },
@@ -419,7 +423,7 @@ export const tracks: Character[] = [
 		],
 		modules: makeModules('em', [
 			{ title: 'Fundamentos de Eletrônica Analógica & Digital', description: 'Leis de Ohm e Kirchhoff, análise de circuitos CC, comportamento de componentes passivos (resistores, capacitores, indutores) e lógica booleana em portas lógicas.', icon: 'Cpu', link: 'https://www.youtube.com/playlist?list=PLfdR3_dt2rbcv2CmrbeT8wu50Yga0fjE8', book: '/docs/embedded/practical_electronics_inventors.pdf', rating: 1 },
-			{ title: 'Programação em C Embarcado & Manipulação de Memória', description: 'Ponteiros avançados, aritmética de ponteiros, alocação estática vs dinâmica, estruturas de dados otimizadas, modificador volatile e máscaras de bits.', icon: 'Code', link: 'https://www.youtube.com/playlist?list=PLIfZMtpPYFP5qaS2RFQxcNVkmJLGQwyKE', book: '/docs/embedded/embedded_c_coding_standard.pdf', rating: 2 },
+			{ requires: ['es-1'], title: 'Programação em C Embarcado & Manipulação de Memória', description: 'Ponteiros avançados, aritmética de ponteiros, alocação estática vs dinâmica, estruturas de dados otimizadas, modificador volatile e máscaras de bits.', icon: 'Code', link: 'https://www.youtube.com/playlist?list=PLIfZMtpPYFP5qaS2RFQxcNVkmJLGQwyKE', book: '/docs/embedded/embedded_c_coding_standard.pdf', rating: 2 },
 			{ title: 'Prototipagem, Simulação & Design de PCB (KiCad)', description: 'Montagem física em matriz de contatos, simulação de circuitos com SPICE, desenvolvimento de esquemáticos e design de placas de circuito impresso usando o KiCad.', icon: 'Layout', link: 'https://www.youtube.com/playlist?list=PLZ8dBTV2_5HQpKzBt3nJex3Mbk7hmhFHl', book: '/docs/embedded/kicad_like_a_pro.pdf', rating: 2 },
 			{ title: 'Arquitetura de Microcontroladores & ARM Cortex-M', description: 'Arquitetura interna de processadores RISC de 32 bits. Mapeamento de memória, registradores de propósito geral, GPIOs e programação Bare-Metal usando a família STM32.', icon: 'Box', link: 'https://www.youtube.com/playlist?list=PLMdNWywlSE5QPsEeT_cXisUT366NS3U8R', book: '/docs/embedded/mastering_stm32.pdf', rating: 3 },
 			{ title: 'Sistemas de Interrupção, Timers & Periféricos', description: 'Configuração do controlador de interrupções vetoriais (NVIC), timers de hardware para contagem e geração de PWM, e amostragem de sinais via conversores ADC/DAC.', icon: 'Activity', link: 'https://www.youtube.com/playlist?list=PLMdNWywlSE5TtOxRm6frvH_om1NOyj33H', book: '/docs/embedded/definitive_guide_arm_cortex_m3_m4.pdf', rating: 3 },
@@ -444,7 +448,7 @@ export const tracks: Character[] = [
 			{ title: 'PCAP – Certified Associate Python Programmer', issuer: 'Python Institute', link: 'https://pythoninstitute.org/pcap' },
 		],
 		modules: makeModules('au', [
-			{ title: 'Python Avançado para Automação de Sistemas', description: 'Manipulação avançada do sistema de arquivos (OS, Pathlib), gerenciamento de subprocessos, Expressões Regulares (Regex) e agendamento crontab nativo.', icon: 'Code', link: 'https://www.youtube.com/playlist?list=PLpdAy0tYrnKyjrY1Fr72DhmrRmeWI_5C8', book: '/docs/automations/automate_the_boring_stuff.pdf', rating: 1 },
+			{ requires: ['es-1'], title: 'Python Avançado para Automação de Sistemas', description: 'Manipulação avançada do sistema de arquivos (OS, Pathlib), gerenciamento de subprocessos, Expressões Regulares (Regex) e agendamento crontab nativo.', icon: 'Code', link: 'https://www.youtube.com/playlist?list=PLpdAy0tYrnKyjrY1Fr72DhmrRmeWI_5C8', book: '/docs/automations/automate_the_boring_stuff.pdf', rating: 1 },
 			{ title: 'Web Scraping & Data Extraction Avançado', description: 'Raspagem estruturada de dados na web em escala. Manipulação de requisições HTTP com HTTPX, parsing de HTML com BeautifulSoup e extração robusta via framework Scrapy.', icon: 'Globe', link: 'https://docs.scrapy.org/en/latest/', book: '/docs/automations/web_scraping_python.pdf', rating: 2 },
 			{ title: 'Automação de Interfaces (Web & Desktop)', description: 'Navegação automatizada Headless com Playwright para bypass de autenticações complexas e controle programático do sistema operacional via PyAutoGUI para sistemas legados.', icon: 'Monitor', link: 'https://playwright.dev/python/docs/intro', book: '/docs/automations/python_automation_cookbook.pdf', rating: 2 },
 			{ title: 'Integração de APIs, Webhooks & REST', description: 'Conexão programática entre plataformas distribuídas. Construção de clientes HTTP resilientes, consumo de endpoints RESTful, manipulação de payloads JSON e ganchos de eventos (Webhooks).', icon: 'Link', link: 'https://www.youtube.com/playlist?list=PLpdAy0tYrnKy3TvpCT-x7kGqMQ5grk1Xq', book: '/docs/automations/working_with_apis.pdf', rating: 3 },
@@ -469,7 +473,7 @@ export const tracks: Character[] = [
 			{ title: 'Certified Blockchain Developer', issuer: 'Blockchain Council', link: 'https://www.blockchain-council.org/certifications/' },
 		],
 		modules: makeModules('bc', [
-			{ title: 'Fundamentos de Redes Descentralizadas & P2P', description: 'Histórico dos sistemas distribuídos, arquitetura peer-to-peer (P2P), o problema dos generais bizantinos e a mecânica de livros-razão imutáveis (ledgers).', icon: 'Link', link: 'https://www.youtube.com/playlist?list=PL4PvbJTuGFzu1Xw5mMTvCLy4pY5S3ZBGO', book: '/docs/blockchain/mastering_bitcoin.pdf', rating: 2 },
+			{ requires: ['es-5'], title: 'Fundamentos de Redes Descentralizadas & P2P', description: 'Histórico dos sistemas distribuídos, arquitetura peer-to-peer (P2P), o problema dos generais bizantinos e a mecânica de livros-razão imutáveis (ledgers).', icon: 'Link', link: 'https://www.youtube.com/playlist?list=PL4PvbJTuGFzu1Xw5mMTvCLy4pY5S3ZBGO', book: '/docs/blockchain/mastering_bitcoin.pdf', rating: 2 },
 			{ title: 'Criptografia Primitiva & Algoritmos de Consenso', description: 'Funções de hash (SHA-256, Keccak-256), criptografia de chave assimétrica (ECDSA), Árvores de Merkle e análise matemática de Proof-of-Work vs Proof-of-Stake.', icon: 'Key', link: 'https://ethereum.org/en/developers/docs/consensus-mechanisms/', book: '/docs/blockchain/blockchain_theoretical_foundations.pdf', rating: 2 },
 			{ title: 'Ethereum Virtual Machine & Linguagem Solidity', description: 'A arquitetura da EVM, estrutura de um arquivo Solidity, tipos de dados estáticos, modificadores de função, escopos de visibilidade e ciclo de vida de transações.', icon: 'Code', link: 'https://docs.soliditylang.org/', book: '/docs/blockchain/mastering_ethereum.pdf', rating: 3 },
 			{ title: 'Desenvolvimento de Smart Contracts & Padrões ERC', description: 'Implementação prática de contratos inteligentes modulares, gerenciamento de estados, tratamento de erros nativo e herança estruturada usando os padrões institucionais ERC-20 e ERC-721.', icon: 'FileCode', link: 'https://docs.openzeppelin.com/contracts/', book: '/docs/blockchain/solidity_programming_essentials.pdf', rating: 3 },
@@ -528,7 +532,7 @@ export const specialPaths: SpecialPath[] = [
 			{ title: 'AWS Certified Solutions Architect – Professional', issuer: 'AWS', link: 'https://aws.amazon.com/certification/certified-solutions-architect-professional/' },
 		],
 		modules: makeModules('av', [
-			{ title: 'Design Patterns & Padrões GoF de Código', description: 'Implementação de padrões de projeto criacionais, estruturais e comportamentais (GoF) com foco em desacoplamento, extensibilidade e legibilidade.', icon: 'Layers', link: 'https://refactoring.guru/design-patterns', book: '/docs/advanced/design_patterns_elements.pdf', rating: 3 },
+			{ requires: ['es-7'], title: 'Design Patterns & Padrões GoF de Código', description: 'Implementação de padrões de projeto criacionais, estruturais e comportamentais (GoF) com foco em desacoplamento, extensibilidade e legibilidade.', icon: 'Layers', link: 'https://refactoring.guru/design-patterns', book: '/docs/advanced/design_patterns_elements.pdf', rating: 3 },
 			{ title: 'Domain-Driven Design (DDD) & Clean Architecture', description: 'Arquitetura em camadas, separação de conceitos, modelagem estratégica de domínios, contextos delimitados (Bounded Contexts), entidades, agregados e value objects.', icon: 'Box', link: 'https://martinfowler.com/tags/domain%20driven%20design.html', book: '/docs/advanced/domain_driven_design.pdf', rating: 3 },
 			{ title: 'Engenharia de Requisitos & Modelagem de Sistemas', description: 'Mapeamento de sistemas complexos. Engenharia de requisitos arquiteturais, trade-offs de design, diagramação técnica estruturada e análise de viabilidade computacional.', icon: 'FileText', link: 'https://arc42.org/', book: '/docs/advanced/software_architecture_practice.pdf', rating: 3 },
 			{ title: 'Sistemas Distribuídos & Padrões de Comunicação', description: 'Modelos de comunicação entre microsserviços. Implementação de gRPC de alta performance, GraphQL, contratos REST estáveis, Service Mesh e resiliência com Circuit Breakers.', icon: 'Network', link: 'https://gprc.io/', book: '/docs/advanced/distributed_systems.pdf', rating: 4 },
@@ -571,3 +575,49 @@ export const specialPaths: SpecialPath[] = [
 		]),
 	},
 ];
+
+// ————————————————————————————————————————————————————————————————
+// Índice global de módulos + pré-requisitos entre trilhas
+// ————————————————————————————————————————————————————————————————
+
+/** Chave usada para persistir o progresso de cada trilha no localStorage. */
+export const progressKey = (characterId: string) => `jornada-dev:progress:${characterId}`;
+
+export interface ModuleRef {
+	trackId: string;
+	trackName: string;
+	moduleTitle: string;
+	accentColor: string;
+}
+
+const buildModuleIndex = (): Record<string, ModuleRef> => {
+	const index: Record<string, ModuleRef> = {};
+	for (const character of [...tracks, ...specialPaths]) {
+		for (const module of character.modules) {
+			index[module.id] = {
+				trackId: character.id,
+				trackName: character.name,
+				moduleTitle: module.title,
+				accentColor: character.accentColor,
+			};
+		}
+	}
+	return index;
+};
+
+/** Mapeia cada moduleId para a trilha dona e seus metadados. */
+export const moduleIndex: Record<string, ModuleRef> = buildModuleIndex();
+
+/** Lê o localStorage da trilha dona do módulo e diz se ele está concluído. */
+export const isModuleCompleted = (moduleId: string): boolean => {
+	const ref = moduleIndex[moduleId];
+	if (!ref) return false;
+	try {
+		const raw = localStorage.getItem(progressKey(ref.trackId));
+		if (!raw) return false;
+		const saved = JSON.parse(raw) as Record<string, ModuleStatus>;
+		return saved[moduleId] === 'concluído';
+	} catch {
+		return false;
+	}
+};
