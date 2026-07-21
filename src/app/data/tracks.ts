@@ -68,9 +68,9 @@ export const tracks: Character[] = [
 		icon: 'Code',
 		stats: { nivel: 1, missoes: 2, progresso: 4, xp: 1200 },
 		certificates: [
-			{ title: 'Oracle Certified Professional: Java SE 17 Developer (1Z0-829)', issuer: 'Oracle', link: 'https://education.oracle.com/java-se-17-developer/pexam_1Z0-829' },
-			{ title: 'Spring Certified Professional', issuer: 'Broadcom (VMware)', link: 'https://www.spring.academy/courses' },
-			{ title: 'Oracle Database SQL (1Z0-071)', issuer: 'Oracle', link: 'https://education.oracle.com/oracle-database-sql/pexam_1Z0-071' },
+			{ title: 'Oracle Certified Professional: Java SE 17 ou 21 Developer (1Z0-829)', issuer: 'Oracle', link: 'https://mylearn.oracle.com/ou/learning-path/become-a-java-se-17-developer/99487' },
+			{ title: 'Spring Certified Professional', issuer: 'Broadcom (VMware)', link: 'https://spring.academy/paths/spring-certified-professional-2023' },
+			{ title: 'Oracle Database SQL (1Z0-071)', issuer: 'Oracle', link: 'https://mylearn.oracle.com/ou/learning-path/earn-the-oracle-database-sql-associate-credential/80636' },
 		],
 		modules: makeModules('be', [
 			{ title: 'Java Firme & JVM', description: 'POO, coleções, generics e tratamento de exceções em Java', icon: 'Code', link: 'https://www.youtube.com/playlist?list=PL62G310vn6nFIsOCC0H-C2infYgwm8SWW', book: '/docs/backend/effective_java.pdf', rating: 2, lessonCount: 0  },
@@ -242,7 +242,7 @@ export const tracks: Character[] = [
 		icon: 'Gamepad2',
 		stats: { nivel: 1, missoes: 2, progresso: 4, xp: 1200 },
 		certificates: [
-			{ title: 'Unity Certified Associate: Game Developer', issuer: 'Unity', link: 'https://unity.com/products/unity-certifications' },
+			{ title: 'Unity Certified Associate: Game Developer', issuer: 'Unity', link: 'https://unity.com/products/unity-certifications/associate-game-developer' },
 		],
 		modules: makeModules('gd', [
 			{ title: 'Fundamentos de Game Design', description: 'Mecânicas centrais, loops de gameplay, curvas de interesse, balanceamento matemático de regras e estruturação do Game Design Document (GDD).', icon: 'Gamepad2', link: 'https://gamedev.net/', book: '/docs/gamedev/art_of_game_design.pdf', rating: 1 },
@@ -267,7 +267,7 @@ export const tracks: Character[] = [
 		icon: 'Box',
 		stats: { nivel: 1, missoes: 2, progresso: 4, xp: 1200 },
 		certificates: [
-			{ title: 'Unity Certified Associate: 3D Artist', issuer: 'Unity', link: 'https://unity.com/products/unity-certifications' },
+			{ title: 'Unity Certified Associate: 3D Artist', issuer: 'Unity', link: 'https://unity.com/products/unity-certifications/user-programmer' },
 		],
 		modules: makeModules('3d', [
 			{ title: 'Fundamentos de Espaço Vetorial & Geometria', description: 'Visão espacial, anatomia das malhas (vértices, arestas, faces), topologia de polígonos, projeções e navegação em viewports tridimensionais.', icon: 'Box', link: 'https://docs.blender.org/manual/en/latest/modeling/introduction.html', book: '/docs/3dmod/3d_modeling_fundamentals.pdf', rating: 1 },
@@ -496,8 +496,9 @@ export const specialPaths: SpecialPath[] = [
 		description: 'Conteúdos essenciais para a base da programação. Para quem está começando ou quer solidificar o alicerce.',
 		buttonLabel: 'Despertar o Arcanjo',
 		certificates: [
-			{ title: 'GitHub Foundations', issuer: 'GitHub', link: 'https://resources.github.com/learn/certifications/' },
-			{ title: 'Scrum Foundation Professional Certificate (SFPC)', issuer: 'CertiProf', link: 'https://certiprof.com/products/scrum-foundation-professional-certificate-sfpc' },
+			{ title: 'GitHub Foundations', issuer: 'GitHub', link: 'https://learn.github.com/certification/GHF' },
+			{ title: 'GitHub CI/CD', issuer: 'GitHub', link: 'https://learn.github.com/certification/ACTIONS' },
+			{ title: 'Scrum Foundation Professional Certificate (SFPC)', issuer: 'CertiProf', link: 'https://certiprof.com/products/scrum-certification-free-exam-sfpc?_pos=1&_sid=f84b47870&_ss=r' },
 		],
 		modules: makeModules('es', [
 			{ title: 'Lógica de Programação & Algoritmos', description: 'Variáveis, condicionais, loops, funções e o raciocínio lógico do zero', icon: 'Code', link: 'https://www.youtube.com/playlist?list=PLHz_AreHm4dmSj0MHol_aoNYCSGFqvfXV', book: '/docs/essentials/entendendo_algoritmos.pdf', rating: 1 },
@@ -551,7 +552,7 @@ export const specialPaths: SpecialPath[] = [
 		description: 'A matemática e os algoritmos que todo programador precisa. Da lógica à criptografia.',
 		buttonLabel: 'Consultar o Sábio',
 		certificates: [
-			{ title: 'FE – Fundamental Information Technology Engineer', issuer: 'IPA (Japão)', link: 'https://www.ipa.go.jp/en/it-examinations/fe.html' },
+			{ title: 'FE – Fundamental Information Technology Engineer', issuer: 'IPA (Japão)', link: 'https://www.ipa.go.jp/en' },
 		],
 		modules: makeModules('mt', [
 			{ title: 'Matemática Básica & Nivelamento Aritmético', description: 'Revisão de propriedades algébricas, produtos notáveis, fatoração de expressões, equações, inequações, potenciação e radiciação aplicadas à modelagem computacional.', icon: 'Diff', link: 'https://www.youtube.com/playlist?list=PLTPg64KdGgYgFpOFt2TETLdEuBB4fvxxf', book: '/docs/math/basic_mathematics.pdf', rating: 2 },
