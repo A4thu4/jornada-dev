@@ -12,7 +12,7 @@ interface CharacterSelectPageProps {
 	onStartSpecial: (c: Character) => void;
 }
 
-const HERO_IMG = 'public/assets/banner.png';
+const HERO_IMG = '/assets/banner.png';
 
 export function CharacterSelectPage({ selected, onSelect, onStart, onStartSpecial }: CharacterSelectPageProps) {
 	const scrollRef = useRef<HTMLDivElement>(null);
