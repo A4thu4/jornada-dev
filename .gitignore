@@ -30,6 +30,7 @@ lerna-debug.log*
 
 # Editor / IDE
 .claude/
+graphify-out/
 .ide/
 .vscode/*
 !.vscode/extensions.json

@@ -12,7 +12,7 @@ interface CharacterSelectPageProps {
 	onStartSpecial: (c: Character) => void;
 }
 
-const HERO_IMG = 'assets/banner.jpeg';
+const HERO_IMG = 'public/assets/banner.png';
 
 export function CharacterSelectPage({ selected, onSelect, onStart, onStartSpecial }: CharacterSelectPageProps) {
 	const scrollRef = useRef<HTMLDivElement>(null);
@@ -70,7 +70,7 @@ export function CharacterSelectPage({ selected, onSelect, onStart, onStartSpecia
 					style={{
 						position: 'absolute',
 						inset: 0,
-						background: 'linear-gradient(to bottom, transparent 30%, #060B1A 100%)',
+						background: 'linear-gradient(to bottom, transparent 70%, #060B1A 100%)',
 					}}
 				/>
 				{/* Stars/particle effect overlay */}
@@ -124,7 +124,7 @@ export function CharacterSelectPage({ selected, onSelect, onStart, onStartSpecia
 			</div>
 
 			{/* Character Selection Section */}
-			<div className="flex flex-col items-center gap-8 px-4 py-10">
+			<div className="flex flex-col items-center gap-6 px-4 py-10">
 				<div className="text-center">
 					<p
 						style={{
