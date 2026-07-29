@@ -147,6 +147,7 @@ export const tracks: Character[] = [
 		certificates: [
 			{ title: 'AWS Certified Cloud Practitioner (CLF-C02)', issuer: 'AWS', link: 'https://aws.amazon.com/certification/certified-cloud-practitioner/' },
 			{ title: 'AWS Certified Solutions Architect – Associate (SAA-C03)', issuer: 'AWS', link: 'https://aws.amazon.com/certification/certified-solutions-architect-associate/' },
+			{ title: 'AWS Certified Solutions Architect – Professional', issuer: 'AWS', link: 'https://aws.amazon.com/certification/certified-solutions-architect-professional/' },
 			{ title: 'HashiCorp Certified: Terraform Associate', issuer: 'HashiCorp', link: 'https://www.hashicorp.com/certification/terraform-associate' },
 			{ title: 'CKA – Certified Kubernetes Administrator', issuer: 'CNCF', link: 'https://www.cncf.io/training/certification/cka/' },
 		],
@@ -170,6 +171,7 @@ export const tracks: Character[] = [
 		icon: 'BarChart2',
 		stats: { nivel: 1, missoes: 2, progresso: 4, xp: 1200 },
 		certificates: [
+			{ title: 'CS50\'s Introduction to Databases with SQL', issuer: 'Harvard', link: 'https://learning.edx.org/course/course-v1:HarvardX+CS50SQL+SQL/home' },
 			{ title: 'Microsoft Azure Data Fundamentals (DP-900)', issuer: 'Microsoft', link: 'https://learn.microsoft.com/credentials/certifications/azure-data-fundamentals/' },
 			{ title: 'Google Data Analytics', issuer: 'Google / Coursera', link: 'https://www.coursera.org/professional-certificates/google-data-analytics' },
 		],
@@ -195,6 +197,7 @@ export const tracks: Character[] = [
 		icon: 'Brain',
 		stats: { nivel: 1, missoes: 2, progresso: 4, xp: 1200 },
 		certificates: [
+			{ title: 'CS50\'s Introduction to Artificial Intelligence with Python', issuer: 'Harvard', link: 'https://learning.edx.org/course/course-v1:HarvardX+CS50AI+1T2020/home' },
 			{ title: 'AWS Certified AI Practitioner', issuer: 'AWS', link: 'https://aws.amazon.com/certification/certified-ai-practitioner/' },
 			{ title: 'DeepLearning.AI TensorFlow Developer', issuer: 'DeepLearning.AI / Coursera', link: 'https://www.coursera.org/professional-certificates/tensorflow-in-practice' },
 		],
@@ -320,6 +323,7 @@ export const tracks: Character[] = [
 		icon: 'ShieldBan',
 		stats: { nivel: 1, missoes: 2, progresso: 4, xp: 1200 },
 		certificates: [
+			{ title: 'CS50\'s Introduction to Cybersecurity', issuer: 'Harvard', link: 'https://learning.edx.org/course/course-v1:HarvardX+CS50CS+Cybersecurity/home' },
 			{ title: 'CompTIA Security+', issuer: 'CompTIA', link: 'https://www.comptia.org/certifications/security' },
 			{ title: 'ISC2 Certified in Cybersecurity (CC)', issuer: 'ISC2', link: 'https://www.isc2.org/certifications/cc' },
 		],
@@ -529,7 +533,7 @@ export const specialPaths: SpecialPath[] = [
 		description: 'Conteúdos avançados para devs experientes que querem dominar arquitetura, performance e engenharia de software.',
 		buttonLabel: 'Invocar o Demônio',
 		certificates: [
-			{ title: 'AWS Certified Solutions Architect – Professional', issuer: 'AWS', link: 'https://aws.amazon.com/certification/certified-solutions-architect-professional/' },
+			{ title: 'CS50\'s Introduction to Computer Science', issuer: 'Harvard', link: 'https://learning.edx.org/course/course-v1:HarvardX+CS50+X/home' },
 		],
 		modules: makeModules('av', [
 			{ requires: ['es-3'], title: 'Design Patterns & Padrões GoF de Código', description: 'Implementação de padrões de projeto criacionais, estruturais e comportamentais (GoF) com foco em desacoplamento, extensibilidade e legibilidade.', icon: 'Layers', link: 'https://refactoring.guru/design-patterns', book: '/docs/advanced/design_patterns_elements.pdf', rating: 3 },
